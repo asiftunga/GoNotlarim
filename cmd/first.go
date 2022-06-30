@@ -102,6 +102,19 @@ mesela boyle bir yapida bu yapinin tamami bir moduldur ancak icerisindeki email,
 */
 
 
+/* 
+notlarim: bir paketin oncelikle variablelari ardindan ise init fonksiyonu calisir
+eger import edilmis bir paket varsa oncelikle onlarin variablelari sonrasinda ise onlarin init fonksiyonlari calisir
+init fonksiyonlari zorunlu fonksiyonlar degillerdir ve birden cok init fonksiyonu bulunabilir
+init fonksiyonlari variablelaardan sonra initialize edilirler
+init fonksiyonlari sira ile calisirlar
+bir variable initialize edilecekse ve birden cok variable varsa oncelikle bagimsiz olan (digerlerine bagimli olmayan variable) initialize edilir ardindan en az bagimli olan ve bu sekilde devam eder.
+*/
+
+
+
+
+
 
 
 
