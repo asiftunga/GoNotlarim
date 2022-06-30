@@ -23,12 +23,12 @@ package main
 
 import (
 	"fmt"
-	"newgroupproject/new"
+	deneme "newgroupproject/new"
 )
 
 func main(){
 	l1:=23
-	new.Deneme()
+	deneme.Deneme()
 	fmt.Println("hellooo ",l1)
 }
 
