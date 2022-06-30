@@ -40,7 +40,7 @@ func main(){
 
 
 
-package main
+/* package main
 
 import (
     "fmt"
@@ -57,6 +57,57 @@ func main() {
     fmt.Println(emailContents)
     email.SendEmail(emailContents, customerEmail)
     invoice.CreateAndSaveInvoice(customerName, nights, 145.32)
-}
+} */
 
 //! ayni temada olan fonksiyonlari birbirleri ile birlestirip onlari birer paket haline getirmek iyi bir aliskanliktir
+
+//* https://www.practical-go-lessons.com/chap-11-packages-and-imports#answers bu adreste go paketinin dogru bir sekilde github uzerinden nasil diger kisilerle paylasilacagi anlatilmis. (go.mod file buna gore yapiliyor)
+
+
+//* https://www.practical-go-lessons.com/chap-11-packages-and-imports#answers bu adreste key takeaways kisminda paketlerin genel bir ozeti bulunmakta
+
+
+//@ paket ayni directories icerisinde bulunan bir veya birden cok source files'a verilen isimdir. Source files : su anda icinde yazdigim first.go file'i source filedir. Source file icerisinde package blabla ardindan import edilen seyler ardindan degisken tanimlamalari ardindan ise fonksiyon tanimlamalarinin oldugu bir yerdir
+//@ bir isim bir paketi tanimlar.
+//@ buyuk harf ile baslayan bir isimlendirme exported diye isimlendirilir ve public anlami tasir
+//! bir modul kokunde (root kisminda) bir go.mod file dosyasi bulunan dosya agacinda depolanan bir go paketleri toplulugudur
+/* 
+.
+├── cmd
+│   └── first.go
+├── go.mod
+├── go.mod.save
+└── internal
+    ├── email
+    │   └── email.go
+    ├── invoice
+    │   └── invoice.go
+    └── new
+        └── new.go
+
+mesela boyle bir yapida bu yapinin tamami bir moduldur ancak icerisindeki email, invoice, new ler birer pakettir
+*/
+
+//bir paketi _ blank identifier ile cagirdiginda eger paketin icerisinde init fonksiyonu var ise init fonksiyonunu calistirmis oluruz 
+
+/* 
+        ------initializion sirasi--------
+        oncelikle import ettigimiz paketler initialized edilir
+        oncelikle paketimize import edilmis olan paketlerin degiskenleri (variablelari initialized edilir)
+        ardindan import ettigimiz paketlerin init fonksiyonlari calisir
+        sonra paketin kendisi initialized edilir
+        paket icerisindeki degiskenler initialized edilir
+        son olarak paketin icersindeki init fonksiyonu calistirilir
+        onemli : init fonksiyonlari sira ile calisir yani ayni anda calismaz
+*/
+
+
+
+
+
+
+
+
+
+
+
