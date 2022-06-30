@@ -59,24 +59,4 @@ func main() {
     invoice.CreateAndSaveInvoice(customerName, nights, 145.32)
 }
 
-/* // send an email
-func sendEmail(contents string, to string) {
-    // ...
-    // ...
-}
-
-// prepare email template
-func getEmailContents(title string, name string, nights uint) string {
-    text := "Dear %s %s,\n your room reservation for %d night(s) is confirmed. Have a nice day !"
-    return fmt.Sprintf(text,
-        title,
-        name,
-        nights)
-} */
-
-/* // create the invoice for the reservation
-func createAndSaveInvoice(name string, nights uint, price float32) {
-    // ...
-} */
-
 //! ayni temada olan fonksiyonlari birbirleri ile birlestirip onlari birer paket haline getirmek iyi bir aliskanliktir
