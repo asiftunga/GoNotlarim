@@ -1,0 +1,3 @@
+module newgroupproject
+
+go 1.12
