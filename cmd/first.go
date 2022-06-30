@@ -112,9 +112,81 @@ bir variable initialize edilecekse ve birden cok variable varsa oncelikle bagims
 */
 
 
+ /* 
+ var nameDisplayer func(name, firstname string) string bu sekilde bir kullanim mevcut bu kullanimin amaci ise sudur 
+ 
+type Country struct {
+    Name        string
+    CapitalCity string
+}
+struct yapisi bu sekilde
+kullanimi ise bu sekilde 
+
+france := Country{
+    Name:        "France",
+    CapitalCity: "Paris",
+}
+
+usa := Country{
+    Name: "United Sates of America",
+}
+
+bu kisimda bos biraktigimiz capitalcity kismi bos kalir. String bir ifade icin bu "" seklindedir
 
 
 
+empty := Country{}
+
+ayni sekilde bos bir belge de olusturabiliriz
+
+japan := Country{
+    "Tokyo",
+    "Japan",
+}
+
+su sekilde bir kullanim yapilabilir ancak bu sekilde bir kullanim yapildigi zaman herhangi bir field alani bos gecilemez ve bir kural daha var
+bu sekilde bir kullanim yapiliyorsa iki yontemi birbiri ile birlestiremezsin. Iki yontemden birisini kullanman gerekir
+
+
+
+ */
+
+
+ /* 
+ 
+ usa := Country{
+    Name: "United Sates of America",
+}
+usa.CapitalCity = "Washington DC"
+
+erismek icin bu sekilde bir kullanim vardir
+
+if usa.Name == "France" {
+  fmt.Println("we have an error !")
+}
+ 
+bu sekilde bir kullanim da yapilabilir
+ 
+ */
+
+// bir structurein icinde baska bir structure field olarak kullanilabilir
+
+
+/* 
+type Hotel struct {
+    Name     string
+    Capacity uint8
+    Rooms    uint8
+    Smoking  bool
+    Country
+}
+
+type Country struct {
+    Name        string
+    CapitalCity string
+}
+
+*/
 
 
 
