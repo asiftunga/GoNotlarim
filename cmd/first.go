@@ -1,13 +1,142 @@
-/* package main
+/* 
+go dilinde variablelar nasil tanimlanir?
+degiskenisimlerine identifier denir degerlerine ise expression denir
+
+var degiskenIsmi degiskenturu = deger   seklinde degisken tanimlamasi yapilabilir
+var degisken1,degisken2,degisken3 degiskenlerinturu = deger1,deger2,deger3
+=============kisa degisken tanimlamalari==================================
+kisa degisken tanimlamalari su sekilde yapilir
+degiskenismi := deger
+
+!   kisa degisken tanimlamalari fonksiyonlarin disarisinda kullanilamazlar
+
+============sabit degisken tanimlamak=====================================
+
+const degiskenIsmi degiskenturu = deger
+
+tipsiz bir const tanimlamasi yapilabilir
+    const degiskenismi = deger  seklinde
+
+==============================================================================
+                    if else if else ve switch case yapisi
+==============================================================================
+if kosul{
+
+}else if kosul{
+
+}else{
+
+}
+! bu kullanim seklinden baska bir kullanim sekli yoktur. Kosullar parantezler icerisine alinamaz else ve else if ayri bir satirda yazilamaz
+
+======================= switch case yapisi ===================================
+
+switch ageJohn {  
+case 10:
+   fmt.Println("John is 10 years old")
+case 20:
+   fmt.Println("John is 20 years old")
+case 100:
+   fmt.Println("John is 100 years old")
+default:
+   fmt.Println("John has neither 10,20 nor 100 years old")
+}
+
+
+switch ageSum := ageJohn + agePaul; ageSum { 
+case 10:
+   fmt.Println("ageJohn + agePaul = 10")
+case 20, 30, 40: //*\label{switchMulti}
+   fmt.Println("ageJohn + agePaul = 20 or 30 or 40")
+case 2 * agePaul:
+   fmt.Println("ageJohn + agePaul = 2 times agePaul")
+}
+
+switch { 
+case agePaul > ageJohn:
+   fmt.Println("agePaul > ageJohn")
+case agePaul == ageJohn:
+   fmt.Println("agePaul == ageJohn")
+case agePaul < ageJohn:
+   fmt.Println("agePaul < ageJohn")
+}
+
+switch {
+case agePaul > ageJohn:
+   ...
+}
+
+is equivalent to
+
+switch true {
+case agePaul > ageJohn:
+    ...
+}
+
+
+==================================for kullanimi========================================
+package main
 
 import "fmt"
 
 func main() {
 
-	for2: for i:=0;i<20;i++{
-		fmt.Println("hello")
+    i := 1
+    for i <= 3 {
+        fmt.Println(i)
+        i = i + 1
+        !   forun while seklinde kullanilmasi
+    }
+    
+    for j := 7; j <= 9; j++ {
+        fmt.Println(j)
+    }
+    
+    for {
+        fmt.Println("loop")
+        break
+    }
+    
+    for n := 0; n <= 5; n++ {
+        if n%2 == 0 {
+            continue
+        }
+        fmt.Println(n)
+    }
+}
+
+
+*/
+
+// ==========================================================================================
+                        // FONKSIYON KULLANIMI
+// ==========================================================================================
+
+
+/* 
+func computePrice(rate float32, nights int) (price float32) {
+   price = rate * float32(nights)
+   return
+}
+boyle bir kullanimda 
+
+
+
+*/
+
+
+
+
+/* package main
+
+import "fmt"
+
+func main() {
+    
+    for2: for i:=0;i<20;i++{
+        fmt.Println("hello")
 		for m:=0; m<10;m++{
-			fmt.Println("world")
+            fmt.Println("world")
 			if m==5{
 				break for2
 			}
@@ -229,27 +358,11 @@ func main() {
 
 
 
-package main
+// package main
 
-import "fmt"
+// import "fmt"
 
-/* func zeroval(ival int) {
-    ival = 0
-}
-
-func zeroptr(iptr *int) {
-    *iptr = 0
-} */
-
-func main() {
-    i := 1
-    // fmt.Println("initial:", i)
-
-    // zeroval(i)
-    // fmt.Println("zeroval:", i)
-
-    // zeroptr(&i)
-    // fmt.Println("zeroptr:", i)
+// func main() {
 /*  
     ! var po *int = &i seklinde pointer tanimlamasi yapabilecegim gibi 
     ! po := &i seklinde de pointer tanimlamasi yapabilirim 
@@ -280,6 +393,40 @@ func main() {
     Pointerin adresini tutan pointerin isaret ettigi adresteki pointerin isaret ettigi adresteki degeri:  1 
     
     */
+
+/*     i := 1
+
+    fmt.Println("initial:", i)
+
+    zeroval(i)
+    fmt.Println("zeroval:", i)
+
+    zeroptr(&i)
+    fmt.Println("zeroptr:", i) */
+
+//}
+
+/* func zeroval(ival int) {
+    ival = 0
+}
+
+func zeroptr(iptr *int) {
+    *iptr = 0
+} */
+
+
+
+
+package main
+
+import "fmt"
+
+func main(){
+
+}
+
+func (c *Cart) TotalPrice() (error){
+    //buradaki c *Cart olan kisim bu methodun receiveridir. 
 
 }
 
