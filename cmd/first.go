@@ -254,14 +254,33 @@ func main() {
     ! var po *int = &i seklinde pointer tanimlamasi yapabilecegim gibi 
     ! po := &i seklinde de pointer tanimlamasi yapabilirim 
 */
+    /* 
+    
+    i:=1
     po := &i
     po2 := &po
     fmt.Println("i nin degeri: ",i)
     fmt.Println("i nin adresi: ",&i)
     fmt.Println("pointer degeri: ",po)
     fmt.Println("Pointerin adresi: ", &po)
+    fmt.Println("Pointerin isaret ettigi adresteki degeri: ", *po)
     fmt.Println("Pointerin adresini tutan pointerin degeri: ",po2)
     fmt.Println("Pointerin adresini tutan pointerin adresi: ",&po2)
+    fmt.Println("Pointerin adresini tutan pointerin isaret ettigi adresteki degeri: ",*po2)
+    fmt.Println("Pointerin adresini tutan pointerin isaret ettigi adresteki pointerin isaret ettigi adresteki degeri: ",**po2)
+    ========cikti============
+    i nin degeri:  1
+    i nin adresi:  0xc00008a040
+    pointer degeri:  0xc00008a040
+    Pointerin adresi:  0xc00009e038
+    Pointerin isaret ettigi adresteki degeri:  1
+    Pointerin adresini tutan pointerin degeri:  0xc00009e038
+    Pointerin adresini tutan pointerin adresi:  0xc00009e040
+    Pointerin adresini tutan pointerin isaret ettigi adresteki degeri:  0xc00008a040
+    Pointerin adresini tutan pointerin isaret ettigi adresteki pointerin isaret ettigi adresteki degeri:  1 
+    
+    */
+
 }
 
 
