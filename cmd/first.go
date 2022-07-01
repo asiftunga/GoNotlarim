@@ -1,3 +1,6 @@
+package main
+
+import "fmt"
 /* 
 go dilinde variablelar nasil tanimlanir?
 degiskenisimlerine identifier denir degerlerine ise expression denir
@@ -118,7 +121,7 @@ func computePrice(rate float32, nights int) (price float32) {
    price = rate * float32(nights)
    return
 }
-boyle bir kullanimda 
+boyle bir kullanimda fonksiyonun return kisminda bir sey yazmaya gerek yoktur cunku fonksiyon taniminda geri donus degerine isim verdik, eger isim vermemis olsaydim mutlaka return float32 turunde geri donus degeri koymam gerekirdi
 
 
 
@@ -417,26 +420,20 @@ func zeroptr(iptr *int) {
 
 
 
-package main
+// package main
 
-import "fmt"
+// import "fmt"
 
-func main(){
+// func main(){
 
+// }
+
+// func (c *Cart) TotalPrice() (error){
+//     //buradaki c *Cart olan kisim bu methodun receiveridir.
+
+func main()  {
+    fmt.Println("hello world")
+    for i := 0; i < 15; i++ {
+        fmt.Println("sonunda calisti ya")
+    }
 }
-
-func (c *Cart) TotalPrice() (error){
-    //buradaki c *Cart olan kisim bu methodun receiveridir. 
-
-}
-
-
-
-
-
-
-
-
-
-
-
