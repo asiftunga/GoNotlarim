@@ -229,6 +229,43 @@ func main() {
 
 
 
+package main
+
+import "fmt"
+
+/* func zeroval(ival int) {
+    ival = 0
+}
+
+func zeroptr(iptr *int) {
+    *iptr = 0
+} */
+
+func main() {
+    i := 1
+    // fmt.Println("initial:", i)
+
+    // zeroval(i)
+    // fmt.Println("zeroval:", i)
+
+    // zeroptr(&i)
+    // fmt.Println("zeroptr:", i)
+/*  
+    ! var po *int = &i seklinde pointer tanimlamasi yapabilecegim gibi 
+    ! po := &i seklinde de pointer tanimlamasi yapabilirim 
+*/
+    po := &i
+    po2 := &po
+    fmt.Println("i nin degeri: ",i)
+    fmt.Println("i nin adresi: ",&i)
+    fmt.Println("pointer degeri: ",po)
+    fmt.Println("Pointerin adresi: ", &po)
+    fmt.Println("Pointerin adresini tutan pointerin degeri: ",po2)
+    fmt.Println("Pointerin adresini tutan pointerin adresi: ",&po2)
+}
+
+
+
 
 
 
