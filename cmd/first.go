@@ -188,6 +188,47 @@ type Country struct {
 
 */
 
+//------Ornek bir kullanim sekli
+
+/* package main
+
+import "fmt"
+
+type Hotel struct {
+    Name string
+    Country
+}
+
+type Country struct {
+    Name        string
+    CapitalCity string
+}
+
+func main() {
+    hotel := Hotel{
+        Name:    "Hotel super luxe",
+        Country: Country{
+            "France",
+            "blabladenenbiryer",
+        },
+    }
+    fmt.Println(hotel.Name)
+    fmt.Println(hotel.Country.Name)
+    fmt.Println(hotel.Country.CapitalCity)
+
+    /*  ==ciktisi==
+    Hotel super luxe
+    France
+    blabladenenbiryer
+    /*
+}
+*/
+
+
+// methodlar receiveri olan fonksiyonlara verilen isimlerdir
+
+
+
 
 
 
