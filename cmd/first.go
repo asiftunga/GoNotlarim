@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+_"fmt"
+"time"
+)
 /* 
 go dilinde variablelar nasil tanimlanir?
 degiskenisimlerine identifier denir degerlerine ise expression denir
@@ -417,23 +420,22 @@ func zeroptr(iptr *int) {
     *iptr = 0
 } */
 
+func main(){
 
+}
 
+type Cart struct {
+    ID        string
+    CreatedAt time.Time
+    UpdatedAt time.Time
+    lockedAt  time.Time
+    CurrencyCode string
+    isLocked     bool
+}
 
-// package main
-
-// import "fmt"
-
-// func main(){
-
-// }
-
-// func (c *Cart) TotalPrice() (error){
-//     //buradaki c *Cart olan kisim bu methodun receiveridir.
-
-func main()  {
-    fmt.Println("hello world")
-    for i := 0; i < 15; i++ {
-        fmt.Println("sonunda calisti ya")
-    }
+func (c *Cart) TotalPrice() (error){
+    //buradaki c *Cart olan kisim bu methodun receiveridir.
+    //receiverlarin normal parametrelerden farki aslinda sunlardir; 
+    //bu fonksiyonu kullanirken sadece cart tipinde kullanabiliriz baska bir sekilde kullanamayiz
+    return nil
 }
