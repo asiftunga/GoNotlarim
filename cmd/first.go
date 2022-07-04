@@ -419,29 +419,35 @@ ancak eger pointer tipinde bir degisken yollarsam yolladigim degiskenin adresi g
 @receiver kullanirken genel kullanim type in first letteridir. c *Cart gibi
 */
 
-
 // methods/example-project/main.go
 package main
 
 import (
-    "log"
-    "newgroupproject/internal/cart"
+	"fmt"
+	_"github.com/Rhymond/go-money"
+	"newgroupproject/internal/cart"
+	_"newgroupproject/internal/product"
 )
 
 func main() {
-    newCart := cart.Cart{}
 
-    totalPrice, err := newCart.TotalPrice()
-    if err != nil {
-        log.Printf("impossible to compute price of the cart: %s", err)
-        return
-    }
-    log.Println("Total Price", totalPrice.Display())
+    var newcart = cart.Cart{}
+    total,error := newcart.TotalPrice()
+    fmt.Printf("toplam tutar : %d hata kodu : %d",total,error)
+    
+	/*
 
-    err = newCart.Lock()
-    if err != nil {
-        log.Printf("impossible to lock the cart: %s", err)
-        return
-    }
+	   totalPrice, err := newCart.TotalPrice()
+	   if err != nil {
+	       fmt.Printf("impossible to compute price of the cart: %s", err)
+	       return
+	   }
+	   fmt.Println("Total Price", totalPrice.Display())
+
+	   err = newCart.Lock()
+	   if err != nil {
+	       fmt.Printf("impossible to lock the cart: %s", err)
+	       return
+	   } */
 
 }
