@@ -451,7 +451,10 @@ func main() {
 	   } */
 
 //?================================================================================================================
-package main //? bu kod blogu sadece receiver fonksiyonlari ve struct yapisini anlamak icin var
+//? bu kod blogu sadece receiver fonksiyonlari ve struct yapisini daha iyi anlamak icin var
+//?================================================================================================================
+
+package main
 
 import (
 	"fmt"
@@ -460,9 +463,13 @@ import (
 
 func main(){
     b := &receiver.Fatura{
-        Isim: "Tunga Beyin Faturasi",
+        Isim: "Market Faturasi",
         Bahsis: 40.00,
         Items: map[string]float32{"patates": 5.00, "elma":4.00, "biber":10.00, "salatalik":12.00},
     }
+
+    b.Update("patlican",20.00)
+    b.Update("domates",35.00)
+    b.Update("lahana",17.00)
     fmt.Println(b.Hesap())
 }
