@@ -409,12 +409,39 @@ func main(){
     newcart.Lock()
     totalPrice := newcart.TotalPrice()
     err := newcart.Lock()
-} 
-
+}
+! receiverli metotlari gormek icin internal/cart/cart.go kismina git
 bu kodun soyle bir mantigi var aslinda. internal klasoru icersinde cart isimli bir klasorum var o klasorun icerisinde cart.go isimli bir paketim var. Bu paketi import kisminda import etmisim. Daha sonra bu paketimin icerisinde Cart isimli bir struct'im ve iki adet metodum var. Metodlarimin receiveleri cart tipinde oldugundan dolayi cart tipinde bir sey olmadan kullanamam bundan dolayi metotlarimi kullanabilmek icin newcart isimli cart tipindeki cart.Cart{} olusturdum, daha sonra bunu kullanarak metotlarima erisebildim
-
-
-
-
+=====================================peki value receiver mi yoksa pointer receiver mi kullanmaliyim?=======================
+eger value receiver olusturursam gonderdigim degisken method icerisinde kopyasi (internal) olusturulur ve o sekilde kullanilir  yani gonderdigim degisken degistirilmez.
+! ayrica ustteki kullanim cok az da olsa memory kisminda fazlalik olusturur. Bu cogu zaman goz ardi edilebilir ancak memory onemli olan kullanimlarda dikkat edilmelidir
+ancak eger pointer tipinde bir degisken yollarsam yolladigim degiskenin adresi gideceginden dolayi yollayacagim degisken degistirilir
+@receiver kullanirken genel kullanim type in first letteridir. c *Cart gibi
 */
 
+
+// methods/example-project/main.go
+package main
+
+import (
+    "log"
+    "newgroupproject/internal/cart"
+)
+
+func main() {
+    newCart := cart.Cart{}
+
+    totalPrice, err := newCart.TotalPrice()
+    if err != nil {
+        log.Printf("impossible to compute price of the cart: %s", err)
+        return
+    }
+    log.Println("Total Price", totalPrice.Display())
+
+    err = newCart.Lock()
+    if err != nil {
+        log.Printf("impossible to lock the cart: %s", err)
+        return
+    }
+
+}
