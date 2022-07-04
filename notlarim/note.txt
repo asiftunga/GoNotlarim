@@ -2,3 +2,6 @@ kendime not : herhangi bir paket indirmek icin yapmam gereken oncelikle su:
     1- indirecegim paketi go get github.com/Rhymond/go-money seklinde terminal ekraninda yazmak
     2- ardindan go mod init (go.mod dosyasi yok ise)
     3- ardindan go mod tidy yapip gerekli projeyi go.mod dosyasina eklemis oluyorum
+================================================================
+================================================================
+

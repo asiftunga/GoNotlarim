@@ -1,0 +1,54 @@
+benden istedikleri sunlar:
+
+totalprice ve lock diye metotlarim var
+
+totalprice bir kartin totalprice ini hesaplayip donduruyor bu islemi ise su sekilde yapiyor : quantity (adet) toplami * unit price (adet ucreti)
+
+**lock ise onaylama yasandiktan sonra cartlari kilitlemeye yariyor 
+bunu su sekilde yapiyor : islocked true oluyor ve lockedAt su anki zamani gosteriyor**
+
+eger kart zaten hali hazirda kilitli ise return olarak bir error donduruyor
+
+==================================================================
+
+money modulunde ise su sekilde structlar ve fonksiyonlar var
+
+type Amount struct {
+	val int64
+}
+
+type Currency struct {
+	Code        string
+	NumericCode string
+	Fraction    int
+	Grapheme    string
+	Template    string
+	Decimal     string
+	Thousand    string
+}
+
+type Money struct {
+	amount   *Amount
+	currency *Currency
+}
+
+// New creates and returns new instance of Money.
+func New(amount int64, code string) *Money {
+	return &Money{
+		amount:   &Amount{val: amount},
+		currency: newCurrency(code).get(),
+	}
+}
+
+// Currency returns the currency used by Money.
+func (m *Money) Currency() *Currency {
+	return m.currency
+}
+
+// Amount returns a copy of the internal monetary value as an int64.
+func (m *Money) Amount() int64 {
+	return m.amount.val
+}
+
+
+main > cart > money & Product > money        "user'a baglanan hicbir paket yok"
