@@ -1,10 +1,4 @@
-package main
-
-import (
-_"fmt"
-"time"
-)
-/* 
+/*
 go dilinde variablelar nasil tanimlanir?
 degiskenisimlerine identifier denir degerlerine ise expression denir
 
@@ -37,7 +31,7 @@ if kosul{
 
 ======================= switch case yapisi ===================================
 
-switch ageJohn {  
+switch ageJohn {
 case 10:
    fmt.Println("John is 10 years old")
 case 20:
@@ -49,7 +43,7 @@ default:
 }
 
 
-switch ageSum := ageJohn + agePaul; ageSum { 
+switch ageSum := ageJohn + agePaul; ageSum {
 case 10:
    fmt.Println("ageJohn + agePaul = 10")
 case 20, 30, 40: //*\label{switchMulti}
@@ -58,7 +52,7 @@ case 2 * agePaul:
    fmt.Println("ageJohn + agePaul = 2 times agePaul")
 }
 
-switch { 
+switch {
 case agePaul > ageJohn:
    fmt.Println("agePaul > ageJohn")
 case agePaul == ageJohn:
@@ -93,16 +87,16 @@ func main() {
         i = i + 1
         !   forun while seklinde kullanilmasi
     }
-    
+
     for j := 7; j <= 9; j++ {
         fmt.Println(j)
     }
-    
+
     for {
         fmt.Println("loop")
         break
     }
-    
+
     for n := 0; n <= 5; n++ {
         if n%2 == 0 {
             continue
@@ -115,11 +109,10 @@ func main() {
 */
 
 // ==========================================================================================
-                        // FONKSIYON KULLANIMI
+// FONKSIYON KULLANIMI
 // ==========================================================================================
 
-
-/* 
+/*
 func computePrice(rate float32, nights int) (price float32) {
    price = rate * float32(nights)
    return
@@ -130,15 +123,12 @@ boyle bir kullanimda fonksiyonun return kisminda bir sey yazmaya gerek yoktur cu
 
 */
 
-
-
-
 /* package main
 
 import "fmt"
 
 func main() {
-    
+
     for2: for i:=0;i<20;i++{
         fmt.Println("hello")
 		for m:=0; m<10;m++{
@@ -152,7 +142,6 @@ func main() {
 } */
 
 //* _ kullanimi bu kismi es gec anlamina gelmektedir. Ornekte 3 adet return degeri var, diyelim ki benim sadece iclerinden bir tanesine ihtiyacim var bu durumda yapmam gereken _ kullanmaktir bu kisaca diger degiskenleri ignore et anlamina gelir ayni zamanda import ettigim bir seyi su an kullanmayacak isem bas kismina _ ekleyebilirim. Ayni sekilde degisken tanimlayip o degiskeni kullanmadigim durumlarda da bunu uygulayabilirim
-
 
 /* package main
 
@@ -172,8 +161,6 @@ func main(){
 //boyle bir kullanimda l1:=23 fonc disinda kullanildigi icin func icinden buna ulasamiyoruz ancak soyle bir durum var eger ben bu kullanim yerine su sekilde bir kullanim yaparsam var l1 = 23 or var l1 int = 23 seklinde bu durumda func icinden bu degiskene erisebilirim herhangi bir sikinti yasamam
 
 // package-imports/application-refactor/problem/main.go
-
-
 
 /* package main
 
@@ -198,15 +185,13 @@ func main() {
 
 //* https://www.practical-go-lessons.com/chap-11-packages-and-imports#answers bu adreste go paketinin dogru bir sekilde github uzerinden nasil diger kisilerle paylasilacagi anlatilmis. (go.mod file buna gore yapiliyor)
 
-
 //* https://www.practical-go-lessons.com/chap-11-packages-and-imports#answers bu adreste key takeaways kisminda paketlerin genel bir ozeti bulunmakta
-
 
 //@ paket ayni directories icerisinde bulunan bir veya birden cok source files'a verilen isimdir. Source files : su anda icinde yazdigim first.go file'i source filedir. Source file icerisinde package blabla ardindan import edilen seyler ardindan degisken tanimlamalari ardindan ise fonksiyon tanimlamalarinin oldugu bir yerdir
 //@ bir isim bir paketi tanimlar.
 //@ buyuk harf ile baslayan bir isimlendirme exported diye isimlendirilir ve public anlami tasir
 //! bir modul kokunde (root kisminda) bir go.mod file dosyasi bulunan dosya agacinda depolanan bir go paketleri toplulugudur
-/* 
+/*
 .
 ├── cmd
 │   └── first.go
@@ -223,21 +208,20 @@ func main() {
 mesela boyle bir yapida bu yapinin tamami bir moduldur ancak icerisindeki email, invoice, new ler birer pakettir
 */
 
-//bir paketi _ blank identifier ile cagirdiginda eger paketin icerisinde init fonksiyonu var ise init fonksiyonunu calistirmis oluruz 
+//bir paketi _ blank identifier ile cagirdiginda eger paketin icerisinde init fonksiyonu var ise init fonksiyonunu calistirmis oluruz
 
-/* 
-        ------initializion sirasi--------
-        oncelikle import ettigimiz paketler initialized edilir
-        oncelikle paketimize import edilmis olan paketlerin degiskenleri (variablelari initialized edilir)
-        ardindan import ettigimiz paketlerin init fonksiyonlari calisir
-        sonra paketin kendisi initialized edilir
-        paket icerisindeki degiskenler initialized edilir
-        son olarak paketin icersindeki init fonksiyonu calistirilir
-        onemli : init fonksiyonlari sira ile calisir yani ayni anda calismaz
+/*
+   ------initializion sirasi--------
+   oncelikle import ettigimiz paketler initialized edilir
+   oncelikle paketimize import edilmis olan paketlerin degiskenleri (variablelari initialized edilir)
+   ardindan import ettigimiz paketlerin init fonksiyonlari calisir
+   sonra paketin kendisi initialized edilir
+   paket icerisindeki degiskenler initialized edilir
+   son olarak paketin icersindeki init fonksiyonu calistirilir
+   onemli : init fonksiyonlari sira ile calisir yani ayni anda calismaz
 */
 
-
-/* 
+/*
 notlarim: bir paketin oncelikle variablelari ardindan ise init fonksiyonu calisir
 eger import edilmis bir paket varsa oncelikle onlarin variablelari sonrasinda ise onlarin init fonksiyonlari calisir
 init fonksiyonlari zorunlu fonksiyonlar degillerdir ve birden cok init fonksiyonu bulunabilir
@@ -246,16 +230,15 @@ init fonksiyonlari sira ile calisirlar
 bir variable initialize edilecekse ve birden cok variable varsa oncelikle bagimsiz olan (digerlerine bagimli olmayan variable) initialize edilir ardindan en az bagimli olan ve bu sekilde devam eder.
 */
 
+/*
+ var nameDisplayer func(name, firstname string) string bu sekilde bir kullanim mevcut bu kullanimin amaci ise sudur
 
- /* 
- var nameDisplayer func(name, firstname string) string bu sekilde bir kullanim mevcut bu kullanimin amaci ise sudur 
- 
 type Country struct {
     Name        string
     CapitalCity string
 }
 struct yapisi bu sekilde
-kullanimi ise bu sekilde 
+kullanimi ise bu sekilde
 
 france := Country{
     Name:        "France",
@@ -274,21 +257,17 @@ empty := Country{}
 
 ayni sekilde bos bir belge de olusturabiliriz
 
+
+
 japan := Country{
     "Tokyo",
     "Japan",
 }
-
 su sekilde bir kullanim yapilabilir ancak bu sekilde bir kullanim yapildigi zaman herhangi bir field alani bos gecilemez ve bir kural daha var
-bu sekilde bir kullanim yapiliyorsa iki yontemi birbiri ile birlestiremezsin. Iki yontemden birisini kullanman gerekir
+bu sekilde bir kullanim yapiliyorsa iki yontemi birbiri ile birlestiremezsin. Iki yontemden birisini kullanman gerekir*/
 
+/*
 
-
- */
-
-
- /* 
- 
  usa := Country{
     Name: "United Sates of America",
 }
@@ -299,15 +278,14 @@ erismek icin bu sekilde bir kullanim vardir
 if usa.Name == "France" {
   fmt.Println("we have an error !")
 }
- 
+
 bu sekilde bir kullanim da yapilabilir
- 
- */
+
+*/
 
 // bir structurein icinde baska bir structure field olarak kullanilabilir
 
-
-/* 
+/*
 type Hotel struct {
     Name     string
     Capacity uint8
@@ -359,56 +337,53 @@ func main() {
 }
 */
 
-
 // methodlar receiveri olan fonksiyonlara verilen isimlerdir
-
-
 
 // package main
 
 // import "fmt"
 
 // func main() {
-/*  
-    ! var po *int = &i seklinde pointer tanimlamasi yapabilecegim gibi 
-    ! po := &i seklinde de pointer tanimlamasi yapabilirim 
+/*
+   ! var po *int = &i seklinde pointer tanimlamasi yapabilecegim gibi
+   ! po := &i seklinde de pointer tanimlamasi yapabilirim
 */
-    /* 
-    
-    i:=1
-    po := &i
-    po2 := &po
-    fmt.Println("i nin degeri: ",i)
-    fmt.Println("i nin adresi: ",&i)
-    fmt.Println("pointer degeri: ",po)
-    fmt.Println("Pointerin adresi: ", &po)
-    fmt.Println("Pointerin isaret ettigi adresteki degeri: ", *po)
-    fmt.Println("Pointerin adresini tutan pointerin degeri: ",po2)
-    fmt.Println("Pointerin adresini tutan pointerin adresi: ",&po2)
-    fmt.Println("Pointerin adresini tutan pointerin isaret ettigi adresteki degeri: ",*po2)
-    fmt.Println("Pointerin adresini tutan pointerin isaret ettigi adresteki pointerin isaret ettigi adresteki degeri: ",**po2)
-    ========cikti============
-    i nin degeri:  1
-    i nin adresi:  0xc00008a040
-    pointer degeri:  0xc00008a040
-    Pointerin adresi:  0xc00009e038
-    Pointerin isaret ettigi adresteki degeri:  1
-    Pointerin adresini tutan pointerin degeri:  0xc00009e038
-    Pointerin adresini tutan pointerin adresi:  0xc00009e040
-    Pointerin adresini tutan pointerin isaret ettigi adresteki degeri:  0xc00008a040
-    Pointerin adresini tutan pointerin isaret ettigi adresteki pointerin isaret ettigi adresteki degeri:  1 
-    
-    */
+/*
+
+   i:=1
+   po := &i
+   po2 := &po
+   fmt.Println("i nin degeri: ",i)
+   fmt.Println("i nin adresi: ",&i)
+   fmt.Println("pointer degeri: ",po)
+   fmt.Println("Pointerin adresi: ", &po)
+   fmt.Println("Pointerin isaret ettigi adresteki degeri: ", *po)
+   fmt.Println("Pointerin adresini tutan pointerin degeri: ",po2)
+   fmt.Println("Pointerin adresini tutan pointerin adresi: ",&po2)
+   fmt.Println("Pointerin adresini tutan pointerin isaret ettigi adresteki degeri: ",*po2)
+   fmt.Println("Pointerin adresini tutan pointerin isaret ettigi adresteki pointerin isaret ettigi adresteki degeri: ",**po2)
+   ========cikti============
+   i nin degeri:  1
+   i nin adresi:  0xc00008a040
+   pointer degeri:  0xc00008a040
+   Pointerin adresi:  0xc00009e038
+   Pointerin isaret ettigi adresteki degeri:  1
+   Pointerin adresini tutan pointerin degeri:  0xc00009e038
+   Pointerin adresini tutan pointerin adresi:  0xc00009e040
+   Pointerin adresini tutan pointerin isaret ettigi adresteki degeri:  0xc00008a040
+   Pointerin adresini tutan pointerin isaret ettigi adresteki pointerin isaret ettigi adresteki degeri:  1
+
+*/
 
 /*     i := 1
 
-    fmt.Println("initial:", i)
+fmt.Println("initial:", i)
 
-    zeroval(i)
-    fmt.Println("zeroval:", i)
+zeroval(i)
+fmt.Println("zeroval:", i)
 
-    zeroptr(&i)
-    fmt.Println("zeroptr:", i) */
+zeroptr(&i)
+fmt.Println("zeroptr:", i) */
 
 //}
 
@@ -420,22 +395,26 @@ func zeroptr(iptr *int) {
     *iptr = 0
 } */
 
+/* package main
+
+import (
+	"fmt"
+	_ "fmt"
+	"newgroupproject/internal/cart"
+	_ "time"
+)
+
 func main(){
+    newcart := cart.Cart{}
+    newcart.Lock()
+    totalPrice := newcart.TotalPrice()
+    err := newcart.Lock()
+} 
 
-}
+bu kodun soyle bir mantigi var aslinda. internal klasoru icersinde cart isimli bir klasorum var o klasorun icerisinde cart.go isimli bir paketim var. Bu paketi import kisminda import etmisim. Daha sonra bu paketimin icerisinde Cart isimli bir struct'im ve iki adet metodum var. Metodlarimin receiveleri cart tipinde oldugundan dolayi cart tipinde bir sey olmadan kullanamam bundan dolayi metotlarimi kullanabilmek icin newcart isimli cart tipindeki cart.Cart{} olusturdum, daha sonra bunu kullanarak metotlarima erisebildim
 
-type Cart struct {
-    ID        string
-    CreatedAt time.Time
-    UpdatedAt time.Time
-    lockedAt  time.Time
-    CurrencyCode string
-    isLocked     bool
-}
 
-func (c *Cart) TotalPrice() (error){
-    //buradaki c *Cart olan kisim bu methodun receiveridir.
-    //receiverlarin normal parametrelerden farki aslinda sunlardir; 
-    //bu fonksiyonu kullanirken sadece cart tipinde kullanabiliriz baska bir sekilde kullanamayiz
-    return nil
-}
+
+
+*/
+
