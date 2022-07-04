@@ -420,7 +420,7 @@ ancak eger pointer tipinde bir degisken yollarsam yolladigim degiskenin adresi g
 */
 
 // methods/example-project/main.go
-package main
+/*package main
 
 import (
 	"fmt"
@@ -434,7 +434,7 @@ func main() {
     var newcart = cart.Cart{}
     total,error := newcart.TotalPrice()
     fmt.Printf("toplam tutar : %d hata kodu : %d",total,error)
-    
+
 	/*
 
 	   totalPrice, err := newCart.TotalPrice()
@@ -450,4 +450,19 @@ func main() {
 	       return
 	   } */
 
+//?================================================================================================================
+package main //? bu kod blogu sadece receiver fonksiyonlari ve struct yapisini anlamak icin var
+
+import (
+	"fmt"
+	"newgroupproject/internal/receiver"
+)
+
+func main(){
+    b := &receiver.Fatura{
+        Isim: "Tunga Beyin Faturasi",
+        Bahsis: 40.00,
+        Items: map[string]float32{"patates": 5.00, "elma":4.00, "biber":10.00, "salatalik":12.00},
+    }
+    fmt.Println(b.Hesap())
 }
