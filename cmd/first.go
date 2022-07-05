@@ -454,11 +454,12 @@ func main() {
 //? bu kod blogu sadece receiver fonksiyonlari ve struct yapisini daha iyi anlamak icin var
 //?================================================================================================================
 
-package main
+/* package main
 
 import (
 	"fmt"
 	"newgroupproject/internal/receiver"
+    _"strconv"
 )
 
 func main(){
@@ -472,4 +473,18 @@ func main(){
     b.Update("domates",35.00)
     b.Update("lahana",17.00)
     fmt.Println(b.Hesap())
+} */
+
+
+//?===========================================================================================================
+
+package main
+
+import (
+    "fmt"
+    "newgroupproject/internal/romantoint"
+)
+
+func main(){
+    fmt.Println(romantoint.RomanToInt("MCMXCIV"))
 }

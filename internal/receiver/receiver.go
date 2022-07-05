@@ -9,7 +9,7 @@ type Fatura struct {
 }
 
 func (f *Fatura) Hesap() string {
-	fmt.Println(f.Isim)
+	fmt.Println(f.Isim) //map elemani yazdirmak
 	var toplamtutar float32 = 0
 	text := "------Faturaniz---------\n"
 	for index,value := range f.Items{
@@ -23,5 +23,7 @@ func (f *Fatura) Hesap() string {
 
 
 func (f *Fatura) Update(name string, price float32){
-	f.Items[name] = price
+	f.Items[name] = price //mape eleman eklemek
 }
+
+
