@@ -642,6 +642,7 @@ func addCountries2(countriesPointer *[]string) { //@ parametre olarak slice poin
 
 
 
+/* 
 type Cat struct{
     Color string
     Age int16
@@ -665,15 +666,28 @@ func main(){
     cat := Cat{Color: "blue", Age: 8, Name: "Milow"}
     cat.Rename("Bob")
     fmt.Println(cat.Name)
-    // Bob
+    //! Bob
 
     cat.Rename2("Ben")
     fmt.Println(cat.Name)
-    //Bob yazdirir cunku fonksiyon icerisindeki local degiskeni degistirdik
+    //! Bob yazdirir cunku fonksiyon icerisindeki local degiskeni degistirdik
     
     adres := &cat
     Rename3(adres,"hasan")
     fmt.Println(cat.Name)
-    //hasan yazdirir :)
-}
+    //! hasan yazdirir :)
+} 
+*/
 
+//@=========================ne zaman pointer receiver ne zaman value receiver kullanmam gerekli====================================================
+/* 
+                            Pointer receiver kullan
+struct yapim cok buyuk ve agir ise
+receiveri degistirmek istiyorsam (ornegin struct alaninda bir degiskenin isim alanini degistirmeye calisiyorsam)
+synchronization primitive (like sync.Mutex) gibi bir sey kullaniyorsak
+
+                            Value receiver kullan
+struct yapim small ise
+receiveri degistirmeye gerek yok ise
+eger receiver map, func, chan, slice, string, interface ise bunlarla value receiver kullanmam gerekir cunku bu yapilar yapisal olarak hali hazirda pointerlar ile calisirlar
+*/
