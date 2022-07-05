@@ -477,8 +477,8 @@ func main(){
 
 
 //?===========================================================================================================
-
-package main
+//leetcode sorusu : roman to int
+/* package main
 
 import (
     "fmt"
@@ -487,4 +487,60 @@ import (
 
 func main(){
     fmt.Println(romantoint.RomanToInt("MCMXCIV"))
+} */
+
+//============================================================================================================
+//*                            Pointerlar icin notlarim
+/* 
+type User struct {
+    ID string
+    Username string
 }
+
+! bu sekilde bir structim oldugu zaman *User demek User turune ait tum degiskenleri belirtir anlamindadir
+
+pointer tanimlamasi su sekilde yapilir -> 
+
+var p *int
+var answer int = 42
+p = &answer
+
+veya ayni sekilde
+var answer int = 42
+p := &answer
+
+seklinde pointer tanimlamasi yapabilirim
+
+simdi pointerlar aslinda adres tutarlar peki ben pointerin isaret ettigi o adresteki degeri kullanmak istersem ne yapmaliyim? * dereference operatorunu kullanmaliyim
+
+bunu su sekilde yapabilirim. Ustte tanimlamis oldugum bir struct var
+bu struct elemanlarina erismek icin sunlari yapabilirim
+
+cart := Cart{
+    ID: "12345",
+    Paid: true,
+}
+
+cartPtr := &cart //! cartPtr su anda sadece 0x385v854 seklinde bir adres tutuyor (yani deger degil degerlerin saklandigi adresi tutuyor (isaret ediyor))
+
+cartDeref := *cartPtr  //! iste bu sekilde su an pointerin isaret ettigi yerdeki value lara ulasis oldumm
+
+@ & -> adres bilgisini al (reference)
+@ * -> adres bilgisine ulas (takip et) (dereference)
+* operatoru ile *card seklindeki kullanim birbirinin aynisi degildir. *card bir isaretci tipi olabilecegi gibi ayni zamanda referansi kaldirilmis bir isaretci degiskenini de gosteriyor olabilir. Kullanimini yakindan inceleyerek hangisi olduguna karar vermem gerekir
+
+
+!     var myPointerVar *int
+!    fmt.Println(*myPointerVar)  mesela soyle bir kullanim yanlistir bunun nedenini detayli aciklamak istiyorum
+
+@ oncelikle tipi(adresini gosterecegi) *int olan bir pointer degiskeni tanimladik. Daha sonra bunu dereference etmeye calistik ancak oncesinde referans etmemistik ki.. yani bu sekilde sanki gostermedigi bir yer oldugu halde o yere gitmeye calisiyoruz aslinda o yer nil dir. Yani yoktur bu nedenle program hata verir. Bu programin calismasinin tek yolu degisken tanimlamasindan sonra reference atamasi yapilmasidir. mypointer = &blabla seklinde. Sonra buradaki kullanimi yapabilirim
+
+
+map ve slice lar reference tipleridir. Yani kendi ic yapilarina reference lilardir. Bu soyle bir kullanim saglar, bir method parametre olarak bir maps aliyor ise ve bu parametre pointer seklinde olmasa bile yapilan degisiklikler direkt olarak mapse yansir.
+*/
+
+
+
+
+package main
+
