@@ -544,3 +544,136 @@ map ve slice lar reference tipleridir. Yani kendi ic yapilarina reference lilard
 
 package main
 
+import (
+    "fmt"
+    _"strings"
+
+)
+
+//slicelar ayni turdeki elementlerin birer koleksiyonudur. 
+
+/* func main(){
+    EUcountries := []string{"Austria", "Belgium", "Bulgaria"} //slice tanimlamasi yaptik
+    addCountries(EUcountries)
+    fmt.Println(EUcountries)
+    upper(EUcountries)
+    fmt.Println(EUcountries)
+} */
+
+//slice eleman eklemek icin
+
+/* func addCountries(countries []string) {
+    countries = append(countries, []string{"Croatia", "Republic of Cyprus", "Czech Republic", "Denmark", "Estonia", "Finland", "France", "Germany", "Greece", "Hungary", "Ireland", "Italy", "Latvia", "Lithuania", "Luxembourg", "Malta", "Netherlands", "Poland", "Portugal", "Romania", "Slovakia", "Slovenia", "Spain", "Sweden"}...)
+} */
+
+//bu sekilde bu fonksiyonu main icerisinde calistirdigimizda [Austria Belgium Bulgaria] sonucuna ulasiyoruz. Bunun sebebi parametre gecisi sirasinda internal bir kopya olusturulmasidir. Eger addcountries fonksiyonu icerisinde bu print isini gerceklestirmis olsaydik ekledigimiz tum countryleri gorurduk ([Austria Belgium Bulgaria] bunlar dahil)
+
+/* func upper(countries []string) {
+    for k, _ := range countries {
+        countries[k] = strings.ToUpper(countries[k])
+    }
+} */
+
+//peki bu sekilde bir kullanim yapsak ve main icersinde bu fonksiyonu calistirsam ne olurdu? Daha deminki gibi bir sonuc bekliyorsam bu tamamen yanlis cevap su olurdu [AUSTRIA BELGIUM BULGARIA]. Peki ama daha demin degismeyen slice ne oldu da su anda degisti?  adim adim aciklayayim
+/* 
+ilk olarak upper fonksiyonu eucontries sliceinin bir local kopyasini olusturdu
+bu fonksiyonun icerisinde slice elementinin valuelarini degistirdik
+bu kopya hala temel olan slice i referans ediyor ancak soyle bir durum var //! sadece ama sadece var olan degerleri degistririsek bu olur
+@ aklimda daha kolay kalmasi icin sanki icerisindeki her bir value orijinal olan slice in valuelarina referans gosteriyormuslar gibi dusunebilirim
+*/
+
+/* func main() {
+    EUcountries := []string{"Austria", "Belgium", "Bulgaria"}
+    addCountries2(&EUcountries) //slice adresini yolladik
+    fmt.Println(EUcountries)
+}
+
+func addCountries2(countriesPointer *[]string) { //@ parametre olarak slice pointeri veriyoruz
+    *countriesPointer = append(*countriesPointer, []string{"Croatia", "Republic of Cyprus", "Czech Republic", "Denmark", "Estonia", "Finland", "France", "Germany", "Greece", "Hungary", "Ireland", "Italy", "Latvia", "Lithuania", "Luxembourg", "Malta", "Netherlands", "Poland", "Portugal", "Romania", "Slovakia", "Slovenia", "Spain", "Sweden"}...)
+} */
+
+// kisaca addcountries2 fonksiyonuna bir adres bilgisi yollandi ve fonksiyon kendi icerisinde olusturdugu degisken ile bu adres bilgisinin degerine  * operatoru ile ulasti
+
+
+//simdi bir kullanim gosterecegim. dereference operatorunu kullanmadan sadece adres bilgisi ile struct kullanabiliriz
+/* func main(){
+
+    type Cart struct {
+        ID   string
+        Paid bool
+    }
+
+    cart := Cart{
+        ID:          "115552221",
+        Paid:   true,
+    }
+    cartPtr := &cart
+    cartPtr.ID = "tunga"
+    cartPtr.Paid = false
+
+    fmt.Println(cart)
+
+    //{tunga false} seklinde bir ciktisi olur 
+}
+*/
+
+
+//burdaki kullanim ile su kullanim ayni seydir
+
+/* func main(){
+
+    type Cart struct {
+        ID   string
+        Paid bool
+    }
+
+    cart := Cart{
+        ID:          "115552221",
+        Paid:   true,
+    }
+    cartPtr := &cart
+    (*cartPtr).ID = "asif tunga"
+    (*cartPtr).Paid = false
+
+    fmt.Println(cart)
+
+    //{asif tunga false} seklinde bir ciktisi olur 
+} */
+
+
+
+type Cat struct{
+    Color string
+    Age int16
+    Name string
+}
+
+
+func (cat *Cat) Rename(newname string){
+    cat.Name = newname
+}
+
+func (cat Cat) Rename2(newname string){
+    cat.Name = newname
+}
+
+func Rename3(adress *Cat,newname string){
+    (*adress).Name = newname
+}
+
+func main(){
+    cat := Cat{Color: "blue", Age: 8, Name: "Milow"}
+    cat.Rename("Bob")
+    fmt.Println(cat.Name)
+    // Bob
+
+    cat.Rename2("Ben")
+    fmt.Println(cat.Name)
+    //Bob yazdirir cunku fonksiyon icerisindeki local degiskeni degistirdik
+    
+    adres := &cat
+    Rename3(adres,"hasan")
+    fmt.Println(cat.Name)
+    //hasan yazdirir :)
+}
+
