@@ -691,3 +691,68 @@ struct yapim small ise
 receiveri degistirmeye gerek yok ise
 eger receiver map, func, chan, slice, string, interface ise bunlarla value receiver kullanmam gerekir cunku bu yapilar yapisal olarak hali hazirda pointerlar ile calisirlar
 */
+//@=========================================interface kavrami==================================================
+
+/* 
+arayuz dedigimiz sey aslinda bir dizi ortak davranisi tanimlayan bir seydir. 
+herhangi bir implementation olmadan (ornek olarak metotlarin davranislarini tanimlar)
+kisaca interface herhangi bir implementation olmadan methodlarin nasil bir tipte oldugunu tanimlar
+*/
+
+//ornek bir interface imlementationu bu sekilde gerceklesir 
+
+/* 
+type DomasticAnimal interface{
+    ReceiverAffection(from Human)
+    GiveAffection(to Human)
+}
+
+type Human struct{
+    Firstname string
+    Lastname string
+    Age int
+    Country string
+}
+
+type Cat struct{
+    Name string
+}
+
+type Dog struct{
+    Name string
+}
+
+func (c Cat) ReceiverAffection(from Human){
+    fmt.Printf("the cat name %s receive affection from human who name is %s\n",c.Name,from.Firstname)
+}
+
+func (c Cat) GiveAffection(to Human){
+    fmt.Printf("the cat name %s give affection to human who name is %s\n",c.Name,to.Firstname)
+}
+
+func (d Dog) ReceiverAffection(from Human){
+    fmt.Printf("the dog name %s receive affection form human who name is %s\n",d.Name,from.Firstname)
+}
+
+
+func (d Dog) GiveAffection(to Human){
+    fmt.Printf("the dog name %s give affection to human who name is %s \n",d.Name,to.Firstname)
+
+}
+
+
+func Pet(animal DomasticAnimal, human Human){
+    animal.GiveAffection(human)
+    animal.ReceiverAffection(human)
+}
+
+
+func main(){
+    Pet(Dog{"TOM"},Human{"asif","tunga",23,"turkiye"})
+} 
+
+*/
+
+// ================================ anlamama yardimci olacak baska bir ornek olabilir ===================================================
+
+
