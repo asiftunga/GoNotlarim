@@ -756,3 +756,89 @@ func main(){
 // ================================ anlamama yardimci olacak baska bir ornek olabilir ===================================================
 
 
+type Article struct {
+	Title string
+	Author string
+}
+
+type Book struct{
+    Title string
+    Author string
+    Pages int
+}
+
+func (b Book) String() string{
+    return fmt.Sprintf("The %q book was written by %s",b.Title,b.Author)
+}
+
+func (a Article) String() string {
+	return fmt.Sprintf("The %q article was written by %s.", a.Title, a.Author)
+}
+
+
+
+type Stringer interface{
+    String() string             //@ burada yaptigim tek sey Stringer isminde String() isimli string geri donuslu bir metot koydum. Interface tanimlamasi bu kadar
+}
+
+func main() {
+    a := Article{
+        Title: "Understanding Interfaces in Go",
+        Author: "Sammy Shark",
+    }
+    b:=Article{"Umutlu Bir Bilgisayar Muhendisinin Yasami","Asif Tunga Mubarek"} // ayni zamanda bu sekilde de kullaniliyor (daha fazla bilgi icin yukaridaki struct yapisina bakabilirim)
+    c:=Book{"Yasamim","Asif Tunga Mubarek",23}
+    Print(a)
+    Print(b)
+    Print(c)
+}
+
+
+func Print(s Stringer) {
+    fmt.Println(s.String())
+}
+// cok onemli bir not : //! bir method fonksiyondan farkli olarak sadece tanimlandigi turun orneginden cagrilabilir
+//A method is a special function that is scoped to a specific type in Go. Unlike a function, a method can only be called from the instance of the type it was defined on.
+//simdi bu yapi beni kod tekrarindan kurtardi. Bunu bir ornekle gostermek istiyorum
+/* 
+diyelimki elimde iki tane daha struct daha var
+
+type Yazar struct{
+    Name string
+    Age int
+    Country string 
+}
+
+type Basimevi struct{
+    Locasyon string
+    Country string
+}
+
+func (y Yazar) String() string {
+	return fmt.Sprintf("The %q article was written by %s.", y.Name, y.Country)
+}
+
+func (b Basimevi) String() string {
+	return fmt.Sprintf("The %q article was written by %s.", b.Locasyon, b.Country)
+}
+
+asagidaki print fonksiyonunu da degistirmemis oldugumu varsayalim
+
+func Print(a Article){
+    fmt.Println(a.String())
+}
+
+func Print(b Book){
+    fmt.Println(b.String())
+}
+
+func Print(y Yazar){
+    fmt.Println(y.String())
+}
+
+func Print(b Basimevi){
+    fmt.Println(b.String())
+}
+
+*/
+
