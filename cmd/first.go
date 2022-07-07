@@ -863,3 +863,24 @@ func main() {
     Pet(c, john)
     Pet(d,john)
 } */
+
+
+
+
+
+/* // ...
+// let's create a concrete type Snake
+type Snake struct {
+    Name string
+}
+// we do not implement the methods ReceiveAffection and GiveAffection intentionally
+//...
+
+
+func main(){
+
+    var snake Snake
+    snake.Name = "Joe"
+
+    Pet(snake, john)
+} */
