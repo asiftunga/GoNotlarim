@@ -842,3 +842,24 @@ func Print(b Basimevi){
 
 */
 
+/* // interfaces/first-example/main.go 
+//...
+
+func main() {
+
+    // Create the Human
+    var john Human
+    john.Firstname = "John"
+
+
+    // Create a Cat
+    var c Cat
+    c.Name = "Maru"
+
+    // then a dog
+    var d Dog
+    d.Name = "Medor"
+
+    Pet(c, john)
+    Pet(d,john)
+} */
