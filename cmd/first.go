@@ -1,6 +1,6 @@
 /*
 go dilinde variablelar nasil tanimlanir?
-degiskenisimlerine identifier denir degerlerine ise expression denir
+degisken  isimlerine identifier denir degerlerine ise expression denir
 
 var degiskenIsmi degiskenturu = deger   seklinde degisken tanimlamasi yapilabilir
 var degisken1,degisken2,degisken3 degiskenlerinturu = deger1,deger2,deger3
@@ -122,7 +122,7 @@ boyle bir kullanimda fonksiyonun return kisminda bir sey yazmaya gerek yoktur cu
 
 
 */
-
+//! goruldugu uzere go dilinde de ayni sekilde dongulere isim verilebilmekte.
 /* package main
 
 import "fmt"
@@ -159,7 +159,7 @@ func main(){
 } */
 
 //boyle bir kullanimda l1:=23 fonc disinda kullanildigi icin func icinden buna ulasamiyoruz ancak soyle bir durum var eger ben bu kullanim yerine su sekilde bir kullanim yaparsam var l1 = 23 or var l1 int = 23 seklinde bu durumda func icinden bu degiskene erisebilirim herhangi bir sikinti yasamam
-
+//============================================================================
 // package-imports/application-refactor/problem/main.go
 
 /* package main
@@ -180,6 +180,80 @@ func main() {
     email.SendEmail(emailContents, customerEmail)
     invoice.CreateAndSaveInvoice(customerName, nights, 145.32)
 } */
+/* 
+yukaridaki ornege benzer sekilde eger import kisminda takma isim verirsem bu durumda verdigim takma isim uzerinden go modullerine ulasabilirim
+
+soyle bir structure oldugunu varsayalim
+
+
+├── vehicle
+│   ├── go.mod
+│   ├── main.go
+│   └── car
+│       └── car.go
+
+bu vehicle bir go moduludur
+
+Go inside the vehicle directory and run the following command to create a go module named vehicle.
+
+! go mod init vehicle
+
+The above command will create a file named go.mod. The following will be the contents of the file.
+
+module vehicle
+
+go 1.14
+
+bu sekilde bir go module'u olusturmus oldum
+
+vehicle\main.go su sekilde 
+
+package main
+
+import (
+	car1 "vehicle/car"
+	car2 "vehicle/car"
+
+	"fmt"
+)
+
+func main() {
+	c1 := new(car1.Car)
+	c1.Single(10)
+	fmt.Println(c1.Price)
+
+	c2 := new(car2.Car)
+	c2.Double(10)
+	fmt.Println(c2.Price)
+}
+
+@ goruldugu uzere burada takma isimler uzerinden module ulasim saglanmis
+
+vehicle\car\car.go dosyasi ise su sekilde 
+
+package car
+
+type Car struct {
+	Price int
+}
+
+func (obj *Car) Single(price int) int {
+	obj.Price = price
+	return obj.Price
+}
+
+func (obj *Car) Double(price int) int {
+	obj.Price = price * 2
+	return obj.Price
+}
+
+vehicle>go run main.go bu komutu calistirdigimiz zaman ise su output karsimiza cikmakta:
+    10
+    20
+*/
+
+
+
 
 //! ayni temada olan fonksiyonlari birbirleri ile birlestirip onlari birer paket haline getirmek iyi bir aliskanliktir
 
