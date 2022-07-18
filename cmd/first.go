@@ -3,7 +3,27 @@ go dilinde variablelar nasil tanimlanir?
 degisken  isimlerine identifier denir degerlerine ise expression denir
 
 var degiskenIsmi degiskenturu = deger   seklinde degisken tanimlamasi yapilabilir
+
+var sayi int32 = 84 seklinde bir tanimlama yapilabilir
+
+
+
+
 var degisken1,degisken2,degisken3 degiskenlerinturu = deger1,deger2,deger3
+
+var geek1, geek2, geek3 int = 232, 784, 854 boyle bir tanimlamada sadece ayni turde degiskenler tanimlanabilir
+
+var geek4, geek5, geek6 = 100, "GFG", 7896.46 fakat tip (type) kismini (int) kaldirirsak istedigim sekilde degisken tanimlamasi yapabilirim
+
+once degiskeni tanimlayip sonra deger atamasi gerceklestirebilirim. //@ onemli bir not olarak degiskeni tanimlayip deger atamasi gerceklestirmemis olsam bile go dilinde uninitialized variablelar yoktur bu nedenle bool lar false degeri sayisal degerler 0 ve string ifadeler "" seklinde ilk deger atamasi yapilir (initialize edilir)
+
+
+    var geek1 int
+    var geek2 string
+    var geek3 float64
+    var geek4 bool
+    
+seklindedir
 =============kisa degisken tanimlamalari==================================
 kisa degisken tanimlamalari su sekilde yapilir
 degiskenismi := deger
@@ -16,6 +36,21 @@ const degiskenIsmi degiskenturu = deger
 
 tipsiz bir const tanimlamasi yapilabilir
     const degiskenismi = deger  seklinde
+
+
+
+degisken tanimlamalarinda su yontem de kullanilabilir
+
+var(
+     geek1 = 100
+     geek2 = 200.57
+     geek3 bool
+     geek4 string = "GeeksforGeeks"
+)
+bu sekilde birden fazla degiskeni tek seferde tanimlamis oldum
+
+While using type during declaration you are only allowed to declare multiple variables of the same type. But removing type during declarations you are allowed to declare multiple variables of different types.
+
 
 ==============================================================================
                     if else if else ve switch case yapisi
