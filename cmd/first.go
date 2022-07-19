@@ -139,7 +139,7 @@ func main() {
         fmt.Println(n)
     }
 }
-
+//ayni if yapisinda oldugu sekilde for kosullari da parantezler icerisine alinamaz. Alindigi takdirde hata mesaji ile karsilasilir 
 
 */
 
@@ -175,25 +175,25 @@ func main() {
 	}
 
 } */
-
-//* _ kullanimi bu kismi es gec anlamina gelmektedir. Ornekte 3 adet return degeri var, diyelim ki benim sadece iclerinden bir tanesine ihtiyacim var bu durumda yapmam gereken _ kullanmaktir bu kisaca diger degiskenleri ignore et anlamina gelir ayni zamanda import ettigim bir seyi su an kullanmayacak isem bas kismina _ ekleyebilirim. Ayni sekilde degisken tanimlayip o degiskeni kullanmadigim durumlarda da bunu uygulayabilirim
+//=============================================================================================
+//* _ kullanimi bu kismi es gec anlamina gelmektedir. Ornekte 3 adet return degeri var, diyelim ki benim sadece iclerinden bir tanesine ihtiyacim var bu durumda yapmam gereken _ kullanmaktir bu kisaca diger degiskenleri ignore et anlamina gelir ayni zamanda import ettigim bir seyi su an kullanmayacak isem bas kismina _ ekleyebilirim. Ayni sekilde degisken tanimlayip o degiskeni kullanmadigim durumlarda da bunu uygulayabilirim ..... asagilarda da aciklamistim aslinda ancak _ varsa bu ayni zamanda init fonksiyonu icerisinde onun initialized edilmesi anlamini tasir. Daha detayli bilgi icin asagidaki notlarimi okuyabilirim
 
 /* package main
 
 import (
 	"fmt"
-	new "newgroupproject/internal/new"
+	new "newgroupproject/internal/new"   //yap dikkat edersem kullandigim dosya yoluna takma isim atamasi yapmisim. Bu ~new~ ismini kullanarak modulume direkt erisim saglayabilirim
     _ "newgroupproject/internal/email"
 
 )
 
 func main(){
 	l1:=23
-	new.Deneme()
+	new.Deneme() //yap burada bu erisimin bir ornegi gorulmekte
 	fmt.Println("hellooo ",l1)
 } */
 
-//boyle bir kullanimda l1:=23 fonc disinda kullanildigi icin func icinden buna ulasamiyoruz ancak soyle bir durum var eger ben bu kullanim yerine su sekilde bir kullanim yaparsam var l1 = 23 or var l1 int = 23 seklinde bu durumda func icinden bu degiskene erisebilirim herhangi bir sikinti yasamam
+//boyle bir kullanimda l1:=23 fonc disinda kullanildigi icin func icinden buna ulasamiyoruz ancak soyle bir durum var eger ben bu kullanim yerine su sekilde bir kullanim yaparsam -> var l1 = 23 or var l1 int = 23 seklinde bu durumda func icinden bu degiskene erisebilirim herhangi bir sikinti yasamam
 //============================================================================
 // package-imports/application-refactor/problem/main.go
 
@@ -210,7 +210,7 @@ func main() {
     customerName := "Doe"
     customerEmail := "john.doe@example.com"
     var nights uint = 12
-    emailContents := email.GetEmailContents("M", customerName, nights)
+    emailContents := email.GetEmailContents("M", customerName, nights) //@ GetEmailContents isimli fonksiyonun geri donus degeri Sprintf oldugundan dolayi burada bir degisken kullanrak geri donus degerini bir degiskene atamis bulunmaktayiz
     fmt.Println(emailContents)
     email.SendEmail(emailContents, customerEmail)
     invoice.CreateAndSaveInvoice(customerName, nights, 145.32)
@@ -253,7 +253,7 @@ import (
 )
 
 func main() {
-	c1 := new(car1.Car)
+	c1 := new(car1.Car) //! new keywordu oop bir dil olmayan go nun struct yapisi sayesinde sanki oop bir dilmis gibi davranmasini sagliyor. new keywordu aslinda objenin memory adresinin geri dondurulmesini sagliyor boylece yeni yaratilmis olan obje diger objeyi isaret edebiliyor. Aslinda gerceklesmis olan sey yeni yaratilan obje diger obje icin bir pointerdir.
 	c1.Single(10)
 	fmt.Println(c1.Price)
 
@@ -262,7 +262,7 @@ func main() {
 	fmt.Println(c2.Price)
 }
 
-@ goruldugu uzere burada takma isimler uzerinden module ulasim saglanmis
+@ goruldugu uzere burada takma isimler uzerinden paketlere ulasim saglanmis
 
 vehicle\car\car.go dosyasi ise su sekilde 
 
@@ -340,7 +340,10 @@ bir variable initialize edilecekse ve birden cok variable varsa oncelikle bagims
 */
 
 /*
- var nameDisplayer func(name, firstname string) string bu sekilde bir kullanim mevcut bu kullanimin amaci ise sudur
+ var nameDisplayer func(name, firstname string) string bu sekilde bir kullanim mevcut bu kullanimin amaci ise sudur fonksiyonu henuz tamamlamadan tanimlama kismidir
+
+
+===============================================================================
 
 type Country struct {
     Name        string
@@ -358,13 +361,13 @@ usa := Country{
     Name: "United Sates of America",
 }
 
-bu kisimda bos biraktigimiz capitalcity kismi bos kalir. String bir ifade icin bu "" seklindedir
+bu kisimda bos biraktigimiz capitalcity kismi bos kalir. (bos kalirdan kastim initialize edilir ancak baslangic degeri atanmaz default deger atanir) String bir ifade icin bu "" seklindedir
 
 
 
 empty := Country{}
 
-ayni sekilde bos bir belge de olusturabiliriz
+ayni sekilde bos bir struct objesi de olusturabiliriz, bu structin tum field kisimlari default sekilde initialize edilirler
 
 
 
@@ -383,6 +386,15 @@ bu sekilde bir kullanim yapiliyorsa iki yontemi birbiri ile birlestiremezsin. Ik
 usa.CapitalCity = "Washington DC"
 
 erismek icin bu sekilde bir kullanim vardir
+
+//@ su sekilde de bir kullanim yapilabilir
+
+usa := Country {}
+usa.Name = "United States of America"
+usa.CapitalCity = "Washington DC"
+
+
+
 
 if usa.Name == "France" {
   fmt.Println("we have an error !")
@@ -445,6 +457,36 @@ func main() {
     /*
 }
 */
+
+//@ bu sekilde de bir kullanim mevcuttur
+/* package main
+
+import "fmt"
+
+//degiskenler main disinda tanimlanirlar
+
+type Hotel struct {
+    Name string
+    Country
+}
+
+type Country struct {
+    Name        string
+    CapitalCity string
+}
+
+func main(){
+    hotel := Hotel{}
+    hotel.Name = "ATM otelleri"
+    hotel.Country.Name = "Turkey"
+    hotel.Country.CapitalCity = "Antalya"
+    fmt.Println(hotel.Name)
+    fmt.Println(hotel.Country)
+}
+
+ */
+
+
 
 // methodlar receiveri olan fonksiyonlara verilen isimlerdir
 
@@ -651,13 +693,13 @@ map ve slice lar reference tipleridir. Yani kendi ic yapilarina reference lilard
 
 
 
-package main
+// package main
 
-import (
-    "fmt"
-    _"strings"
+// import (
+//     "fmt"
+//     _"strings"
 
-)
+// )
 
 //slicelar ayni turdeki elementlerin birer koleksiyonudur. 
 
@@ -865,47 +907,47 @@ func main(){
 // ================================ anlamama yardimci olacak baska bir ornek olabilir ===================================================
 
 
-type Article struct {
-	Title string
-	Author string
-}
+// type Article struct {
+// 	Title string
+// 	Author string
+// }
 
-type Book struct{
-    Title string
-    Author string
-    Pages int
-}
+// type Book struct{
+//     Title string
+//     Author string
+//     Pages int
+// }
 
-func (b Book) String() string{
-    return fmt.Sprintf("The %q book was written by %s",b.Title,b.Author)
-}
+// func (b Book) String() string{
+//     return fmt.Sprintf("The %q book was written by %s",b.Title,b.Author)
+// }
 
-func (a Article) String() string {
-	return fmt.Sprintf("The %q article was written by %s.", a.Title, a.Author)
-}
-
-
-
-type Stringer interface{
-    String() string             //@ burada yaptigim tek sey Stringer isminde String() isimli string geri donuslu bir metot koydum. Interface tanimlamasi bu kadar
-}
-
-func main() {
-    a := Article{
-        Title: "Understanding Interfaces in Go",
-        Author: "Sammy Shark",
-    }
-    b:=Article{"Umutlu Bir Bilgisayar Muhendisinin Yasami","Asif Tunga Mubarek"} // ayni zamanda bu sekilde de kullaniliyor (daha fazla bilgi icin yukaridaki struct yapisina bakabilirim)
-    c:=Book{"Yasamim","Asif Tunga Mubarek",23}
-    Print(a)
-    Print(b)
-    Print(c)
-}
+// func (a Article) String() string {
+// 	return fmt.Sprintf("The %q article was written by %s.", a.Title, a.Author)
+// }
 
 
-func Print(s Stringer) {
-    fmt.Println(s.String())
-}
+
+// type Stringer interface{
+//     String() string             //@ burada yaptigim tek sey Stringer isminde String() isimli string geri donuslu bir metot koydum. Interface tanimlamasi bu kadar
+// }
+
+// func main() {
+//     a := Article{
+//         Title: "Understanding Interfaces in Go",
+//         Author: "Sammy Shark",
+//     }
+//     b:=Article{"Umutlu Bir Bilgisayar Muhendisinin Yasami","Asif Tunga Mubarek"} // ayni zamanda bu sekilde de kullaniliyor (daha fazla bilgi icin yukaridaki struct yapisina bakabilirim)
+//     c:=Book{"Yasamim","Asif Tunga Mubarek",23}
+//     Print(a)
+//     Print(b)
+//     Print(c)
+// }
+
+
+// func Print(s Stringer) {
+//     fmt.Println(s.String())
+// }
 // cok onemli bir not : //! bir method fonksiyondan farkli olarak sadece tanimlandigi turun orneginden cagrilabilir
 //A method is a special function that is scoped to a specific type in Go. Unlike a function, a method can only be called from the instance of the type it was defined on.
 //simdi bu yapi beni kod tekrarindan kurtardi. Bunu bir ornekle gostermek istiyorum
@@ -971,25 +1013,4 @@ func main() {
 
     Pet(c, john)
     Pet(d,john)
-} */
-
-
-
-
-
-/* // ...
-// let's create a concrete type Snake
-type Snake struct {
-    Name string
-}
-// we do not implement the methods ReceiveAffection and GiveAffection intentionally
-//...
-
-
-func main(){
-
-    var snake Snake
-    snake.Name = "Joe"
-
-    Pet(snake, john)
 } */
