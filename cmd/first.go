@@ -1039,11 +1039,11 @@ func (a Article) String() string {
 }
 
 func (y Yazar) String() string {
-	return fmt.Sprintf("The %q article was written by %s.", y.Country, y.Name)
+	return fmt.Sprintf("The %q sehrinde yasayan kisi: %s.", y.Country, y.Name)
 }
 
 func (b Basimevi) String() string {
-	return fmt.Sprintf("The %q article was written by %s.", b.Locasion, b.Country)
+	return fmt.Sprintf("The %q lokasyonu su ulkede bulunur: %s.", b.Locasion, b.Country)
 }
 
 func main(){
