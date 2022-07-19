@@ -28,7 +28,8 @@ type Item struct {
 func (c *Cart) TotalPrice() (*money.Money, error) {
 	//buradaki c *Cart olan kisim bu methodun receiveridir.
 	//receiverlarin normal parametrelerden farki aslinda sunlardir;
-	//! bu fonksiyonu kullanirken sadece cart tipinde kullanabiliriz baska bir sekilde kullanamayiz
+	//! bu fonksiyonu kullanirken sadece Cart tipinde kullanabiliriz baska bir sekilde kullanamayiz
+	//yap dikkat: buradaki *money.Money parametre degil return ediliyor. Bunu gozden kacirmamak gerekli
     total := money.New(0, c.CurrencyCode)
 	var err error
     for _, v := range c.Items {

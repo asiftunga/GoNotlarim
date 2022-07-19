@@ -483,7 +483,9 @@ func main(){
     fmt.Println(hotel.Name)
     fmt.Println(hotel.Country)
 }
-
+===========output=============
+ATM otelleri
+{Turkey Antalya} 
  */
 
 
@@ -496,19 +498,20 @@ func main(){
 
 // func main() {
 /*
+   ! var DegiskenIsmi *DegiskenTuru = &AdresiGosterilecekDegisken 
    ! var po *int = &i seklinde pointer tanimlamasi yapabilecegim gibi
    ! po := &i seklinde de pointer tanimlamasi yapabilirim
 */
 /*
 
    i:=1
-   po := &i
+   po := &i        //@ bunun ile var po *int = &i ayni anlama geliyor karistirmamaliyim :)
    po2 := &po
    fmt.Println("i nin degeri: ",i)
    fmt.Println("i nin adresi: ",&i)
    fmt.Println("pointer degeri: ",po)
    fmt.Println("Pointerin adresi: ", &po)
-   fmt.Println("Pointerin isaret ettigi adresteki degeri: ", *po)
+   fmt.Println("Pointerin isaret ettigi adresteki deger: ", *po)
    fmt.Println("Pointerin adresini tutan pointerin degeri: ",po2)
    fmt.Println("Pointerin adresini tutan pointerin adresi: ",&po2)
    fmt.Println("Pointerin adresini tutan pointerin isaret ettigi adresteki degeri: ",*po2)
@@ -518,11 +521,11 @@ func main(){
    i nin adresi:  0xc00008a040
    pointer degeri:  0xc00008a040
    Pointerin adresi:  0xc00009e038
-   Pointerin isaret ettigi adresteki degeri:  1
+   Pointerin isaret ettigi adresteki deger:  1
    Pointerin adresini tutan pointerin degeri:  0xc00009e038
    Pointerin adresini tutan pointerin adresi:  0xc00009e040
-   Pointerin adresini tutan pointerin isaret ettigi adresteki degeri:  0xc00008a040
-   Pointerin adresini tutan pointerin isaret ettigi adresteki pointerin isaret ettigi adresteki degeri:  1
+   Pointerin adresini tutan pointerin isaret ettigi adresteki deger:  0xc00008a040
+   Pointerin adresini tutan pointerin isaret ettigi adresteki pointerin isaret ettigi adresteki deger:  1
 
 */
 
@@ -562,7 +565,7 @@ func main(){
     err := newcart.Lock()
 }
 ! receiverli metotlari gormek icin internal/cart/cart.go kismina git
-bu kodun soyle bir mantigi var aslinda. internal klasoru icersinde cart isimli bir klasorum var o klasorun icerisinde cart.go isimli bir paketim var. Bu paketi import kisminda import etmisim. Daha sonra bu paketimin icerisinde Cart isimli bir struct'im ve iki adet metodum var. Metodlarimin receiveleri cart tipinde oldugundan dolayi cart tipinde bir sey olmadan kullanamam bundan dolayi metotlarimi kullanabilmek icin newcart isimli cart tipindeki cart.Cart{} olusturdum, daha sonra bunu kullanarak metotlarima erisebildim
+bu kodun soyle bir mantigi var aslinda. internal klasoru icersinde cart isimli bir klasorum var o klasorun icerisinde cart.go isimli bir paketim (source code'a paket ismi veriliyordu) var. Bu paketi import kisminda import etmisim. Daha sonra bu paketimin icerisinde Cart isimli bir struct'im ve iki adet metodum var. Metodlarimin receiveleri Cart tipinde oldugundan dolayi cart tipinde bir sey olmadan kullanamam bundan dolayi metotlarimi kullanabilmek icin newcart isimli Cart tipindeki cart.Cart{} olusturdum, daha sonra bunu kullanarak metotlarima erisebildim
 =====================================peki value receiver mi yoksa pointer receiver mi kullanmaliyim?=======================
 eger value receiver olusturursam gonderdigim degisken method icerisinde kopyasi (internal) olusturulur ve o sekilde kullanilir  yani gonderdigim degisken degistirilmez.
 ! ayrica ustteki kullanim cok az da olsa memory kisminda fazlalik olusturur. Bu cogu zaman goz ardi edilebilir ancak memory onemli olan kullanimlarda dikkat edilmelidir
@@ -614,18 +617,21 @@ import (
 )
 
 func main(){
-    b := &receiver.Fatura{
+    //bunu pointer seklinde kullanmadigimda da oluyor peki pointerin buradaki amaci nedir amk
+    //? burdaki b yi su sekilde kullandigimda neden bir fark olusmuyor bunu sonradan tekrar incelemem gerekli cok ONEMLI (b := receiver.Fatura)
+    var b *receiver.Fatura = &receiver.Fatura{
         Isim: "Market Faturasi",
         Bahsis: 40.00,
         Items: map[string]float32{"patates": 5.00, "elma":4.00, "biber":10.00, "salatalik":12.00},
     }
-
+    fmt.Printf("%+v\n", receiver.Fatura{})
+    fmt.Println(b)
     b.Update("patlican",20.00)
     b.Update("domates",35.00)
     b.Update("lahana",17.00)
     fmt.Println(b.Hesap())
-} */
-
+}
+ */
 
 //?===========================================================================================================
 //leetcode sorusu : roman to int
@@ -682,9 +688,10 @@ cartDeref := *cartPtr  //! iste bu sekilde su an pointerin isaret ettigi yerdeki
 
 
 !     var myPointerVar *int
+//@============================
 !    fmt.Println(*myPointerVar)  mesela soyle bir kullanim yanlistir bunun nedenini detayli aciklamak istiyorum
 
-@ oncelikle tipi(adresini gosterecegi) *int olan bir pointer degiskeni tanimladik. Daha sonra bunu dereference etmeye calistik ancak oncesinde referans etmemistik ki.. yani bu sekilde sanki gostermedigi bir yer oldugu halde o yere gitmeye calisiyoruz aslinda o yer nil dir. Yani yoktur bu nedenle program hata verir. Bu programin calismasinin tek yolu degisken tanimlamasindan sonra reference atamasi yapilmasidir. mypointer = &blabla seklinde. Sonra buradaki kullanimi yapabilirim
+@ oncelikle tipi(adresini gosterecegi) *int olan bir pointer degiskeni tanimladik. Daha sonra bunu dereference etmeye calistik ancak oncesinde referans etmemistik ki.. yani bu sekilde sanki gostermedigi bir yer oldugu halde o yere gitmeye calisiyoruz aslinda o yer nil dir. Yani yoktur bu nedenle program hata verir. Bu programin calismasinin tek yolu degisken tanimlamasindan (kirmizi yerden) sonra reference atamasi yapilmasidir. mypointer = &blabla seklinde. Sonra buradaki kullanimi yapabilirim
 
 
 map ve slice lar reference tipleridir. Yani kendi ic yapilarina reference lilardir. Bu soyle bir kullanim saglar, bir method parametre olarak bir maps aliyor ise ve bu parametre pointer seklinde olmasa bile yapilan degisiklikler direkt olarak mapse yansir.
@@ -729,8 +736,9 @@ map ve slice lar reference tipleridir. Yani kendi ic yapilarina reference lilard
 /* 
 ilk olarak upper fonksiyonu eucontries sliceinin bir local kopyasini olusturdu
 bu fonksiyonun icerisinde slice elementinin valuelarini degistirdik
-bu kopya hala temel olan slice i referans ediyor ancak soyle bir durum var //! sadece ama sadece var olan degerleri degistririsek bu olur
+bu kopya hala temel olan slice i referans ediyor ancak soyle bir durum var //! sadece ama sadece var olan degerleri degistririsek bu olur demek istedigim slice icerisinde var olan elemanlar degistirilebilir bunun nedeni ise:
 @ aklimda daha kolay kalmasi icin sanki icerisindeki her bir value orijinal olan slice in valuelarina referans gosteriyormuslar gibi dusunebilirim
+//! ancak yeni eleman eklersem bu sonucumuza yansimaz.
 */
 
 /* func main() {
