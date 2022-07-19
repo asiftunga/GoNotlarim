@@ -858,7 +858,7 @@ herhangi bir implementation olmadan (ornek olarak metotlarin davranislarini tani
 kisaca interface herhangi bir implementation olmadan methodlarin nasil bir tipte oldugunu tanimlar
 */
 
-//ornek bir interface imlementationu bu sekilde gerceklesir 
+//ornek bir interface implementationu bu sekilde gerceklesir 
 
 /* 
 type DomasticAnimal interface{
@@ -912,7 +912,7 @@ func main(){
 
 */
 
-// ================================ anlamama yardimci olacak baska bir ornek olabilir ===================================================
+// ?================================ anlamama yardimci olacak baska bir ornek olabilir ===================================================
 
 
 // type Article struct {
@@ -981,7 +981,7 @@ func (b Basimevi) String() string {
 	return fmt.Sprintf("The %q article was written by %s.", b.Locasyon, b.Country)
 }
 
-asagidaki print fonksiyonunu da degistirmemis oldugumu varsayalim
+//@ asagidaki print fonksiyonunu da degistirmemis oldugumu varsayalim (bundan kastim aslinda su: degistirmemisim derken interface ile kullanmamisim anlaminda soyleyebilirim)
 
 func Print(a Article){
     fmt.Println(a.String())
@@ -1000,25 +1000,85 @@ func Print(b Basimevi){
 }
 
 */
+//@================================================== peki bunu interface ile yapmis olsaydim nasil mi olurdu? ========================================= neler neler
 
-/* // interfaces/first-example/main.go 
-//...
+package main
 
-func main() {
+import "fmt"
 
-    // Create the Human
-    var john Human
-    john.Firstname = "John"
+type Yazar struct{
+    Name string
+    Age int
+    Country string
+}
+
+type Basimevi struct{
+    Locasion string
+    Country string
+}
 
 
-    // Create a Cat
-    var c Cat
-    c.Name = "Maru"
+type Article struct {
+	Title string
+	Author string
+}
 
-    // then a dog
-    var d Dog
-    d.Name = "Medor"
+type Book struct{
+    Title string
+    Author string
+    Pages int
+}
 
-    Pet(c, john)
-    Pet(d,john)
-} */
+
+func (b Book) String() string{
+    return fmt.Sprintf("The %q book was written by %s",b.Title,b.Author)
+}
+
+func (a Article) String() string {
+	return fmt.Sprintf("The %q article was written by %s.", a.Title, a.Author)
+}
+
+func (y Yazar) String() string {
+	return fmt.Sprintf("The %q article was written by %s.", y.Country, y.Name)
+}
+
+func (b Basimevi) String() string {
+	return fmt.Sprintf("The %q article was written by %s.", b.Locasion, b.Country)
+}
+
+func main(){
+   a:=Article{"baslik","asif tunga mubarek"} 
+   b:=Book{"kitap basligi","asif tunga mubarek",300}
+   c:=Yazar{"asif tunga mubarek",26,"antakya"}
+   d:=Basimevi{"mersin","turkey"}
+   Print(a)
+   Print(b)
+   Print(c)
+   Print(d)
+}
+
+
+
+type Stringer interface{
+    String() string             
+}
+
+func Print(s Stringer) {
+    fmt.Println(s.String())
+}
+/* 
+KONU ILE ALAKASIZ VIM NOTU : eger bir sonraki karaktere gitmek istiyor isem yapmam gereken tek sey insert moda a ile gecis yapmak. veya bunun yerine direkt olarak cumlenin sonuna gitmek istiyor isem A seklinde kullanabilirim ama bu direkt insert moda sokar haberim olsun
+$ seklinde de kullanabilirim bu insert moda sokmaz direkt cumlenin sonuna giderim bu sekilde
+*/
+
+
+
+
+
+
+
+
+
+
+
+
