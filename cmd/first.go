@@ -840,31 +840,27 @@ func main(){
 
 //@=========================ne zaman pointer receiver ne zaman value receiver kullanmam gerekli====================================================
 /* 
-                            Pointer receiver kullan
+                            //yap Pointer receiver kullan
 struct yapim cok buyuk ve agir ise
 receiveri degistirmek istiyorsam (ornegin struct alaninda bir degiskenin isim alanini degistirmeye calisiyorsam)
 synchronization primitive (like sync.Mutex) gibi bir sey kullaniyorsak
 
-                            Value receiver kullan
+                            //yap Value receiver kullan
 struct yapim small ise
 receiveri degistirmeye gerek yok ise
 eger receiver map, func, chan, slice, string, interface ise bunlarla value receiver kullanmam gerekir cunku bu yapilar yapisal olarak hali hazirda pointerlar ile calisirlar
 */
 //@=========================================interface kavrami==================================================
 
-/* 
-arayuz dedigimiz sey aslinda bir dizi ortak davranisi tanimlayan bir seydir. 
-herhangi bir implementation olmadan (ornek olarak metotlarin davranislarini tanimlar)
-kisaca interface herhangi bir implementation olmadan methodlarin nasil bir tipte oldugunu tanimlar
-*/
+//arayuz dedigimiz sey aslinda bir dizi ortak davranisi tanimlayan bir seydir. 
+//herhangi bir implementation olmadan (ornek olarak metotlarin davranislarini tanimlar)
+//kisaca interface herhangi bir implementation olmadan methodlarin nasil bir tipte oldugunu tanimlar
 
 //ornek bir interface implementationu bu sekilde gerceklesir 
 
-/* 
-type DomasticAnimal interface{
-    ReceiverAffection(from Human)
-    GiveAffection(to Human)
-}
+/* package main
+
+import "fmt"
 
 type Human struct{
     Firstname string
@@ -896,9 +892,13 @@ func (d Dog) ReceiverAffection(from Human){
 
 func (d Dog) GiveAffection(to Human){
     fmt.Printf("the dog name %s give affection to human who name is %s \n",d.Name,to.Firstname)
-
+    
 }
 
+type DomasticAnimal interface{
+    ReceiverAffection(from Human)
+    GiveAffection(to Human)
+}
 
 func Pet(animal DomasticAnimal, human Human){
     animal.GiveAffection(human)
@@ -907,12 +907,12 @@ func Pet(animal DomasticAnimal, human Human){
 
 
 func main(){
-    Pet(Dog{"TOM"},Human{"asif","tunga",23,"turkiye"})
-} 
-
-*/
-
-// ?================================ anlamama yardimci olacak baska bir ornek olabilir ===================================================
+    Pet(Dog{"MISHA"},Human{"asif","tunga",23,"turkiye"})
+    Pet(Cat{"TOM"},Human{"hediye","ozgul",20,"bulgaristan"})
+    }  */
+    
+    
+    // ?================================ anlamama yardimci olacak baska bir ornek olabilir ===================================================
 
 
 // type Article struct {
@@ -937,7 +937,7 @@ func main(){
 
 
 // type Stringer interface{
-//     String() string             //@ burada yaptigim tek sey Stringer isminde String() isimli string geri donuslu bir metot koydum. Interface tanimlamasi bu kadar
+//     String() string //@ burada yaptigim tek sey Stringer isminde String() isimli string geri donuslu bir metot koydum. Interface tanimlamasi bu kadar
 // }
 
 // func main() {
@@ -1002,83 +1002,123 @@ func Print(b Basimevi){
 */
 //@================================================== peki bunu interface ile yapmis olsaydim nasil mi olurdu? ========================================= neler neler
 
-package main
+// package main
 
-import "fmt"
+// import "fmt"
 
-type Yazar struct{
-    Name string
-    Age int
-    Country string
-}
+// type Yazar struct{
+//     Name string
+//     Age int
+//     Country string
+// }
 
-type Basimevi struct{
-    Locasion string
-    Country string
-}
-
-
-type Article struct {
-	Title string
-	Author string
-}
-
-type Book struct{
-    Title string
-    Author string
-    Pages int
-}
+// type Basimevi struct{
+//     Locasion string
+//     Country string
+// }
 
 
-func (b Book) String() string{
-    return fmt.Sprintf("The %q book was written by %s",b.Title,b.Author)
-}
+// type Article struct {
+// 	Title string
+// 	Author string
+// }
 
-func (a Article) String() string {
-	return fmt.Sprintf("The %q article was written by %s.", a.Title, a.Author)
-}
-
-func (y Yazar) String() string {
-	return fmt.Sprintf("The %q sehrinde yasayan kisi: %s.", y.Country, y.Name)
-}
-
-func (b Basimevi) String() string {
-	return fmt.Sprintf("The %q lokasyonu su ulkede bulunur: %s.", b.Locasion, b.Country)
-}
-
-func main(){
-   a:=Article{"baslik","asif tunga mubarek"} 
-   b:=Book{"kitap basligi","asif tunga mubarek",300}
-   c:=Yazar{"asif tunga mubarek",26,"antakya"}
-   d:=Basimevi{"mersin","turkey"}
-   Print(a)
-   Print(b)
-   Print(c)
-   Print(d)
-}
+// type Book struct{
+//     Title string
+//     Author string
+//     Pages int
+// }
 
 
+// func (b Book) String() string{
+//     return fmt.Sprintf("The %q book was written by %s",b.Title,b.Author)
+// }
 
-type Stringer interface{
-    String() string             
-}
+// func (a Article) String() string {
+// 	return fmt.Sprintf("The %q article was written by %s.", a.Title, a.Author)
+// }
 
-func Print(s Stringer) {
-    fmt.Println(s.String())
-}
+// func (y Yazar) String() string {
+// 	return fmt.Sprintf("The %q sehrinde yasayan kisi: %s.", y.Country, y.Name)
+// }
+
+// func (b Basimevi) String() string {
+// 	return fmt.Sprintf("The %q lokasyonu su ulkede bulunur: %s.", b.Locasion, b.Country)
+// }
+
+// func main(){
+//    a:=Article{"baslik","asif tunga mubarek"} 
+//    b:=Book{"kitap basligi","asif tunga mubarek",300}
+//    c:=Yazar{"asif tunga mubarek",26,"antakya"}
+//    d:=Basimevi{"mersin","turkey"}
+//    Print(a)
+//    Print(b)
+//    Print(c)
+//    Print(d)
+// }
+
+
+
+// type Stringer interface{
+//     String() string             
+// }
+
+// func Print(s Stringer) {
+//     fmt.Println(s.String())
+// }
 /* 
 KONU ILE ALAKASIZ VIM NOTU : eger bir sonraki karaktere gitmek istiyor isem yapmam gereken tek sey insert moda a ile gecis yapmak. veya bunun yerine direkt olarak cumlenin sonuna gitmek istiyor isem A seklinde kullanabilirim ama bu direkt insert moda sokar haberim olsun
 $ seklinde de kullanabilirim bu insert moda sokmaz direkt cumlenin sonuna giderim bu sekilde
 */
 
 
+//@ interfaceleri anlamak icin kendime alacagim not kisimlari buralar
+//? burada alinan notlar sadece interface konusunu daha iyi anlamak icindir. Her bir not acik bir sekilde yazilacaktir. 
+// burada anlatilan kodlar https://go.kaanksc.com/boeluem-3/arayuez-interface adresinden alinmistir. Detayli bilgi icin bu siteyi inceleyebilirim
+
+/* package main
+
+import "fmt"
 
 
+type BiberSalcasi struct {
+    marka string
+}
+
+func (s BiberSalcasi) Ye() (dondur string) {
+	fmt.Println("Biber salçası yenildi")
+    return
+}
+
+type domatesSalçası struct {
+    marka string
+}
+
+func (s domatesSalçası) Ye() {
+	fmt.Sprintf("Domates salçası yenildi")
+}
+
+type Salca interface{
+    Ye() string    //bu kisim aslinda Ye() isimli bir fonksiyonun string bir ifade dondurdugunu anlatir
+} */
+
+//* deneme amacli alan ------------------------------------------------------------------------------------
+
+// func Besle(salcaint Salca){
+//     salcaint.Ye()
+// }
+
+// func main(){
+//     Besle(BiberSalcasi{"tamek"}) //burada biber salcasi kismini parametre seklinde gonderdik. ASlinda ust kisimdaki besle fonksiyonunda interface i parametre olarak kullanmamiz sayesinde interface uzerinden fonksiyona erisiyorum gibi dusunebilirim
+// }
 
 
+//*------------------------------------------------- bu kisim ise ust kisim yerine yapilabilir--------------------------------------------------------
+/* func main(){
+    biber := BiberSalcasi{"tamek"}
+    var salcam Salca = &biber
+    fmt.Print(salcam.Ye())
+} */
 
-
-
-
-
-
+//@ ustteki ile bu ayni sonucu verir. Burada yaptigim sey ise aslinda deneme amacli olarak yazdigim kisimdan cok da farkli degil. Orda bir fonksiyon olusturdum ve o fonksiyon vasitasi ile interface yapisini parametre olarak gonderip interface yapisi uzerinden kontratta yani interface uzerinde belirlenmis olan fonksiyona interface uzerinden ulasmis oldum. (struct yapimi interface uzerinden gonderdim)
+//@bu kisimda yaptigim sey ise oncelikle bir struct yapimi olustrudum ardindan interface type li bir variable a bu structimin tutuldugu adresi yolladim bir nevi interface imi pointer gibi kullanmis oldum ardindan bu interface variable im sayesinde, interface uzerinden gerekli fonksiyonuma ulasmis oldum
