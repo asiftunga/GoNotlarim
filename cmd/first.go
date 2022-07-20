@@ -1104,8 +1104,8 @@ type Salca interface{
 
 //* deneme amacli alan ------------------------------------------------------------------------------------
 
-// func Besle(salcaint Salca){
-//     salcaint.Ye()
+// func Besle(salcam Salca){
+//     salcam.Ye()
 // }
 
 // func main(){
