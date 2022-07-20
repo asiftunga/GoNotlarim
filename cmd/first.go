@@ -852,7 +852,7 @@ eger receiver map, func, chan, slice, string, interface ise bunlarla value recei
 */
 //@=========================================interface kavrami==================================================
 
-//arayuz dedigimiz sey aslinda bir dizi ortak davranisi tanimlayan bir seydir. 
+//arayuz dedigimiz sey aslinda bir dizi ortak davranisi tanimlayan bir kontraktir. 
 //herhangi bir implementation olmadan (ornek olarak metotlarin davranislarini tanimlar)
 //kisaca interface herhangi bir implementation olmadan methodlarin nasil bir tipte oldugunu tanimlar
 
@@ -1122,3 +1122,110 @@ type Salca interface{
 
 //@ ustteki ile bu ayni sonucu verir. Burada yaptigim sey ise aslinda deneme amacli olarak yazdigim kisimdan cok da farkli degil. Orda bir fonksiyon olusturdum ve o fonksiyon vasitasi ile interface yapisini parametre olarak gonderip interface yapisi uzerinden kontratta yani interface uzerinde belirlenmis olan fonksiyona interface uzerinden ulasmis oldum. (struct yapimi interface uzerinden gonderdim)
 //@bu kisimda yaptigim sey ise oncelikle bir struct yapimi olustrudum ardindan interface type li bir variable a bu structimin tutuldugu adresi yolladim bir nevi interface imi pointer gibi kullanmis oldum ardindan bu interface variable im sayesinde, interface uzerinden gerekli fonksiyonuma ulasmis oldum
+
+//bak : fonksiyonlarin struct yapilari icerisinde nasil kullanildiklarini ogrenecegim
+
+//! interfacelerin kullanim alanlarina ornek olarak -> bir suru database mevcut (postrgresql, mysql) ve bunlarin hepsinin Open metotlari ayri ayri. Bu durumda bu databaselere baglanmak icin ayni kodu initialize(baslatma) yapmayacagiz
+//@ bir interface tanimlayarak bircok implemantationun kullanabilecegi bir kontrat hazirlamis oluruz aslinda
+/* 
+type Driver interface {
+    Open(name string) (Conn, error)
+}
+*/
+
+/* 
+interface icerisine interface implement edebilirim ancak bunu yapmanin elbette dezavantaji vardir. 
+simdi bunun bir ornegini denemek istiyorum
+*/
+//bak alt kisimda bak dedigim yer burasi
+
+// package main
+
+// import "fmt"
+
+// type BiberSalcasi struct{
+//     marka string    
+// }
+
+// func (b BiberSalcasi) Salca(){
+//     fmt.Println("salca yapimi baslamis bulunmakta")
+// }
+
+// func (b BiberSalcasi) Ye(){
+//     fmt.Println("salca yenildi")
+// }
+
+// type Yenier interface{
+//     Ye()
+// }
+
+// type Salcaer interface{
+//     Salca()
+//     Yenier
+// }
+
+// func Olustur(s Salcaer){
+//     s.Salca()
+// }
+
+
+
+// func main(){
+//     Olustur(BiberSalcasi{"tunga salcalari"})
+// }
+// bu sekilde gerceklestiremedim diger yol ile deneyecegim su anda 
+// tahmin ettigim gibi bu yol ile yapilabildi
+//bak ustte yaptigim yol ile neden olmadigini mutlaka ogrenmeliyim
+/* package main
+
+import "fmt"
+
+type BiberSalcasi struct{
+    marka string
+}
+
+func (b BiberSalcasi) Salca(){
+    fmt.Println("salca yapimi baslamis bulunmakta")
+}
+
+func (b BiberSalcasi) Ye(){
+    fmt.Println("salca yenildi")
+}
+
+type Yenier interface{
+    Ye()
+}
+
+type Salcaer interface{
+    Salca()
+    Yenier
+}
+
+func main(){
+    b := BiberSalcasi{"tamek"}
+    var s Salcaer = b
+    s.Salca()
+    s.Ye()
+} */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
