@@ -22,7 +22,7 @@ once degiskeni tanimlayip sonra deger atamasi gerceklestirebilirim. //@ onemli b
     var geek2 string
     var geek3 float64
     var geek4 bool
-    
+
 seklindedir
 =============kisa degisken tanimlamalari==================================
 kisa degisken tanimlamalari su sekilde yapilir
@@ -139,7 +139,7 @@ func main() {
         fmt.Println(n)
     }
 }
-//ayni if yapisinda oldugu sekilde for kosullari da parantezler icerisine alinamaz. Alindigi takdirde hata mesaji ile karsilasilir 
+//ayni if yapisinda oldugu sekilde for kosullari da parantezler icerisine alinamaz. Alindigi takdirde hata mesaji ile karsilasilir
 
 */
 
@@ -215,7 +215,7 @@ func main() {
     email.SendEmail(emailContents, customerEmail)
     invoice.CreateAndSaveInvoice(customerName, nights, 145.32)
 } */
-/* 
+/*
 yukaridaki ornege benzer sekilde eger import kisminda takma isim verirsem bu durumda verdigim takma isim uzerinden go modullerine ulasabilirim
 
 soyle bir structure oldugunu varsayalim
@@ -241,7 +241,7 @@ go 1.14
 
 bu sekilde bir go module'u olusturmus oldum
 
-vehicle\main.go su sekilde 
+vehicle\main.go su sekilde
 
 package main
 
@@ -264,7 +264,7 @@ func main() {
 
 @ goruldugu uzere burada takma isimler uzerinden paketlere ulasim saglanmis
 
-vehicle\car\car.go dosyasi ise su sekilde 
+vehicle\car\car.go dosyasi ise su sekilde
 
 package car
 
@@ -286,9 +286,6 @@ vehicle>go run main.go bu komutu calistirdigimiz zaman ise su output karsimiza c
     10
     20
 */
-
-
-
 
 //! ayni temada olan fonksiyonlari birbirleri ile birlestirip onlari birer paket haline getirmek iyi bir aliskanliktir
 
@@ -485,10 +482,8 @@ func main(){
 }
 ===========output=============
 ATM otelleri
-{Turkey Antalya} 
- */
-
-
+{Turkey Antalya}
+*/
 
 // methodlar receiveri olan fonksiyonlara verilen isimlerdir
 
@@ -498,7 +493,7 @@ ATM otelleri
 
 // func main() {
 /*
-   ! var DegiskenIsmi *DegiskenTuru = &AdresiGosterilecekDegisken 
+   ! var DegiskenIsmi *DegiskenTuru = &AdresiGosterilecekDegisken
    ! var po *int = &i seklinde pointer tanimlamasi yapabilecegim gibi
    ! po := &i seklinde de pointer tanimlamasi yapabilirim
 */
@@ -631,7 +626,7 @@ func main(){
     b.Update("lahana",17.00)
     fmt.Println(b.Hesap())
 }
- */
+*/
 
 //?===========================================================================================================
 //leetcode sorusu : roman to int
@@ -648,7 +643,7 @@ func main(){
 
 //============================================================================================================
 //*                            Pointerlar icin notlarim
-/* 
+/*
 type User struct {
     ID string
     Username string
@@ -656,7 +651,7 @@ type User struct {
 
 ! bu sekilde bir structim oldugu zaman *User demek User turune ait tum degiskenleri belirtir anlamindadir
 
-pointer tanimlamasi su sekilde yapilir -> 
+pointer tanimlamasi su sekilde yapilir ->
 
 var p *int
 var answer int = 42
@@ -680,7 +675,7 @@ cart := Cart{
 
 cartPtr := &cart //! cartPtr su anda sadece 0x385v854 seklinde bir adres tutuyor (yani deger degil degerlerin saklandigi adresi tutuyor (isaret ediyor))
 
-cartDeref := *cartPtr  //! iste bu sekilde su an pointerin isaret ettigi yerdeki value lara ulasis oldumm
+cartDeref := *cartPtr  //! iste bu sekilde su an pointerin isaret ettigi yerdeki value lara ulasmis oldumm
 
 @ & -> adres bilgisini al (reference)
 @ * -> adres bilgisine ulas (takip et) (dereference)
@@ -697,9 +692,6 @@ cartDeref := *cartPtr  //! iste bu sekilde su an pointerin isaret ettigi yerdeki
 map ve slice lar reference tipleridir. Yani kendi ic yapilarina reference lilardir. Bu soyle bir kullanim saglar, bir method parametre olarak bir maps aliyor ise ve bu parametre pointer seklinde olmasa bile yapilan degisiklikler direkt olarak mapse yansir.
 */
 
-
-
-
 // package main
 
 // import (
@@ -708,7 +700,7 @@ map ve slice lar reference tipleridir. Yani kendi ic yapilarina reference lilard
 
 // )
 
-//slicelar ayni turdeki elementlerin birer koleksiyonudur. 
+//slicelar ayni turdeki elementlerin birer koleksiyonudur.
 
 /* func main(){
     EUcountries := []string{"Austria", "Belgium", "Bulgaria"} //slice tanimlamasi yaptik
@@ -733,7 +725,7 @@ map ve slice lar reference tipleridir. Yani kendi ic yapilarina reference lilard
 } */
 
 //peki bu sekilde bir kullanim yapsak ve main icersinde bu fonksiyonu calistirsam ne olurdu? Daha deminki gibi bir sonuc bekliyorsam bu tamamen yanlis cevap su olurdu [AUSTRIA BELGIUM BULGARIA]. Peki ama daha demin degismeyen slice ne oldu da su anda degisti?  adim adim aciklayayim
-/* 
+/*
 ilk olarak upper fonksiyonu eucontries sliceinin bir local kopyasini olusturdu
 bu fonksiyonun icerisinde slice elementinin valuelarini degistirdik
 bu kopya hala temel olan slice i referans ediyor ancak soyle bir durum var //! sadece ama sadece var olan degerleri degistririsek bu olur demek istedigim slice icerisinde var olan elemanlar degistirilebilir bunun nedeni ise:
@@ -753,7 +745,6 @@ func addCountries2(countriesPointer *[]string) { //@ parametre olarak slice poin
 
 // kisaca addcountries2 fonksiyonuna bir adres bilgisi yollandi ve fonksiyon kendi icerisinde olusturdugu degisken ile bu adres bilgisinin degerine  * operatoru ile ulasti
 
-
 //simdi bir kullanim gosterecegim. dereference operatorunu kullanmadan sadece adres bilgisi ile struct kullanabiliriz
 /* func main(){
 
@@ -772,10 +763,9 @@ func addCountries2(countriesPointer *[]string) { //@ parametre olarak slice poin
 
     fmt.Println(cart)
 
-    //{tunga false} seklinde bir ciktisi olur 
+    //{tunga false} seklinde bir ciktisi olur
 }
 */
-
 
 //burdaki kullanim ile su kullanim ayni seydir
 
@@ -796,12 +786,10 @@ func addCountries2(countriesPointer *[]string) { //@ parametre olarak slice poin
 
     fmt.Println(cart)
 
-    //{asif tunga false} seklinde bir ciktisi olur 
+    //{asif tunga false} seklinde bir ciktisi olur
 } */
 
-
-
-/* 
+/*
 type Cat struct{
     Color string
     Age int16
@@ -830,16 +818,16 @@ func main(){
     cat.Rename2("Ben")
     fmt.Println(cat.Name)
     //! Bob yazdirir cunku fonksiyon icerisindeki local degiskeni degistirdik
-    
+
     adres := &cat
     Rename3(adres,"hasan")
     fmt.Println(cat.Name)
     //! hasan yazdirir :)
-} 
+}
 */
 
 //@=========================ne zaman pointer receiver ne zaman value receiver kullanmam gerekli====================================================
-/* 
+/*
                             //yap Pointer receiver kullan
 struct yapim cok buyuk ve agir ise
 receiveri degistirmek istiyorsam (ornegin struct alaninda bir degiskenin isim alanini degistirmeye calisiyorsam)
@@ -852,11 +840,11 @@ eger receiver map, func, chan, slice, string, interface ise bunlarla value recei
 */
 //@=========================================interface kavrami==================================================
 
-//arayuz dedigimiz sey aslinda bir dizi ortak davranisi tanimlayan bir kontraktir. 
+//arayuz dedigimiz sey aslinda bir dizi ortak davranisi tanimlayan bir kontraktir.
 //herhangi bir implementation olmadan (ornek olarak metotlarin davranislarini tanimlar)
 //kisaca interface herhangi bir implementation olmadan methodlarin nasil bir tipte oldugunu tanimlar
 
-//ornek bir interface implementationu bu sekilde gerceklesir 
+//ornek bir interface implementationu bu sekilde gerceklesir
 
 /* package main
 
@@ -892,7 +880,7 @@ func (d Dog) ReceiverAffection(from Human){
 
 func (d Dog) GiveAffection(to Human){
     fmt.Printf("the dog name %s give affection to human who name is %s \n",d.Name,to.Firstname)
-    
+
 }
 
 type DomasticAnimal interface{
@@ -910,10 +898,8 @@ func main(){
     Pet(Dog{"MISHA"},Human{"asif","tunga",23,"turkiye"})
     Pet(Cat{"TOM"},Human{"hediye","ozgul",20,"bulgaristan"})
     }  */
-    
-    
-    // ?================================ anlamama yardimci olacak baska bir ornek olabilir ===================================================
 
+// ?================================ anlamama yardimci olacak baska bir ornek olabilir ===================================================
 
 // type Article struct {
 // 	Title string
@@ -934,8 +920,6 @@ func main(){
 // 	return fmt.Sprintf("The %q article was written by %s.", a.Title, a.Author)
 // }
 
-
-
 // type Stringer interface{
 //     String() string //@ burada yaptigim tek sey Stringer isminde String() isimli string geri donuslu bir metot koydum. Interface tanimlamasi bu kadar
 // }
@@ -952,20 +936,19 @@ func main(){
 //     Print(c)
 // }
 
-
 // func Print(s Stringer) {
 //     fmt.Println(s.String())
 // }
 // cok onemli bir not : //! bir method fonksiyondan farkli olarak sadece tanimlandigi turun orneginden cagrilabilir
 //A method is a special function that is scoped to a specific type in Go. Unlike a function, a method can only be called from the instance of the type it was defined on.
 //simdi bu yapi beni kod tekrarindan kurtardi. Bunu bir ornekle gostermek istiyorum
-/* 
+/*
 diyelimki elimde iki tane daha struct daha var
 
 type Yazar struct{
     Name string
     Age int
-    Country string 
+    Country string
 }
 
 type Basimevi struct{
@@ -1017,7 +1000,6 @@ func Print(b Basimevi){
 //     Country string
 // }
 
-
 // type Article struct {
 // 	Title string
 // 	Author string
@@ -1028,7 +1010,6 @@ func Print(b Basimevi){
 //     Author string
 //     Pages int
 // }
-
 
 // func (b Book) String() string{
 //     return fmt.Sprintf("The %q book was written by %s",b.Title,b.Author)
@@ -1047,7 +1028,7 @@ func Print(b Basimevi){
 // }
 
 // func main(){
-//    a:=Article{"baslik","asif tunga mubarek"} 
+//    a:=Article{"baslik","asif tunga mubarek"}
 //    b:=Book{"kitap basligi","asif tunga mubarek",300}
 //    c:=Yazar{"asif tunga mubarek",26,"antakya"}
 //    d:=Basimevi{"mersin","turkey"}
@@ -1057,29 +1038,33 @@ func Print(b Basimevi){
 //    Print(d)
 // }
 
-
-
 // type Stringer interface{
-//     String() string             
+//     String() string
 // }
 
 // func Print(s Stringer) {
 //     fmt.Println(s.String())
 // }
-/* 
+/*
 KONU ILE ALAKASIZ VIM NOTU : eger bir sonraki karaktere gitmek istiyor isem yapmam gereken tek sey insert moda a ile gecis yapmak. veya bunun yerine direkt olarak cumlenin sonuna gitmek istiyor isem A seklinde kullanabilirim ama bu direkt insert moda sokar haberim olsun
 $ seklinde de kullanabilirim bu insert moda sokmaz direkt cumlenin sonuna giderim bu sekilde
 */
 
-
 //@ interfaceleri anlamak icin kendime alacagim not kisimlari buralar
-//? burada alinan notlar sadece interface konusunu daha iyi anlamak icindir. Her bir not acik bir sekilde yazilacaktir. 
+//? burada alinan notlar sadece interface konusunu daha iyi anlamak icindir. Her bir not acik bir sekilde yazilacaktir.
 // burada anlatilan kodlar https://go.kaanksc.com/boeluem-3/arayuez-interface adresinden alinmistir. Detayli bilgi icin bu siteyi inceleyebilirim
 
 /* package main
 
 import "fmt"
 
+type domatesSalçası struct {
+    marka string
+}
+
+func (s domatesSalçası) Ye() {
+    fmt.Sprintf("Domates salçası yenildi")
+}
 
 type BiberSalcasi struct {
     marka string
@@ -1090,13 +1075,6 @@ func (s BiberSalcasi) Ye() (dondur string) {
     return
 }
 
-type domatesSalçası struct {
-    marka string
-}
-
-func (s domatesSalçası) Ye() {
-	fmt.Sprintf("Domates salçası yenildi")
-}
 
 type Salca interface{
     Ye() string    //bu kisim aslinda Ye() isimli bir fonksiyonun string bir ifade dondurdugunu anlatir
@@ -1112,7 +1090,6 @@ type Salca interface{
 //     Besle(BiberSalcasi{"tamek"}) //burada biber salcasi kismini parametre seklinde gonderdik. ASlinda ust kisimdaki besle fonksiyonunda interface i parametre olarak kullanmamiz sayesinde interface uzerinden fonksiyona erisiyorum gibi dusunebilirim
 // }
 
-
 //*------------------------------------------------- bu kisim ise ust kisim yerine yapilabilir--------------------------------------------------------
 /* func main(){
     biber := BiberSalcasi{"tamek"}
@@ -1123,28 +1100,28 @@ type Salca interface{
 //@ ustteki ile bu ayni sonucu verir. Burada yaptigim sey ise aslinda deneme amacli olarak yazdigim kisimdan cok da farkli degil. Orda bir fonksiyon olusturdum ve o fonksiyon vasitasi ile interface yapisini parametre olarak gonderip interface yapisi uzerinden kontratta yani interface uzerinde belirlenmis olan fonksiyona interface uzerinden ulasmis oldum. (struct yapimi interface uzerinden gonderdim)
 //@bu kisimda yaptigim sey ise oncelikle bir struct yapimi olustrudum ardindan interface type li bir variable a bu structimin tutuldugu adresi yolladim bir nevi interface imi pointer gibi kullanmis oldum ardindan bu interface variable im sayesinde, interface uzerinden gerekli fonksiyonuma ulasmis oldum
 
-//bak : fonksiyonlarin struct yapilari icerisinde nasil kullanildiklarini ogrenecegim
+//bak-> fonksiyonlarin struct yapilari icerisinde nasil kullanildiklarini ogrenecegim
 
 //! interfacelerin kullanim alanlarina ornek olarak -> bir suru database mevcut (postrgresql, mysql) ve bunlarin hepsinin Open metotlari ayri ayri. Bu durumda bu databaselere baglanmak icin ayni kodu initialize(baslatma) yapmayacagiz
 //@ bir interface tanimlayarak bircok implemantationun kullanabilecegi bir kontrat hazirlamis oluruz aslinda
-/* 
+/*
 type Driver interface {
     Open(name string) (Conn, error)
 }
 */
 
-/* 
-interface icerisine interface implement edebilirim ancak bunu yapmanin elbette dezavantaji vardir. 
+/*
+interface icerisine interface implement edebilirim ancak bunu yapmanin elbette dezavantaji vardir.
 simdi bunun bir ornegini denemek istiyorum
 */
-//bak alt kisimda bak dedigim yer burasi
+//bak-> alt kisimda bak dedigim yer burasi
 
 // package main
 
 // import "fmt"
 
 // type BiberSalcasi struct{
-//     marka string    
+//     marka string
 // }
 
 // func (b BiberSalcasi) Salca(){
@@ -1166,16 +1143,16 @@ simdi bunun bir ornegini denemek istiyorum
 
 // func Olustur(s Salcaer){
 //     s.Salca()
+//     s.Ye()
 // }
-
-
 
 // func main(){
 //     Olustur(BiberSalcasi{"tunga salcalari"})
 // }
-// bu sekilde gerceklestiremedim diger yol ile deneyecegim su anda 
+// bu sekilde gerceklestiremedim diger yol ile deneyecegim su anda
 // tahmin ettigim gibi bu yol ile yapilabildi
-//bak ustte yaptigim yol ile neden olmadigini mutlaka ogrenmeliyim
+
+//bak-> ustte yaptigim yol ile neden olmadigini mutlaka ogrenmeliyim
 /* package main
 
 import "fmt"
@@ -1208,24 +1185,143 @@ func main(){
     s.Ye()
 } */
 
+//STANDART LIBRARYDE BULUNAN BIRCOK INTERFACE VARDIR BUNLARDAN EN UNLULERI ISE SUNLARDIR : Error interface, Stringer interface, Interface interface bu interfaceleri daha detayli incelemek istersem ; https://www.practical-go-lessons.com/chap-16-interfaces adresinden gorebilirim
+
+//Go da bir diger interface tipi ise bos interfacedir. Bu yazabilecegim en kucuk ve en kisa interfacedir. Bu su sekilde yazilir interface{}
+//peki ben bunu nerede kullanacagim? tanimlama olarak bos bir interface deger her tipte degiskeni tutabilir. Eger her tipi kabul eden bir metot yazmak istersem interface kullanabilirim
+
+// func (l *Logger) Fatal(v...interface{}) {} bu sekilde bir kullanim butun tipleri kabul eder
+//bos bir interface' i parametre olarak alan fonksiyonlarin genel olarak aldiklari bu interface in efektif tipini bilmeleri gerekmektedir. Bunu yapmak icin ise fonksiyon type switch yapisini kullanabilir. Bu normal switchte oldugu gibi valuelari degil typelari karsilastirir
+
+/*
+ printany prints an argument passed to panic.
+ If panic is called with a value that has a String or Error method,
+ it has already been converted into a string by preprintpanics.
+
+func printany(i interface{}) {
+    switch v := i.(type) {
+    case nil:
+        print("nil")
+    case bool:
+        print(v)
+    case int:
+        print(v)
+    case int8:
+        print(v)
+    case int16:
+        print(v)
+    case int32:
+        print(v)
+    case int64:
+        print(v)
+    case uint:
+        print(v)
+    case uint8:
+        print(v)
+    case uint16:
+        print(v)
+    case uint32:
+        print(v)
+    case uint64:
+        print(v)
+    case uintptr:
+        print(v)
+    case float32:
+        print(v)
+    case float64:
+        print(v)
+    case complex64:
+        print(v)
+    case complex128:
+        print(v)
+    case string:
+        print(v)
+    default:
+        printanycustomtype(i)
+    }
+}
+*/
+
+//peki hangi durumlarda bos interface kullanmaliyim? Hatta daha iyi bir soru kullanmali miyim? Bu soruyu soyle yanitlayabilirim kullanirken cok dikkatli olunmasi gerekli. Eger baska bir secenegim yok ise empty interface kullanmaliyim. Empty interface benim fonksiyon veya methodlarimi kullanacak kisiye hicbir ipucu vermez ayrica bir fonksiyonda empty interface kabul edersem kodum daha karmasik bir hale gelir bunun nedeni bu fonksiyonun oncesinde interface tipini check etmesidir.
+
+/*
+func (c Cart) ApplyCoupon(coupon Coupon) error  {
+    //...
+}
+
+func (c Cart) ApplyCoupon2(coupon interface{}) (interface{},interface{}) {
+    //...
+}
+
+hangisini tercih ederdim? elbette en usttekini.. Goruldugu uzere ApplyCoupon fonksiyonu strictly hangi parametre kullanilacagini ve geri donus degerini belirtir.
+*/
+
+/* package main
+
+import (
+    "newgroupproject/internal/cart"
+    "errors"
+)
+
+type Al interface{
+    GetById() (error)
+    Put()
+}
+
+type CartStorePostgres struct{}
+
+func (c *CartStorePostgres) GetById(ID string) (*cart.Cart, error) {
+    // implement me
+    return
+}
+
+func (c *CartStorePostgres) Put(cart *cart.Cart) (*cart.Cart, error) {
+    // implement me
+    return
+}
+
+
+func main(){
+
+} */
 
 
 
+/* package main
+
+import (
+	"fmt"
+)
 
 
+type Database interface{
+    Baglan(d *Db)
+}
 
 
+type Db struct{
+    dbisim string
+    connectionstring string
+}
+
+func (d Db) Baglan(){
+    fmt.Println(d.connectionstring +" db baglanma islemi gerceklestirildi")
+}
 
 
+func Bagla(Dber Database){
+    deneme := Dber.Baglan()
+    deneme.Baglan(deneme)
+}
 
+func main(){
+    a:=&Db{"tamek","pstgresql"}
+    Bagla(a)
 
+}
 
+*/
 
-
-
-
-
-
-
+//! kendime not : interfaceler icin pointer kullanmaya gerek yoktur. Program ilk calistigi sirada zaten kendisi initialize edildigi icin tekrardan bir isaretci kullanip yeniden ram kullanmak gereksizdir.
 
 
