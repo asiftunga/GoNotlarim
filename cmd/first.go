@@ -1325,3 +1325,5 @@ func main(){
 //! kendime not : interfaceler icin pointer kullanmaya gerek yoktur. Program ilk calistigi sirada zaten kendisi initialize edildigi icin tekrardan bir isaretci kullanip yeniden ram kullanmak gereksizdir.
 
 
+//! deneme amacli yorum yapilan yorum satiri 
+//not : geri alinacak
