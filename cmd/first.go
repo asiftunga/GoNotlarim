@@ -1325,5 +1325,37 @@ func main(){
 //! kendime not : interfaceler icin pointer kullanmaya gerek yoktur. Program ilk calistigi sirada zaten kendisi initialize edildigi icin tekrardan bir isaretci kullanip yeniden ram kullanmak gereksizdir.
 
 
-//! deneme amacli yorum yapilan yorum satiri 
-//not : geri alinacak
+/*  //@ API nedir sorusunun cevabi niteliginde
+api lari aslinda birer contract gibi dusunebilirim. Tipki ustteki interfaceler gibi bir yapisi var. Bir api iki farkli seyin bir arada calismasina ve iletisim kurmalarina izin verir (genellikle json formatinda dosya yollayarak). API kisaca sunlardan olusur  Bir yazılım parçası ile etkileşime maruz kalan bir dizi yapıdır (sabitler, değişkenler, işlevler ...).
+
+Bu tanımla, go paketi fmt'nin go programcısına onunla etkileşim kurması için bir API sunduğunu söyleyebiliriz. API'si, örneğin Println gibi kullanabileceğiniz bir dizi işlevi temsil eder. Ayrıca paketin dışa aktarılan tanımlayıcılarını da (sabitler, değişkenler, türler) kapsar.
+
+Go Modülleri, modülün oluştuğu paket(ler)in dışa aktarılan tüm tanımlayıcılarından oluşan bir API'yi kullanıma sunar.
+*/
+
+
+/* 
+A version number must have the following format : X.Y.Z
+Where :
+
+the major version
+
+the minor version
+
+the patch version (bug fix)
+
+How does it work? X, Y, and Z are positive numbers (without leading zeroes). Those numbers are incremented following a specific norm.
+
+When you create new features that breaks the existing API of your software, you increment the major version number.
+
+old version : 1.0.0 / new version : 2.0.0
+When you create new features or make performance improvement that do not break the existing API you increment the minor version number.
+
+old version : 1.0.0 / new version 1.1.0
+When you fix a bug in your code, you just increment the patch version
+
+old version : 1.0.0 / new version 1.0.1
+When you create a major version, you set to zero the minor and the patch version number. When you release a new feature, you set to zero the patch version.
+*/
+
+
