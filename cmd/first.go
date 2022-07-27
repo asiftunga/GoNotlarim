@@ -1487,6 +1487,23 @@ bu hashlar daha sonra base 64 e convert edilir
 h1 kelimesi sabittir bunun anlami go librarysinde kullanilan hash1 fonksiyonun calismis oldugudur
 buradaki checksum bağımlı modüllerin indirilen sürümlerinin ilk indirme ile aynı olduğundan emin olmak için buradadır
 
+
+patch aslinda sudur : 
+
+package corge
+
+func Corge() string {
+    return "Corge"
+}
+
+=========== bu alttaki kisim ile aslinda patch etmis oluyoruz kisaca api degistirmemis oluyor (api demek aslinda modul tarafindan disa aktarilan her sey demektir)
+
+package corge
+
+func Corge() string {
+    return fmt.Sprintf("Corge")
+}
+
 */
 
 package main
