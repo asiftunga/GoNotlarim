@@ -1326,7 +1326,7 @@ func main(){
 
 
 /*  //@ API nedir sorusunun cevabi niteliginde
-api lari aslinda birer contract gibi dusunebilirim. Tipki ustteki interfaceler gibi bir yapisi var. Bir api iki farkli seyin bir arada calismasina ve iletisim kurmalarina izin verir (genellikle json formatinda dosya yollayarak). API kisaca sunlardan olusur  Bir yazılım parçası ile etkileşime maruz kalan bir dizi yapıdır (sabitler, değişkenler, işlevler ...).
+api lari aslinda birer contract gibi dusunebilirim. Tipki ustteki interfaceler gibi bir yapisi var. Bir api iki farkli seyin bir arada calismasina ve iletisim kurmalarina (communication) izin verir (genellikle json formatinda dosya yollayarak). API kisaca sunlardan olusur  Bir yazılım parçası ile etkileşime maruz kalan bir dizi yapıdır (sabitler, değişkenler, işlevler ...).
 
 Bu tanımla, go paketi fmt'nin go programcısına onunla etkileşim kurması için bir API sunduğunu söyleyebiliriz. API'si, örneğin Println gibi kullanabileceğiniz bir dizi işlevi temsil eder. Ayrıca paketin dışa aktarılan tanımlayıcılarını da (sabitler, değişkenler, türler) kapsar.
 
@@ -1356,6 +1356,25 @@ When you fix a bug in your code, you just increment the patch version
 
 old version : 1.0.0 / new version 1.0.1
 When you create a major version, you set to zero the minor and the patch version number. When you release a new feature, you set to zero the patch version.
+
+eger programlamanin baslarinda versiyonlar yaratiyor isem major versiyonuna 0 demeliyim bu sayede diger developerlar benim kodlarimi kendi programlarina dahil ettiklerinde stabil olmadigini ve api in degisebilecegini anlayabileceklerdir
 */
 
+
+//=== alttaki paket icin ve versiyonlama ile ilgili biligileri almak icin time paketine bakabilirim
+/* 
+package main
+
+import (
+	"newgroupproject/internal/time"
+	"fmt"
+    )
+
+func main(){
+	fmt.Println(time.WhatTimeIsIt())
+} */
+
+//dependency graph paketlerin calismasi icin gerekli olan bagimli oldugu paketleri gosteren bir graphictir. Versiyonlar ve bagimli olduklari kisimlar nodelar seklinde yazilirlar (detayli bilgi icin https://www.practical-go-lessons.com/chap-17-go-modules)
+
+//go dilini yaratan kisiler MVS seklinde bir sey gelistirdiler. Bu minimal version selection anlamina gelmektedir. Go.mod dosyasini olusturur ve projede kullanilan butun dependenciesleri gosterir.
 
