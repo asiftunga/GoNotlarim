@@ -1378,3 +1378,115 @@ func main(){
 
 //go dilini yaratan kisiler MVS seklinde bir sey gelistirdiler. Bu minimal version selection anlamina gelmektedir. Go.mod dosyasini olusturur ve projede kullanilan butun dependenciesleri gosterir.
 
+//her modul gerekli modullerin listesini vermelidir. Moduller modul path i ile tanimlanirlar. Her modulun minimum uyumlu versiyonu belirtilmelidir. Bu  dosya go.mod dosyasindadir.
+//Her modul import compatibility rule kuralina uymak zorundadir. Bu kural; ayni module pathine sahip moduller geriye uyumlu olmalidir der
+// yeni bir dependency (bagimlilik) nasil eklenir? go get komutu ile dependecy eklenebilir. Bu komut gerekli modulu indirir ve go.mod dosyasina kaydeder
+//peki go hangi versiyonlari secer? => 1) en son etiketlenmis kararli surum 2) son etiketlenmis pre-release surum 3) son etiketlenmemis versiyon (son eklenmis olan commit ayrica pseudo-version) diye adlandirilir
+
+//@ Yapi listesinin olusturulmasi=> built list is the list of modules necessary to builda Go Program
+//bu list elemanlarinin hepsi iki seyden olusurlar 1) modul path module' u tanimlar 2) revision tanimlayicisi (tag veya commit id)
+//! belirli bir modul icin build list olusturmak icin gerekli olan seyler sunlardir
+/* 
+initialize empty list L
+current module icin gerekli modul listelerini al
+gerekli olan her modul icin :
+    bu modul icin gerekli olan modul listesini al
+    bu elemanlari L listesine ekle
+    bu operasyonu eklenen elemanlar icin tekrar ettir
+    sonunda liste ayni modul pathina sahip birden fazla modul girisi icerebilir eger durum boyleyse her module path icin en yeni versiyonu tut (demek istedigi aslinda su : eger modul path ayni ise en yeni versiyon olani listede tut digerini sil)
+//@ son build list of modulu ekrana yazdirmak icin go list -m all seklinde bir komut kullanabilirim
+//@ dependencyleri son minor veya patchlerine guncellemek istersem eger go get -u komutunu kullanabilirim. -u newer minor veya patch indirir
+//* diyelimki benim projem su modulu kullaniyor olsun gitlab.com/loir402/bluesodium 
+//* sonrasinda kullanilan bu modulun yeni bir surumu cikti diyelim (v2.0.1) 
+//* go get -u gitlab.com/loir402/bluesodium kullanarak  yeni versiyonu indiremem bunun nedeni yeni olan modulun different bir path i olmasidir
+//* bu da import compatibility kuralina gore moduller backward compatible olmalidir. Bu modul bu kurali bozmaktadir 
+//@@ bir modulun son surumu son degisiklikleri getirir bu da onceki surumlerin kullanicilarini etkileyecektir
+//@ bundan dolayi ayri bir module pathine sahip olmalidir
+go.mod dosyasina bakarsask sununla karsilasiriz
+
+module gitlab.com/loir402/bluesodium/v2
+
+go 1.15
+
+module path degisti artik gitlab.com/loir402/bluesodium yerine gitlab.com/loir402/bluesodium/v2 oldu
+
+bir modul v0 dan v2 ye veya v1 den v2 ye guncelleniyorsa import compatibiliry rule kuralina uymak icin pathini degistirmelidir
+
+To specifically require the major version 2, you need to launch the command. :
+
+go get -u gitlab.com/loir402/bluesodium/v2
+
+*/
+/* 
+her gereksinim en son modul listesi gerekiyormus gibi okunur
+import compatibility rule sayesinde hicbir kirilma yasanmamalidir (bu operation sadece new patches ve minor versionlari gerekli kilar)
+Eger yeni surumler bulunduysa build list ve go.mod dosyasi modified edilir
+
+bunu duzgun bir sekilde yapmak icin yapilmasi gereken komutlar sirasi ile 
+
+go get -u ./...
+go: github.com/andybalholm/cascadia upgrade => v1.2.0
+go: golang.org/x/net upgrade => v0.0.0-20210119194325-5f4716e94777
+
+bu command output the upgraded dependencies
+
+go.mod dosyasina bir bakalim
+
+module thisIsATest
+
+go 1.15
+
+require (
+    github.com/andybalholm/cascadia v1.2.0 // indirect
+    gitlab.com/loir402/bluesodium/v2 v2.1.1
+    golang.org/x/net v0.0.0-20210119194325-5f4716e94777 // indirect
+)
+
+burada yazan indirect kelimeleri ; Bu satırlar, derleme listesini oluştururken bu belirli yükseltilmiş sürümleri kullandığımızdan emin olmak için eklenir. Aksi takdirde, yapı listesi aynı kalacaktır. 
+
+
+//@ belirli bir modulu yeni bir versiyona guncellemek icin neler yapilir 
+
+Hiçbir yükseltme yapılmamış gibi bir ilk yapı listesi oluşturulur.
+İstenen yükseltme ile ikinci bir tane inşa edilir.
+Daha sonra iki liste birleştirilir.
+Bir modül listede iki kez listeleniyorsa, en yeni sürüm seçilir.
+
+//@ belirli bir modulu downgrade nasil yapilabilir
+//! tabi bunu yapmak icin nedenlerimiz olabilir : modulun yeni surumu bir bug yaratiyorsa, bir guvenlik acigi varsa, application performansini dusuruyorsa ve bunun gibi bircok nedenden dolayi downgrade yapmak isteyebiliriz
+
+Diyelim ki v1.1.0 sürümünde E modülünü kullandık ve E sürümünü v1.0.0'a düşürmek istiyoruz.
+Go, uygulamanın her gereksinimini alacaktır:
+Yapı listesi, bu özel gereksinim için oluşturulmuştur.
+Derleme listesi yasaklanmış bir E sürümü içeriyorsa (yani, v1.1.0 veya üzeri sürümlerde E)
+Daha sonra, bu gereksinimin sürümü düşürülür. Düşürülmüş sürüm, v1.1.0 (veya üzeri) sürümünde hala E içeriyorsa, önceki sürümde düşürülür
+Görev, yasaklı sürümler derleme listesinde olmayana kadar tekrarlanır.
+Bu işlem, artık gerekmeyen gereksinimleri potansiyel olarak kaldıracaktır.
+
+//encode is the process of converting a piece data from a format to another format
+from the output we can go back to the input
+
+
+! go.sum dosyasi module direct ve indirect kriptografig hashleri tutar
+
+//@ ornek olarak bir go.sum dosyasi olusturalim
+
+go mod init 
+
+boylelikle bir go.mod dosyasi olusturduk ancak bu bos??? gerekli dependency ler go.mod dosyasina eklenmemis bunu elle yapmaktan kacinmak icin go install komutunu calistiririz bu komut sayesinde go.mod dosyasi guncellenir ve go.sum dosyasi olusturulmus olur
+
+go.sum dosyasi her bir modul icin iki satir icerir
+gitlab.com/loir402/foo v1.0.0 h1:sIEfKULMonD3L9COiI2GyGN7SdzXLw0rbT5lcW60t84=
+gitlab.com/loir402/foo v1.0.0/go.mod h1:+IP28RhAFM6FlBl5iSYCGAJoG5GtZpUH4Mteu0ekyDY=
+
+ilk satir modulun dosyalarinin tamaminin sha256 hashidir
+
+ikinci satir modulun go.mod dosyasinin hashidir
+
+bu hashlar daha sonra base 64 e convert edilir
+h1 kelimesi sabittir bunun anlami go librarysinde kullanilan hash1 fonksiyonun calismis oldugudur
+buradaki checksum bağımlı modüllerin indirilen sürümlerinin ilk indirme ile aynı olduğundan emin olmak için buradadır
+
+*/
+
+package main
