@@ -1507,3 +1507,13 @@ func Corge() string {
 */
 
 package main
+
+import (
+    "fmt"
+    "newgroupproject/internal/bar"
+    "newgroupproject/internal/foo"
+)
+func main(){
+    fmt.Println(foo.Foo())
+    fmt.Println(bar.Bar())
+}
