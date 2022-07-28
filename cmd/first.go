@@ -1717,6 +1717,32 @@ You can also exclude a specific version from your builds.
 
 exclude gitlab.com/loir402/bluesodium v2.0.1
 
+===============================================================================================================================
+
+go get komutu modullerin en son surumlerini getirmek icin bir proxy kullanir
+serverlari kisaca aciklamak gerekirse server dedigimiz sey clientlara functionality provide eden applicationlardir.
+client ornek olarak bir web browser olabilir
+
+eger bu functionality yi internet uzerinden saglayan bir uygulama (application) var ise biz buna web server diyoruz
+
+proxy ise client ile server arasindadir ve bir nevi araci sekilde calisir
+
+proxy server resourcelar icin gelen requestleri alir
+    requestleri kendisi karsilayabilir (direkt olarak)
+    arkasindaki servera aktarabilir ardindan arkasindaki serverdan gelen yanitlari clienta geri dondurebilir (bu tarz proxylere forward proxy diyoruz)
+    requesti durdurabilir
+
+Proxy serverlar genel olarak su amaclar icin kullanilir :
+    internet trafigini izleyebilirler (genel olarak sirketler kullanicilarinin internet trafiklerini bu yontemler ile izlerler)
+    bazi siteleri yasaklayabilirler
+    Caching yapabilirler
+        proxyleri resourcelari caching yapmak icin kullaniriz
+        hedeflenen sunucuyu aramak yerine clienta cache alinmis bir response gonderirler
+
+
+go module proxyler son zamanlarda dile eklenen bir seydir, go get komutu kullanilmadan once moduller dogrudan web sayfasi uzerinden indirilirdi
+bunun kotu yanlari modul paylasilan web sitesinden silinebilirdi veya tagler versiyon numaralari silinebilirdi. Eger bizim applicationumuz bu module bagimli ise build sirasinda hatalarla karsilasabilirdik
+
 
 
 
