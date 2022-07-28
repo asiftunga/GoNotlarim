@@ -1517,3 +1517,223 @@ func main(){
     fmt.Println(foo.Foo())
     fmt.Println(bar.Bar())
 }
+
+//diyelim ki bir tane fonksiyon yazdik ve onu api gibi kullandik simdi burada onemli birkac notum var
+//@ oncelikle kullandigimiz bu api kismini degistirip daha sonra tekrar guncellemek istersem diye asagidaki notlar cok onemli
+
+//! butun dependencyleri son surumlerine update etmek icin go get -u ./... bunu yaptigimizda go yapilan patchleri anlar ve onlari otomatik olarak indirir. go.mod dosyasina yeni bir satir eklenir
+//@ ancak go.sum dosyasi degismez bunun nedeni ileride olurda downgrade etmek istersek diye bir guvenlik onlemidir (elbette yeni versiyon da eklenir sadece eski versiyonu silinmez demek istiyorum)
+//! bir dependencyi son surumune update etmek go get blablalinki
+//@ bir dependencyi spesifik bir surume guncellemek icin ise go get module_path@X
+//burada x commit hashi olabilecegi gibi versiyon numarasi da olabilir
+/* 
+ornek olarak bir sey vermek istiyorum. Onceden su sekilde olan public api miza su sekilde bir fonksiyon eklemesi yaptim bu fonksiyon eklemesinden sonra artik api degisecegi icin onceden v1.0.1 olan surumumuzu v1.1.0 sekline getirdim
+// bar/bar.go
+package bar
+
+import (
+    "fmt"
+
+    "gitlab.com/loir402/baz"
+    "gitlab.com/loir402/qux"
+)
+
+func Bar() string {
+    return fmt.Sprintf("Bar %s %s", baz.Baz(), qux.Qux())
+}
+
+//@ func Bar2() string {
+    //@ return fmt.Sprintf("Bar2 %s %s", baz.Baz(), qux.Qux())
+//@ }          yeni eklenen fonksiyon
+
+yapilacak islemler ve degisen dosyalar ise su sekildedir
+
+$ go get gitlab.com/loir402/bar@v1.1.0
+----------------------------------------
+go: finding gitlab.com/loir402/bar v1.1.0
+go: downloading gitlab.com/loir402/bar v1.1.0
+
+go.mod dosyasinda ise gerceklesen degisiklikler su sekildedir
+
+module gitlab.com/loir402/myApp
+
+require (
+    gitlab.com/loir402/bar v1.1.0
+    gitlab.com/loir402/corge v1.0.1 // indirect
+    gitlab.com/loir402/foo v1.0.1
+)
+
+
+simdi ise go.sum dosyasinda nasil degisiklikler olduguna bir goz atalim
+
+gitlab.com/loir402/bar v1.0.0 h1:l8z9pDvQfdWLOG4HNaEPHdd1FMaceFfIUv7nucKDr/E=
+gitlab.com/loir402/bar v1.0.0/go.mod h1:i/AbOUnjwb8HUqxgi4yndsuKTdcZ/ztfO7lLbu5P/2E=
+gitlab.com/loir402/bar v1.1.0 h1:VntceKGOvGEiCGeyyaik5NwU+4APgyS86IZ5/hm6uEc=
+gitlab.com/loir402/bar v1.1.0/go.mod h1:i/AbOUnjwb8HUqxgi4yndsuKTdcZ/ztfO7lLbu5P/2E=
+
+goruldugu gibi eski olan versiyonlari safety olmasi acisindan hala tutulmaktadir (downgrade yapilabilme ihtimaline karsi)
+
+//* downgrade a dependecy ise su sekilde yapiyoruz
+
+$ go get gitlab.com/loir402/bar@v1.0.0
+
+bu geri dondurur ve v1.0.0 versiyonuna geri donmus oluruz
+
+//? son olarak ise bir seyden daha bahsetmek istiyorum. Soyle bir senaryo hayal edelim. Yeni bir paket olusturdum ve bu paketi main paketimin icinde api seklinde kullandim. Daha sonra go mod install yaparak bu paketimi go.sum ve go.mod dosyalarinin icerisine kaydedilmesini sagladim. Daha sonra fikir degistirdim ve bu fonksiyonu disari api seklinde aktaran bu paketimi sildim. Ancak go.sum ve go.mod dosyalarinda silinmemis sekilde durmaya devam etmekte. Bunun onune gecebilmek icin go mod tidy -v komutu kullanilir
+//go aracı tarafından indirilen bağımlılıkların farklı sürümleri $GOPATH/pkg/mod dizininde durmaktadir
+
+//bak-> ======================================================================================================================
+
+oncelikle lock file in ne oldugundan bahsetmek istiyorum. lock file kisaca list of dependency that your project use along with a specific revision(tag or commit hash)
+Peki lock dosyasinin go.sum dosyasindan farki tam olarak nedir > go.sum dosyasi projede direkt olarak kullanilan modullerin veya dolayli olarak kullanilan modullerin kriptographic sum larini ve versionlarini saklar
+go.sum dosyasının amacı, modüllerin bir sonraki indirmede değiştirilmemesini sağlamaktır. Bir kilit dosyasının amacı, tekrarlanabilir yapılara izin vermektir.
+
+Go use a deterministic approach to version selection.
+
+The build list will remain stable with time (if revisions used are not deleted by maintainer)
+
+It means that the build list generated in January will not be different from the one generated in December.
+
+Thus the introduction of a lock file is not necessary.
+
+Dependency management systems that have introduced lock files generally don’t have such a deterministic approach
+
+The lock file is needed to ensure that the builds of the application are reproducible by listing all the dependencies used and at which version.
+
+
+go.sum dosyalarini ve go.mod dosyalarini mutlaka commit etmeliyim bunun nedeni => Others need the go.mod file to construct their build list.
+
+Others will use the go.sum to ensure that the module downloaded have not been altered.
+
+
+kullanilan diger komutlar :
+    go mod graph -> standart output seklinde dependency graph yazdirir
+    go mod vendor -> dependencylerin sourcelari ile birlikte bir vendor dosyasi olusturur (bunu su sekilde dusunebilirim aslinda sanki githubtan kullandigim bir projeyi klonlamisim gibi direkt olarak benim bilgisayarima indiriyor)
+    go mod verify -> Adından da anlaşılacağı gibi, mod doğrulaması yerel olarak depolanan bağımlılıklarınızı kontrol edecektir. Go, yerel olarak depolanan bağımlılıklarınızın değiştirilmediğini kontrol edecektir. Bu denetim, bağımlılıklarınızın değiştirilmiş bir sürümünü değil, doğru sürümünü kullandığınızdan emin olmak için çok kullanışlıdır. Bu değişiklikler buildin başarısız olmasına neden olabilir.
+    
+
+==========================================================================================================================
+A minor version introduces breaking changes. True or False?
+
+    False
+
+    Major versions introduce breaking changes
+
+What is the command to update a module to its latest version?
+
+    $ go get -u path/of/the/module
+
+What is the name of the set of algorithms used in Go to manage dependencies?
+
+    MVS: Minimum Version Selection
+
+Create a sentence describing a Module with the following words: packages, go.mod, go.sum.
+
+    A module is a group of packages and two files, a go.mod & a go.sum.
+
+What is the purpose of the go.mod file?
+
+    The go.mod file will define the module path of the current module
+
+    The go.mod file lists minimum versions of direct dependencies.
+
+    It also lists the minimum versions of indirect dependencies
+
+        It happens when the developer upgraded or removed some dependencies manually
+
+    Each dependency is identified by a module path.
+
+    It also gives the expected language version for the module
+
+What is the purpose of the go.sum file?
+
+    The go.sum file is to ensure that the source code of dependencies downloaded are the same as the one downloaded by the original developer.
+
+What is the command to initialize a module?
+
+    In your module directory :
+    $ go mod init path/of/the/module
+
+What is the command to display the build list of a module?
+
+    In your module directory :
+    $ go list -m all
+
+When the major version 2 is released, the module path is not modified. True or False?
+
+    False
+
+    Because a new major version introduces breaking changes, the module path should change (to respect the import compatibility rule)
+
+    The string “v2” should be added to the module path
+
+
+============================== kisaca ozetlemek gerekirse eger =====================================================
+A Go module is a set of packages that are versioned together with a version control system (for instance, Git)
+
+Go modules are identified by a module path.
+
+    Module paths describe what the module does and where we can find it
+
+A version is identified by a tag that describes the version changes.
+
+To describe what changes are added in a version, we usually use a versioning scheme which is a set of rules enforced by developers
+
+Semantic Versioning is a versioning scheme that Go uses
+
+    In this scheme, a version number is a string formatted this way => “vX.Y.Z” (v is optional)
+
+        X, Y, Z are unsigned integers.
+
+        X is the major version number. When you increase this number, it means that you introduce breaking changes
+
+        Y is the minor number. This number should be increased when new non-breaking features are added.
+
+        Z is the patch number. This number is increased when a patch is created (a bug fix, for instance)
+
+When a module publish a new major version greater or equal than 2, it should add a major version suffix to the module path
+
+    gitlab.com/loir402/bluesodium becomes gitlab.com/loir402/bluesodium/v2
+
+We can initialize a Go module in an existing project by executing the go mod init my/new/module/path command.
+
+To add a new direct dependency to a program, use the go get command:
+
+$ go get my/new/module/to/add
+
+To upgrade all your dependencies, use the go get command:
+
+$ go get -u ./...
+
+To upgrade one dependency, use the go get command:
+
+$ go get -u the/module/path/you/want/to/upgrade
+
+In the go.mod file, you can replace the code of a module by another one (stored on a code-sharing website or locally)
+
+replace gitlab.com/loir402/corge => ./corgeforked
+
+You can also exclude a specific version from your builds.
+
+exclude gitlab.com/loir402/bluesodium v2.0.1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+*/
+

@@ -1,0 +1,2 @@
+# github.com/Rhymond/go-money v1.0.8
+github.com/Rhymond/go-money
