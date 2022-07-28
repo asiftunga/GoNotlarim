@@ -1505,8 +1505,9 @@ func Corge() string {
 }
 
 */
+// ======================
 
-package main
+/* package main
 
 import (
     "fmt"
@@ -1516,7 +1517,7 @@ import (
 func main(){
     fmt.Println(foo.Foo())
     fmt.Println(bar.Bar())
-}
+} */
 
 //diyelim ki bir tane fonksiyon yazdik ve onu api gibi kullandik simdi burada onemli birkac notum var
 //@ oncelikle kullandigimiz bu api kismini degistirip daha sonra tekrar guncellemek istersem diye asagidaki notlar cok onemli
@@ -1742,24 +1743,17 @@ Proxy serverlar genel olarak su amaclar icin kullanilir :
 
 go module proxyler son zamanlarda dile eklenen bir seydir, go get komutu kullanilmadan once moduller dogrudan web sayfasi uzerinden indirilirdi
 bunun kotu yanlari modul paylasilan web sitesinden silinebilirdi veya tagler versiyon numaralari silinebilirdi. Eger bizim applicationumuz bu module bagimli ise build sirasinda hatalarla karsilasabilirdik
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 */
 
+package main
+
+import "fmt"
+
+func main(){
+    price := TotalPrice(3,100,500)
+    fmt.Println(price) //alttaki kod icin bu sekilde bir deneme yapabiliriz
+}
+
+func TotalPrice(nigths, rate, citytax uint) uint{
+    return nigths*rate+citytax //bu fonksiyonu yazdik peki biz bunun dogrulugundan nasil emin olacagiz bunun icin unit testler yazmamiz gerekir
+}
