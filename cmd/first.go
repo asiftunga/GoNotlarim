@@ -1745,15 +1745,134 @@ go module proxyler son zamanlarda dile eklenen bir seydir, go get komutu kullani
 bunun kotu yanlari modul paylasilan web sitesinden silinebilirdi veya tagler versiyon numaralari silinebilirdi. Eger bizim applicationumuz bu module bagimli ise build sirasinda hatalarla karsilasabilirdik
 */
 
+// package main
+
+// import "fmt"
+
+// func main(){
+//     price := TotalPrice(3,100,500)
+//     fmt.Println(price) //alttaki kod icin bu sekilde bir deneme yapabiliriz
+// }
+
+// func TotalPrice(nigths, rate, citytax uint) uint{
+//     return nigths*rate+citytax //bu fonksiyonu yazdik peki biz bunun dogrulugundan nasil emin olacagiz bunun icin unit testler yazmamiz gerekir
+// }
+
+//dogrulugundan emin olmak icin direkt olarak sonucu if degerleri icerisinde main fonksiyonunda test edebiliriz. Tabi oyle bir durum ne kadar efektif olabilir? Unit testte tum sistem test edilmez -> Sistemin kucuk ve belli parcalarini alir test ederiz
+
+//Bazi kisiler unit testlerin gereksiz oldugunu dusunebilir bazilari ise yaptiklari her degisiklikte test ederler. Yapilan bu testleri otomatik yapabildigimizi dusunelim? hatta bu testleri her build aldigimizda calistigini dusunelim hatta daha da iyisi bu testlerin pakette herhangi bir degisiklik yapildiginda calistigini dusunelim
+
+/* 
+single unit testlere test case denir. Bir grup test case'e ise test set (veya test suite) denir
+Soyle bir durum hayal edelim. Bir stringi alip buyuk harflere ceviren bir fonksiyonumuz olsun
+test case sunlardan olusur : 
+    bir test inputu (ornek olarak coffee)
+    bir expected output (in our case it will be COFFEE)
+    the actual output of our function
+    Bu string testini gerceklestirmek icin go paketleri kullanabilir veya go nun bize saglamis oldugu string karsilastirma islemlerini yapabiliriz. Test caselerin bu kismina ise assertion denir.
+
+Unit testler bir fonksiyonun veya metodun duzgun calisip calismadigini kontrol ederler. Unit testler olmadan developerlar kodlarini development fazinda test edebilirler. Bu tarz testler manualdir ve tekrarlanamaz. Development fazi bittikten sonra bu manual testler calistirilamaz.
+
+eger testleri proje dosyasina koyarsak bu testleri sonrasinda da kullanabiliriz. Bu sayede projeyi nasty regressionslara karsi korumus oluruz (yeni featurelarin onceden varolan bir seyleri break etmesi)
+
+API design genellikle unit testler yazarken gelisir bunun nedeni gelistirdigimiz fonksiyonu ayni zamanda cagiracak olmamizdir. TDD yontemlerini kullanirsak bu gelisme daha da bariz bir hale gelir.
+
+Unit testler ayni zamanda code documentation islemi de gorur. Specific bir fonksiyonun nasil calistigini merak eden kullanicilar unit testlere bakarak kolayca anlayabilir.
+
+Test dosyalari nereye konmali? Cogu programlama dilinde testler "test" isminde ayri bir klasorde bulunur ancak GO programlama dilinde testler direkt olarak pakette bulunur
+
+compare.go
+compare_test.go
+replace.go
+replace_test.go
+
+seklinde bir hierrarchi vardir
+Burada bir kullanim dikkatimi cekti. xxx.go seklindeki bir paket icin xxx_test.go seklinde bir test case ismi vardir. xxx_test.go seklinde ismi olan bir paket dosyasi kod derlendigi zaman derleyici tarafindan gormezden gelinir.
+*/
+//@ foo klasorune bak
+//test fonksiyonlari func TestFonksiyonIsmi(t *testing.T) seklinde olmalidir. Testten sonra genlen fonksiyon ismi mutalaka capital ile baslamalidir.
+
+//testlerdeki basariyi olcecek bir T tipinde tanimlanmis bir yontem yoktur. Eger unit test return without calling a failure method its considered success
+
+/* 
+To signal a failure, you can use the following methods :
+
+Error : will log and marks the test function as failed. Execution will continue.
+
+Errorf : will log (with the specified format) and marks the test function as failed. Execution will continue.
+
+Fail : will mark the function as failing. Execution will continue.
+
+FailNow : this one will mark the test as failed and stop the execution of the current test function (if you have other assertions, they will not be tested).
+
+You also have the methods Fatal and Fatalf that will log and call internally FailNow.
+
+
+@ bazen unit testleri destekleyecek test dosyalarini saklamamiz gerekir. Ornegin bir ornek configuration file veya a model CSV file (for application generate file). Bu tarz dosyalari testdata folderinda saklamaliyiz
+
+kisacasi paket icerisindeki testdata folder unit testlerin kullanacagi filelari tutar
+
+
+Go standart kitaplığı, birim testinizi harici kitaplıklar olmadan oluşturmak için gerekli tüm araçları sağlar. Bu gerçeğe rağmen, harici "assertion kitaplıkları" kullanan projeler görmek yaygındır. Bir assertion kitaplığı, assertion oluşturmak için birçok işlev ve yöntem sunar. Çok popüler bir modül github.com/stretchr/testify'dır.
+*/
+
+/* To add it to your project, type the following command in your terminal :
+
+$ go get github.com/stretchr/testify
+
+As an example, this is the previous unit test written with the help of the package assert from the module github.com/stretchr/testify :
+
+package foo
+
+import (
+    "testing"
+
+    "github.com/stretchr/testify/assert"
+)
+
+func TestFoo(t *testing.T) {
+    assert.Equal(t, "Foo", Foo(), "they should be equal")
+} */
+
+//unit testleri calistirmak icin go test komutu kullanilir ancak bu komutun kullanilabilmesi icin testin yazildigi dizinde olunmalidir
+
+//projedeki butun testleri calistirmak icin ise go test ./... komutu kullanilir
+
+/* 
+bunu kullandigimiz zaman su sekilde bi sonucla karsilasiriz
+$ go test ./...
+?       newgroupproject/cmd     [no test files]
+?       newgroupproject/internal/bar    [no test files]
+?       newgroupproject/internal/baz    [no test files]
+?       newgroupproject/internal/cart   [no test files]
+?       newgroupproject/internal/corge  [no test files]
+?       newgroupproject/internal/email  [no test files]
+--- FAIL: TestFoo (0.00s)
+    foo_test.go:9: expected Foo do not match actual Foor
+FAIL
+FAIL    newgroupproject/internal/foo    0.242s
+?       newgroupproject/internal/invoice        [no test files]
+?       newgroupproject/internal/new    [no test files]
+?       newgroupproject/internal/product        [no test files]
+?       newgroupproject/internal/qux    [no test files]
+?       newgroupproject/internal/receiver       [no test files]
+?       newgroupproject/internal/romantoint     [no test files]
+?       newgroupproject/internal/time   [no test files]
+?       newgroupproject/internal/user   [no test files]
+FAIL
+*/
+
+/* 
+peki fail olan bir unit testin outputu nedir? 
+
+Tunga@ATM MINGW64 ~/Desktop/newgroupproject/internal/foo (master)
+$ go test
+--- FAIL: TestFoo (0.00s)
+    foo_test.go:9: expected Foo do not match actual Foor
+FAIL
+exit status 1
+FAIL    newgroupproject/internal/foo    0.239s
+*/
+//Program, 1 durum koduyla çıkar ve sürekli entegrasyon araçları oluşturmak istiyorsanız bunu otomatik olarak algılamanıza olanak tanır.
+
 package main
-
-import "fmt"
-
-func main(){
-    price := TotalPrice(3,100,500)
-    fmt.Println(price) //alttaki kod icin bu sekilde bir deneme yapabiliriz
-}
-
-func TotalPrice(nigths, rate, citytax uint) uint{
-    return nigths*rate+citytax //bu fonksiyonu yazdik peki biz bunun dogrulugundan nasil emin olacagiz bunun icin unit testler yazmamiz gerekir
-}
