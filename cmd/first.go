@@ -1882,6 +1882,11 @@ FAIL    newgroupproject/internal/foo    0.239s
 
 //Birim testlerini başlatmadan önce bir dizi go vet komutunu otomatik olarak çalıştırmak harika bir fikir. Programınıza zarar vermeden önce hataları keşfetmenizi sağlayabilir!
 
+//@ testleri calistirmadan compile etmek icin go test -c komutunu yazmamiz yeterlidir. Bunun sonucunda packageName.test seklinde bir adet dosya olusur.
+/// denemem sonucunda foo.test seklinde bir dosya olusmasi yerine foo.test.exe seklinde bir dosya olusmus bulunmakta. Bunun nedenini tam anlamadim ancak bana onemsiz bir detay gibi gozuktu.
+
+//yazdigimiz test fonksiyonunda fonksiyonumuzu yanlizca bir duruma karsi test ettik ama gercek hayatta birden cok test senaryosu ile test etmek isteyebiliriz //@ bunun ornegi icin price folderina bakabilirim
+
 
 
 
