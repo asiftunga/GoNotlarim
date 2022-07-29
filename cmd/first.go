@@ -1874,5 +1874,29 @@ exit status 1
 FAIL    newgroupproject/internal/foo    0.239s
 */
 //Program, 1 durum koduyla çıkar ve sürekli entegrasyon araçları oluşturmak istiyorsanız bunu otomatik olarak algılamanıza olanak tanır.
+//0 dan farkli bir sinyal kodu hata mesaji donduruldugu anlamina gelir
+//0 ise herhangi bir hata olmadigi mesajini dondurur
+//go test komutunu çalıştırdığınızda, go aracı test edilen paketlerde (paketlerin ve test dosyalarının kaynağı) otomatik olarak go vet'i çalıştıracaktır.
+
+//go vet komutu, Go araç zincirinin bir parçasıdır. Olası hataları tespit etmek için kaynak kodunda syntax doğrulaması gerçekleştirir.
+
+//Birim testlerini başlatmadan önce bir dizi go vet komutunu otomatik olarak çalıştırmak harika bir fikir. Programınıza zarar vermeden önce hataları keşfetmenizi sağlayabilir!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 package main
