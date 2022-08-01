@@ -8,7 +8,6 @@ var sayi int32 = 84 seklinde bir tanimlama yapilabilir
 
 
 
-
 var degisken1,degisken2,degisken3 degiskenlerinturu = deger1,deger2,deger3
 
 var geek1, geek2, geek3 int = 232, 784, 854 boyle bir tanimlamada sadece ayni turde degiskenler tanimlanabilir
@@ -18,10 +17,10 @@ var geek4, geek5, geek6 = 100, "GFG", 7896.46 fakat tip (type) kismini (int) kal
 once degiskeni tanimlayip sonra deger atamasi gerceklestirebilirim. //@ onemli bir not olarak degiskeni tanimlayip deger atamasi gerceklestirmemis olsam bile go dilinde uninitialized variablelar yoktur bu nedenle bool lar false degeri sayisal degerler 0 ve string ifadeler "" seklinde ilk deger atamasi yapilir (initialize edilir)
 
 
-    var geek1 int
-    var geek2 string
-    var geek3 float64
-    var geek4 bool
+var geek1 int
+var geek2 string
+var geek3 float64
+var geek4 bool
 
 seklindedir
 =============kisa degisken tanimlamalari==================================
@@ -30,12 +29,16 @@ degiskenismi := deger
 
 !   kisa degisken tanimlamalari fonksiyonlarin disarisinda kullanilamazlar
 
+degiskenismi := degiskentipi(degiskendegeri) seklinde de bir tanimlama yapilabilirmis
+
+ornek => expected := uint(112)
+
 ============sabit degisken tanimlamak=====================================
 
 const degiskenIsmi degiskenturu = deger
 
 tipsiz bir const tanimlamasi yapilabilir
-    const degiskenismi = deger  seklinde
+const degiskenismi = deger  seklinde
 
 
 
@@ -1792,7 +1795,7 @@ Burada bir kullanim dikkatimi cekti. xxx.go seklindeki bir paket icin xxx_test.g
 //@ foo klasorune bak
 //test fonksiyonlari func TestFonksiyonIsmi(t *testing.T) seklinde olmalidir. Testten sonra genlen fonksiyon ismi mutalaka capital ile baslamalidir.
 
-//testlerdeki basariyi olcecek bir T tipinde tanimlanmis bir yontem yoktur. Eger unit test return without calling a failure method its considered success
+//testlerdeki basariyi olcecek bir T tipinde tanimlanmis bir yontem yoktur. If unit test return without calling a failure method its considered success
 
 /* 
 To signal a failure, you can use the following methods :
