@@ -1890,6 +1890,17 @@ FAIL    newgroupproject/internal/foo    0.239s
 
 //yazdigimiz test fonksiyonunda fonksiyonumuzu yanlizca bir duruma karsi test ettik ama gercek hayatta birden cok test senaryosu ile test etmek isteyebiliriz //@ bunun ornegi icin price folderina bakabilirim
 
+//test table kullanma yontemi birden cok test icin daha uygun bir cozum olabilir Price_test.go paketine bakabilirim
+
+//@ cok onemli bir not : su anda ornek uzerinden ogrendigime gore go dilinde if icerisinde initilalized edebiliyorsun. Ornek kullanim olarak =>
+/*  
+func main() {
+    if x, y := 5, 38; x == 5 { //@ goruldugu gibi ilk once init yapiliyor ondan sonra statement kullaniliyor
+        fmt.Printf("Whee! %d\n", y)
+    }
+}
+*/
+
 
 
 
