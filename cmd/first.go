@@ -1901,21 +1901,365 @@ func main() {
 }
 */
 
+/* 
+go test komutunu 2 modda calistirmak mumkundur. 
+-----------local directory mode--------------
+$go test seklinde kullanilir yani hicbir sey eklenmez. Go paketi aktif olan directory icerisinde build alir. Modulde bulunan butun unit testler calistirilmaz sadece o pakete ozgu olan testler calistirilir (directory icersinde bulunan) 
+----------Package List mode -----------------
+$go test modulepath/packageName
+Bu komut ile birlikte go'ya istedigim yerdeki paket teslerini yapmasini soyleyebilirim hatta path duzgun girilir ise projedeki butun testleri de calistirabilirim. Bu modda iken go otomatik olarak successful olan test sonuclarini cache eder boylelikle multiple defa test etmenin onune gecmis olunur.
+bunu test etmek icin go test string seklinde string paketini test edebiliriz. 
+
+ilk basta bize verilen cikti su sekilde olur
+ok     strings    4.256s
+
+tekrar ayni komutu calistirdigimizda ise bize verilen yeni cikti ise su sekilde olur
+ok     strings    (cached)
+
+digeri 4 sn surdu bu aslinda oldukca buyuk bir sure bu ise aninda calisti bunun nedeni cache edilmis olmasindan dolayidir.
+
+eger paketin herhangi bir test dosyasini veya test dosyasini degistirdigimiz zaman durumlarin degisecegini ve eski testin gecersiz kaldigini unutmamak gerekir. Bu nedenle cache uzerine alinmis olan success mesaji gecersiz sayilir bunun onune gecmek icin ise cache alinmasini iptal edebiliriz.
+
+go test strings -count= 1
+seklinde yaparsak cache iptal edilmis olur.
+
+go source file icersinde eger environment var kullaniyorsak go sonuclari cache eder (if the env var are not changing)
+
+ornek olarak su anda foo_test.go dosyasina ekledigim yeni TestFoo2 functionu bir kere calisirsa ilk kisimdaki gibi ikinci kere calisirsa ise  su sekilde bir cikti verir
+------------------------------------------------------------------------
+Running tool: C:\Program Files\Go\bin\go.exe test -timeout 30s -run ^TestFoo2$ newgroupproject/internal/foo
+
+=== RUN   TestFoo2
+
+--- PASS: TestFoo2 (0.00s)
+PASS
+ok      newgroupproject/internal/foo    0.265s
 
 
+> Test run finished at 8/2/2022, 11:02:05 AM <
+
+Running tool: C:\Program Files\Go\bin\go.exe test -timeout 30s -run ^TestFoo2$ newgroupproject/internal/foo
+
+=== RUN   TestFoo2
+
+--- PASS: TestFoo2 (0.00s)
+PASS
+ok      newgroupproject/internal/foo    (cached)
+------------------------------------------------------------------
+elbette env var degistirilirse go cache edilmis test sonucunu kullanmaz
+
+bu yukarida anlattigim ayni mekanizma open files da da gecerlidir.
+*/
+
+//! bazen test sayilari o kadar cok artar ki bunun onune gecebilmek icin testleri concurrent sekilde beraber calistirmak gerekebilir. Bunu nasil yaptigimi gormek icin corge_test.go paketine bakabilirim
 
 
+//---------------advanced usage of go test command---------------------
+
+/* 
+command line argumentleri alan bir test yazabiliriz.
+//bak-> foo_test.go icerisinde bulunan testargs func neden command line argument almiyor bunu arastir.
+
+=================================FLAGS===================================
+You can pass all the existing build flags to the go test command line.
+
+Bilinmesi gereken en onemli flagslardan birisi -cover flagi dir
+Bunun nedeni kodumuzun yuzde kacinin test tarafindan covered edildigini ogrenebiliriz
+
+$ go test -cover
+
+PASS
+coverage: 100.0% of statements
+
+//* sonra bu kisma tekrar geri donecegim basimi asiri derecede agirtti
 
 
+*/
+
+//SONUNDA ARRAYLAR KONUSUNA GIRIS YAPTIM BE
+
+//array ayni ture sahip elementlerin collectionlaridir
+
+//array icerisindeki elements typelarina element type adi verilir
+
+//bu elementler derleme zamaninda bilinen sabit sayida elemana sahiptir (ornek olarak diyelim ki ay isimlerini tutmak istiyorsunuz bu ay isimleri icin string tipinde bir array kullanabiliriz. Ay sayisi ise compile time da belli olur)
+
+/* package main
+
+import "fmt"
+
+func main(){
+    var myArray [2]int
+    myArray[0] = 156
+    myArray[1] = 147
+    fmt.Println(myArray)
+} */
+
+//! ustteki yonteme ek olarak bu sekilde bir kullanim daha uygundur diyebiliriz
+
+/* package main
+
+import "fmt"
+
+func main(){
+    myArray := [2]int{156,147}
+    fmt.Println(myArray)
+}
+
+ */
+
+ /* 
+ //@ long way
+var a [2]int
+a[0] = 156
+a[1] = 147
+fmt.Println(a)
+
+//@ more concise
+b := [2]string{"FR", "US"}
+fmt.Println(b)
+
+//@ size computed by the compiler
+c := [...]float64{13.2, 37.2}
+fmt.Println(c)
+
+//@ values not set (yet)
+d := [2]int{}
+fmt.Println(d)
+*/
+
+//? bu sekildeki bir kullanimda bos bir array tanimladik ancak dikkat! bu tanimladigimiz array bos olmasina karsin tanimsiz anlamina gelmez cunku bilindigi uzere go dilinde tanimsiz degiskenler tanimlanamaz
+/* package main
+
+import "log"
+
+func main() {
+    var myA [3]int
+    log.Printf("%v", myA)
+} */
+
+//ciktisi bu sekildedir : 2022/08/02 14:16:18 [0 0 0]
+
+/* 
+myEmptyArray2 := [2]string{}
+fmt.Println(myEmptyArray2)
+// output : [] seklinde bir ciktiya sahip olunur
+*/
+
+//len(v) v variablein uzunlugunu return eder.
+//cap temelinde len ile ayni islevi gorur
+
+//ACCESS ELEMENT OF ARRAY 
+
+/* 
+package main
+
+import "fmt"
+
+func main() {
+    b := [2]string{"FR", "US"}
+    firstElement := b[0]
+    secondElement := b[1]
+    fmt.Println(firstElement, secondElement)
+}
+*/
+
+//for loop kullanarak array icinde gezmek su sekilde olmaktadir
+
+/* package main
+
+import "fmt"
+
+func main(){
+myArray := [13]int{156, 147, 5454, 154,21,2,45,23,154,32,654,32,454}
+for index, element := range myArray {
+    fmt.Printf("element at index %d is %d\n", index, element)
+}
+}
+
+ */
+
+ //! string uzerinde gezmek icin su sekilde bir yontem uygulayabiliriz
+
+/* package main
+
+import "fmt"
+
+func main(){
+myArray := "merhabalar canlarim"
+for index, element := range myArray {
+    fmt.Printf("element at index %d is %s\n", index, string(element))
+}
+} */
+
+//bazi durumlarda sadece indexlere veya sadece elementlere ihtiyacimiz vardir. Bunu su sekilde blank identifier kullanarak yapabilirim
+
+/* 
+for _, element := range myArray {
+    fmt.Printf("element is %s\n", string(element))
+}
 
 
+for index, _ := range myArray {
+    fmt.Printf("element at index %d\n", index)
+}
+
+*/
+
+//bu ustte kullanilan bastan baslayan iteration icin gecerlidir. Eger spesifik olarak bir indexten baslayip digerinde durmak istiyorsam normal for loop kullanmam gerekir.
+
+/* 
+myArray2 := [2]int{156, 147}
+for i := 0; i < len(myArray2); i++ {
+    fmt.Printf("element at index %d is %d\n", i, myArray2[i])
+}
+// output :
+//element at index 0 is 156
+//element at index 1 is 147
+*/
+
+//eger azalan sirada bir seyler yapmak istiyorsam bu sekilde bir kullanim yapabilirm
+
+/* 
+for i := len(a) - 1; i >= 0; i-- {
+    fmt.Println(i, a[i])
+}
+*/
+
+//@ bir dizinin icerisindeki elementi for loop yardimi ile nasil bulabiliriz
+
+/* func getIndex(haystack [10]int, needle int) int {
+    for index, element := range haystack {
+        if element == needle {
+            return index
+        }
+    }
+    return -1
+} */
+
+// bu kullanim aslinda sinirli bir kullanimdir cunku hadi diyelim aradigimiz element arrayin sonunda yer aliyor hepsini tek tek gezmis olacak ayrica bu fonksiyon sadece 10 elemanlik bir arrayi parameter olarak alabiliyor bu nedenlerden dolayi bu fonksiyon yetersizdir.
+
+//arraylari karsilastirmak icin oncelikle su iki ozelligin ayni olmasi gerekmektedir. Bunlardan ilki : ayni tip olmalidirlar ikincisi ise : ayni uzunluga sahip olmalidirlar. Bu karsilastirmada kullanilabilecek operatorler sadece == ve != dur. 
+
+/* 
+a := [2]int{1, 2}
+b := [2]int{1, 2}
+if a == b {
+    print("equal")
+} else {
+    print("not equal")
+}
+
+// output : equal
+*/
 
 
+//@ PEKI BIR ARRAYI FONKSIYONA NASIL PASS EDERIZ? ==> bu onemli bir hatadir bunun nedeni ise bir arrayi fonksiyona gonderdigimiz zaman aslinda o fonksiyonda o arrayin bir kopyasini olusturmus oluruz bu da bazi performans kayiplarina neden olur
+//! eger gercekten o arrayi degistirmek istiyor isek pointer kullanmaliyiz
+
+/* 
+
+package demo
+
+const NewValue = "changedValue"
+
+func UpdateArray1(array [2]string) {
+    array[0] = NewValue
+}
+
+-------------------------------
+package demo
+
+import (
+    "testing"
+
+    "github.com/stretchr/testify/assert"
+)
+
+func TestUpdateArray1(t *testing.T) {
+    testArray := [2]string{"Value1", "Value2"}
+    UpdateArray1(testArray)
+    assert.Equal(t, NewValue, testArray[0])
+}
 
 
+------------------test sonucu --------------------
+
+$ go test ./...
+--- FAIL: TestUpdateArray1 (0.00s)
+    demo_test.go:11:
+                Error Trace:    demo_test.go:11
+                Error:          Not equal:
+                                expected: "changedValue"
+                                actual  : "Value1"
+
+                                Diff:
+                                --- Expected
+                                +++ Actual
+                                @@ -1 +1 @@
+                                -changedValue
+                                +Value1
+                Test:           TestUpdateArray1
+FAIL
+FAIL    maximilien-andile.com/array/copy/demo   0.016s
+FAIL
 
 
+==========================SOLUTIONS======================================
+package demo
+
+const NewValue = "changedValue"
+
+func UpdateArray2(array *[2]string) { //@ burada nasil pointer seklinde bir array parametresi alindiginin kullanimi gosterilmis
+    array[0] = NewValue
+}
 
 
+----------------------
+
+// array/demo/demo_test.go 
+package demo
+
+import (
+    "testing"
+
+    "github.com/stretchr/testify/assert"
+)
+
+func TestUpdateArray2(t *testing.T) {
+    testArray := [2]string{"Value1", "Value2"}
+    UpdateArray2(&testArray)
+    assert.Equal(t, NewValue, testArray[0]) //@ uzun sekilde kullanmak yerine bu sekilde de test yazilabilir
+}
+
+
+===========test ciktisi ==================
+$ go test ./...
+ok      maximilien-andile.com/array/copy/demo   0.015s
+
+*/
+
+//su sekilde bir kullanim ile array copy edilebilir
+
+/* 
+    testArray := [2]string{"Value1", "Value2"}
+    newCopy := testArray
+    -----
+    testArray[1] = "updated"
+    assert.Equal(t, "updated", newCopy[1])  
+    bu alt kisim hata verir bunun nedeni sudur : testArray kopyalandiginda onun bir kopyasi olusur sonradan testArrayi degistirmek olusan kopyada herhangi bir degisiklik yasanmasina sebep olmaz
+*/
+
+//@ soyle bir kullanimda pointer seklinde array adresini alip kopyaladigimiz icin bir degisiklik yapildiginda o kisimda da yapilmis olur
+
+/* 
+func TestArrayReference(t *testing.T) {
+    testArray := [2]string{"Value1", "Value2"}
+    reference := &testArray
+    ----------------
+    testArray[1] = "updated"
+    assert.Equal(t, "updated", reference[1])
+}   burada herhangi bir hata meydana gelmeden calisir
+*/
 
 package main

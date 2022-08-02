@@ -52,6 +52,11 @@ func Test_Totalprice2(t *testing.T){
             args: parameters{nights: 2, rate: 100, cityTax: 12},
             want: 224,
         },
+        {
+            name: "test with 20 nights",
+            args: parameters{nights: 10, rate:100, cityTax: 12},
+            want: 1120, //bu test kismini kendim ekledim
+        },
     }
     for _, tt := range tests {
         t.Run(tt.name, func(t *testing.T) {
