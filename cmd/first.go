@@ -2275,9 +2275,9 @@ bu arrayde herhangi bir elemente ulasmak icin su sekilde bir kullanim yapilabili
 value := a[2][1]   //9 degeridir
 
 
-
+/// ASAGIDAKI DOSYA ICIN INTERNAL/ARRAY KLASORUNE BAKABILIRIM
  */
-package main
+/* package main
 import (
     "newgroupproject/internal/array"
     "log"
@@ -2286,4 +2286,35 @@ import (
 func main(){
     NewArray:= array.Generate()
     log.Println(NewArray)
+} */
+
+
+
+
+//go da multi dimentional arrayler olusturmak mumkundur
+/* 
+package main
+
+import "fmt"
+
+func main() {
+    // [[2,4],[5,3]]
+    // [[1,2],[9,6]]
+    // threeD := [2][2][2]string{} dedigimizde ilk [2] olan yukaridan asagiya array buyuklugu ondan sonra gelen [2] soldan saga olan array ondan sonra gelen [2] ise her bir kutucugun icerisindeki 2 li degiskenler
+    threeD := [2][2][2]string{}
+    threeD[0][0][0] = "element 0,0,0"
+    threeD[0][1][0] = "element 0,1,0"
+    threeD[0][0][1] = "element 0,1,1"
+    fmt.Println(threeD)
 }
+ */
+
+//! onemli : oncelikle birden cok dimension olan arraylar visualize etmesi oldukca zor olan seylerdir boyle bir durumda baska bir cozum yolu olabilir mi diye kendi kendime sormam gerekir. Bir arrayin indexindeki elemana ulasmak oldukca hizli bir islemdir ancak bir arrayin icerisindeki bir elemani bulmak oldukca zahmetli bir is olabilir cunku muhtemelen arrayin butun elemanlarini tek tek dolasmam gerekecek. Boyle bir durum varsa map kullanmak daha mantikli bir davranis olacaktir
+//arraylar cok iyidir ancak onlarim limitationlari sizelarinin fixed olmasidir. 
+/* 
+The length of an array is known at compile time.
+
+In other words, an array once created cannot grow
+
+There is no built-in function to find an element in an array.
+ */
