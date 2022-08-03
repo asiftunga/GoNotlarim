@@ -2318,3 +2318,109 @@ In other words, an array once created cannot grow
 
 There is no built-in function to find an element in an array.
  */
+
+
+ //@======================================SLICELAR==============================================
+/* 
+slicelar buyuyebilen arrayler gibi dusunebilirim. Yine ayni tipte olmalari gerekmekte. Buyuyebilmesinin asil nedeni derleme zamaninda fix bir boyut olmamasi ve calisma zamaninda buyutulebilmesinden kaynaklanir.
+
+kullanimi ise su sekildedir []T    T burada slice tipini belirtmek icin kullanilir
+/the zero value of slice is nil
+
+*/
+
+//new slice yaratimi
+
+// package main
+
+/* import "fmt"
+func main(){
+    s:= make([]int,3) //bu sekilde 3 uzunlugunda bir slice olusturdum
+    s[0] = 12
+    s[2] = 45
+    //su sekilde de bir kullanim yapilabilir
+    s2 := []int{10,12}
+    fmt.Println(s)
+    fmt.Println(s2)
+}
+ */
+//slicing islemi : go dilinde slicing islemi bir seyin bir parcasi anlami tasimaktadir. Ornek olarak bir peynir slice'i tamamen bir peynir degildir ancak yine de peynir parcasidir. bir arrayi bir arrayi isaret eden pointeri ve bir slice i slicing islemine tabi tutabiliriz elbette bunun sonucu yine bir slice olacaktir
+
+// bu islemin su sekilde bir syntaxi vardir
+
+// s := e[low:high]
+
+//ornek olarak
+/* 
+package main
+
+import "fmt"
+
+func main(){
+    customers := [4]string{"john haack","asif tunga mubarek","yagmur akan","mavis ve misha"}
+    customerSlice:= customers[0:2]
+    fmt.Println(customerSlice) //[john haack asif tunga mubarek]
+    //goruldugu gibi burada 2 derken cikan sonucun uzunlugu seklinde dusunmem gerekir bunu da soyle aklimda tutabilirim high her zaman bir cikarilacak veya saymaya sifirdan degil de birden baslayacagim
+}
+ */
+
+//@bir slice kopyalaniyor mu? hayir aslinda orjinal olani pointerlar ile gostermis oluyoruz
+
+/* package main
+
+import "fmt"
+
+func main() {
+    customers := [4]string{"John Doe", "Helmuth Verein", "Dany Beril", "Oliver Lump"}
+    customersSlice := customers[0:1]
+    fmt.Println(customersSlice)
+    // modify original array
+    customers[0] = "John Doe degistirildi"
+    fmt.Println("orijinal arrayin degistirilmesinden sonra bu sekilde gozukur")
+    fmt.Println(customersSlice)
+    =======
+    john doe
+    orijinal arrayin degistirilmesinden sonra bu sekilde gozukur
+    john doe degistirildi
+}
+*/
+
+
+//! slicing islemi stringlere de uygulanabilir bir islemdir. Ancak unutmamak gerekir bu islemden sonra ortaya cikan sey de bir stringdir.
+/* 
+package main
+
+import "fmt"
+
+func main(){
+    otelismi:="ramada mersin"
+    s:= otelismi[0:4]
+    fmt.Println(s) //output: rama //saymaya birden baslarsam dogru sonuc alirim
+}
+ */
+//go'da bulunan stringler degistirilemezlerdir yani bir kere olusturulduktan sonra orijinal olani degistirmek sonradan slicing islemini atadigimiz degiskenin degerinin degistirilmesine neden olmaz
+//ornek olarak
+
+package main
+
+import "fmt"
+
+func main(){
+    otelismi := "ramada mersin"
+    s := otelismi[0:4]
+    fmt.Println(s)
+    otelismi = "mersin ramada"
+    fmt.Println(s)
+    //--------output
+    //rama
+    //rama
+}
+
+
+
+
+
+
+
+
+
