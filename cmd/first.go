@@ -1976,7 +1976,7 @@ coverage: 100.0% of statements
 
 */
 
-//SONUNDA ARRAYLAR KONUSUNA GIRIS YAPTIM BE
+//=========================================================================================SONUNDA ARRAYLAR KONUSUNA GIRIS YAPTIM BE================
 
 //array ayni ture sahip elementlerin collectionlaridir
 
@@ -2007,7 +2007,7 @@ func main(){
 }
 
  */
-
+//ARRAY TANIMLAMALARI
  /* 
  //@ long way
 var a [2]int
@@ -2262,4 +2262,28 @@ func TestArrayReference(t *testing.T) {
 }   burada herhangi bir hata meydana gelmeden calisir
 */
 
+//multidimensional arrays 
+/* 
+[0,0
+ 1,3
+ 4,9]
+
+[3][2] int seklinde tanimlanan bir array yukaridaki gibi bir buyukluge sahiptir
+
+bu arrayde herhangi bir elemente ulasmak icin su sekilde bir kullanim yapilabilir
+
+value := a[2][1]   //9 degeridir
+
+
+
+ */
 package main
+import (
+    "newgroupproject/internal/array"
+    "log"
+)
+
+func main(){
+    NewArray:= array.Generate()
+    log.Println(NewArray)
+}
