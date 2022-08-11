@@ -2480,3 +2480,4 @@ func main(){
 */
 
 //length ile capacity arasinda bu sekilde bir iliski vardir
+//son kalinan yer sliceler kismi
