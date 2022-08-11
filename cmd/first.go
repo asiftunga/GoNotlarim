@@ -1288,8 +1288,6 @@ func main(){
 
 } */
 
-
-
 /* package main
 
 import (
@@ -1327,7 +1325,6 @@ func main(){
 
 //! kendime not : interfaceler icin pointer kullanmaya gerek yoktur. Program ilk calistigi sirada zaten kendisi initialize edildigi icin tekrardan bir isaretci kullanip yeniden ram kullanmak gereksizdir.
 
-
 /*  //@ API nedir sorusunun cevabi niteliginde
 api lari aslinda birer contract gibi dusunebilirim. Tipki ustteki interfaceler gibi bir yapisi var. Bir api iki farkli seyin bir arada calismasina ve iletisim kurmalarina (communication) izin verir (genellikle json formatinda dosya yollayarak). API kisaca sunlardan olusur  Bir yazılım parçası ile etkileşime maruz kalan bir dizi yapıdır (sabitler, değişkenler, işlevler ...).
 
@@ -1336,8 +1333,7 @@ Bu tanımla, go paketi fmt'nin go programcısına onunla etkileşim kurması iç
 Go Modülleri, modülün oluştuğu paket(ler)in dışa aktarılan tüm tanımlayıcılarından oluşan bir API'yi kullanıma sunar.
 */
 
-
-/* 
+/*
 A version number must have the following format : X.Y.Z
 Where :
 
@@ -1363,9 +1359,8 @@ When you create a major version, you set to zero the minor and the patch version
 eger programlamanin baslarinda versiyonlar yaratiyor isem major versiyonuna 0 demeliyim bu sayede diger developerlar benim kodlarimi kendi programlarina dahil ettiklerinde stabil olmadigini ve api in degisebilecegini anlayabileceklerdir
 */
 
-
 //=== alttaki paket icin ve versiyonlama ile ilgili biligileri almak icin time paketine bakabilirim
-/* 
+/*
 package main
 
 import (
@@ -1389,7 +1384,7 @@ func main(){
 //@ Yapi listesinin olusturulmasi=> built list is the list of modules necessary to builda Go Program
 //bu list elemanlarinin hepsi iki seyden olusurlar 1) modul path module' u tanimlar 2) revision tanimlayicisi (tag veya commit id)
 //! belirli bir modul icin build list olusturmak icin gerekli olan seyler sunlardir
-/* 
+/*
 initialize empty list L
 current module icin gerekli modul listelerini al
 gerekli olan her modul icin :
@@ -1399,10 +1394,10 @@ gerekli olan her modul icin :
     sonunda liste ayni modul pathina sahip birden fazla modul girisi icerebilir eger durum boyleyse her module path icin en yeni versiyonu tut (demek istedigi aslinda su : eger modul path ayni ise en yeni versiyon olani listede tut digerini sil)
 //@ son build list of modulu ekrana yazdirmak icin go list -m all seklinde bir komut kullanabilirim
 //@ dependencyleri son minor veya patchlerine guncellemek istersem eger go get -u komutunu kullanabilirim. -u newer minor veya patch indirir
-//* diyelimki benim projem su modulu kullaniyor olsun gitlab.com/loir402/bluesodium 
-//* sonrasinda kullanilan bu modulun yeni bir surumu cikti diyelim (v2.0.1) 
+//* diyelimki benim projem su modulu kullaniyor olsun gitlab.com/loir402/bluesodium
+//* sonrasinda kullanilan bu modulun yeni bir surumu cikti diyelim (v2.0.1)
 //* go get -u gitlab.com/loir402/bluesodium kullanarak  yeni versiyonu indiremem bunun nedeni yeni olan modulun different bir path i olmasidir
-//* bu da import compatibility kuralina gore moduller backward compatible olmalidir. Bu modul bu kurali bozmaktadir 
+//* bu da import compatibility kuralina gore moduller backward compatible olmalidir. Bu modul bu kurali bozmaktadir
 //@@ bir modulun son surumu son degisiklikleri getirir bu da onceki surumlerin kullanicilarini etkileyecektir
 //@ bundan dolayi ayri bir module pathine sahip olmalidir
 go.mod dosyasina bakarsask sununla karsilasiriz
@@ -1420,12 +1415,12 @@ To specifically require the major version 2, you need to launch the command. :
 go get -u gitlab.com/loir402/bluesodium/v2
 
 */
-/* 
+/*
 her gereksinim en son modul listesi gerekiyormus gibi okunur
 import compatibility rule sayesinde hicbir kirilma yasanmamalidir (bu operation sadece new patches ve minor versionlari gerekli kilar)
 Eger yeni surumler bulunduysa build list ve go.mod dosyasi modified edilir
 
-bunu duzgun bir sekilde yapmak icin yapilmasi gereken komutlar sirasi ile 
+bunu duzgun bir sekilde yapmak icin yapilmasi gereken komutlar sirasi ile
 
 go get -u ./...
 go: github.com/andybalholm/cascadia upgrade => v1.2.0
@@ -1445,10 +1440,10 @@ require (
     golang.org/x/net v0.0.0-20210119194325-5f4716e94777 // indirect
 )
 
-burada yazan indirect kelimeleri ; Bu satırlar, derleme listesini oluştururken bu belirli yükseltilmiş sürümleri kullandığımızdan emin olmak için eklenir. Aksi takdirde, yapı listesi aynı kalacaktır. 
+burada yazan indirect kelimeleri ; Bu satırlar, derleme listesini oluştururken bu belirli yükseltilmiş sürümleri kullandığımızdan emin olmak için eklenir. Aksi takdirde, yapı listesi aynı kalacaktır.
 
 
-//@ belirli bir modulu yeni bir versiyona guncellemek icin neler yapilir 
+//@ belirli bir modulu yeni bir versiyona guncellemek icin neler yapilir
 
 Hiçbir yükseltme yapılmamış gibi bir ilk yapı listesi oluşturulur.
 İstenen yükseltme ile ikinci bir tane inşa edilir.
@@ -1474,7 +1469,7 @@ from the output we can go back to the input
 
 //@ ornek olarak bir go.sum dosyasi olusturalim
 
-go mod init 
+go mod init
 
 boylelikle bir go.mod dosyasi olusturduk ancak bu bos??? gerekli dependency ler go.mod dosyasina eklenmemis bunu elle yapmaktan kacinmak icin go install komutunu calistiririz bu komut sayesinde go.mod dosyasi guncellenir ve go.sum dosyasi olusturulmus olur
 
@@ -1491,7 +1486,7 @@ h1 kelimesi sabittir bunun anlami go librarysinde kullanilan hash1 fonksiyonun c
 buradaki checksum bağımlı modüllerin indirilen sürümlerinin ilk indirme ile aynı olduğundan emin olmak için buradadır
 
 
-patch aslinda sudur : 
+patch aslinda sudur :
 
 package corge
 
@@ -1530,7 +1525,7 @@ func main(){
 //! bir dependencyi son surumune update etmek go get blablalinki
 //@ bir dependencyi spesifik bir surume guncellemek icin ise go get module_path@X
 //burada x commit hashi olabilecegi gibi versiyon numarasi da olabilir
-/* 
+/*
 ornek olarak bir sey vermek istiyorum. Onceden su sekilde olan public api miza su sekilde bir fonksiyon eklemesi yaptim bu fonksiyon eklemesinden sonra artik api degisecegi icin onceden v1.0.1 olan surumumuzu v1.1.0 sekline getirdim
 // bar/bar.go
 package bar
@@ -1614,7 +1609,7 @@ kullanilan diger komutlar :
     go mod graph -> standart output seklinde dependency graph yazdirir
     go mod vendor -> dependencylerin sourcelari ile birlikte bir vendor dosyasi olusturur (bunu su sekilde dusunebilirim aslinda sanki githubtan kullandigim bir projeyi klonlamisim gibi direkt olarak benim bilgisayarima indiriyor)
     go mod verify -> Adından da anlaşılacağı gibi, mod doğrulaması yerel olarak depolanan bağımlılıklarınızı kontrol edecektir. Go, yerel olarak depolanan bağımlılıklarınızın değiştirilmediğini kontrol edecektir. Bu denetim, bağımlılıklarınızın değiştirilmiş bir sürümünü değil, doğru sürümünü kullandığınızdan emin olmak için çok kullanışlıdır. Bu değişiklikler buildin başarısız olmasına neden olabilir.
-    
+
 
 ==========================================================================================================================
 A minor version introduces breaking changes. True or False?
@@ -1765,10 +1760,10 @@ bunun kotu yanlari modul paylasilan web sitesinden silinebilirdi veya tagler ver
 
 //Bazi kisiler unit testlerin gereksiz oldugunu dusunebilir bazilari ise yaptiklari her degisiklikte test ederler. Yapilan bu testleri otomatik yapabildigimizi dusunelim? hatta bu testleri her build aldigimizda calistigini dusunelim hatta daha da iyisi bu testlerin pakette herhangi bir degisiklik yapildiginda calistigini dusunelim
 
-/* 
+/*
 single unit testlere test case denir. Bir grup test case'e ise test set (veya test suite) denir
 Soyle bir durum hayal edelim. Bir stringi alip buyuk harflere ceviren bir fonksiyonumuz olsun
-test case sunlardan olusur : 
+test case sunlardan olusur :
     bir test inputu (ornek olarak coffee)
     bir expected output (in our case it will be COFFEE)
     the actual output of our function
@@ -1797,7 +1792,7 @@ Burada bir kullanim dikkatimi cekti. xxx.go seklindeki bir paket icin xxx_test.g
 
 //testlerdeki basariyi olcecek bir T tipinde tanimlanmis bir yontem yoktur. If unit test return without calling a failure method its considered success
 
-/* 
+/*
 To signal a failure, you can use the following methods :
 
 Error : will log and marks the test function as failed. Execution will continue.
@@ -1841,7 +1836,7 @@ func TestFoo(t *testing.T) {
 
 //projedeki butun testleri calistirmak icin ise go test ./... komutu kullanilir
 
-/* 
+/*
 bunu kullandigimiz zaman su sekilde bi sonucla karsilasiriz
 $ go test ./...
 ?       newgroupproject/cmd     [no test files]
@@ -1865,8 +1860,8 @@ FAIL    newgroupproject/internal/foo    0.242s
 FAIL
 */
 
-/* 
-peki fail olan bir unit testin outputu nedir? 
+/*
+peki fail olan bir unit testin outputu nedir?
 
 Tunga@ATM MINGW64 ~/Desktop/newgroupproject/internal/foo (master)
 $ go test
@@ -1893,7 +1888,7 @@ FAIL    newgroupproject/internal/foo    0.239s
 //test table kullanma yontemi birden cok test icin daha uygun bir cozum olabilir Price_test.go paketine bakabilirim
 
 //@ cok onemli bir not : su anda ornek uzerinden ogrendigime gore go dilinde if icerisinde initilalized edebiliyorsun. Ornek kullanim olarak =>
-/*  
+/*
 func main() {
     if x, y := 5, 38; x == 5 { //@ goruldugu gibi ilk once init yapiliyor ondan sonra statement kullaniliyor
         fmt.Printf("Whee! %d\n", y)
@@ -1901,14 +1896,14 @@ func main() {
 }
 */
 
-/* 
-go test komutunu 2 modda calistirmak mumkundur. 
+/*
+go test komutunu 2 modda calistirmak mumkundur.
 -----------local directory mode--------------
-$go test seklinde kullanilir yani hicbir sey eklenmez. Go paketi aktif olan directory icerisinde build alir. Modulde bulunan butun unit testler calistirilmaz sadece o pakete ozgu olan testler calistirilir (directory icersinde bulunan) 
+$go test seklinde kullanilir yani hicbir sey eklenmez. Go paketi aktif olan directory icerisinde build alir. Modulde bulunan butun unit testler calistirilmaz sadece o pakete ozgu olan testler calistirilir (directory icersinde bulunan)
 ----------Package List mode -----------------
 $go test modulepath/packageName
 Bu komut ile birlikte go'ya istedigim yerdeki paket teslerini yapmasini soyleyebilirim hatta path duzgun girilir ise projedeki butun testleri de calistirabilirim. Bu modda iken go otomatik olarak successful olan test sonuclarini cache eder boylelikle multiple defa test etmenin onune gecmis olunur.
-bunu test etmek icin go test string seklinde string paketini test edebiliriz. 
+bunu test etmek icin go test string seklinde string paketini test edebiliriz.
 
 ilk basta bize verilen cikti su sekilde olur
 ok     strings    4.256s
@@ -1953,10 +1948,9 @@ bu yukarida anlattigim ayni mekanizma open files da da gecerlidir.
 
 //! bazen test sayilari o kadar cok artar ki bunun onune gecebilmek icin testleri concurrent sekilde beraber calistirmak gerekebilir. Bunu nasil yaptigimi gormek icin corge_test.go paketine bakabilirim
 
-
 //---------------advanced usage of go test command---------------------
 
-/* 
+/*
 command line argumentleri alan bir test yazabiliriz.
 //bak-> foo_test.go icerisinde bulunan testargs func neden command line argument almiyor bunu arastir.
 
@@ -2006,9 +2000,9 @@ func main(){
     fmt.Println(myArray)
 }
 
- */
+*/
 //ARRAY TANIMLAMALARI
- /* 
+/*
  //@ long way
 var a [2]int
 a[0] = 156
@@ -2040,7 +2034,7 @@ func main() {
 
 //ciktisi bu sekildedir : 2022/08/02 14:16:18 [0 0 0]
 
-/* 
+/*
 myEmptyArray2 := [2]string{}
 fmt.Println(myEmptyArray2)
 // output : [] seklinde bir ciktiya sahip olunur
@@ -2049,9 +2043,9 @@ fmt.Println(myEmptyArray2)
 //len(v) v variablein uzunlugunu return eder.
 //cap temelinde len ile ayni islevi gorur
 
-//ACCESS ELEMENT OF ARRAY 
+//ACCESS ELEMENT OF ARRAY
 
-/* 
+/*
 package main
 
 import "fmt"
@@ -2077,9 +2071,9 @@ for index, element := range myArray {
 }
 }
 
- */
+*/
 
- //! string uzerinde gezmek icin su sekilde bir yontem uygulayabiliriz
+//! string uzerinde gezmek icin su sekilde bir yontem uygulayabiliriz
 
 /* package main
 
@@ -2094,7 +2088,7 @@ for index, element := range myArray {
 
 //bazi durumlarda sadece indexlere veya sadece elementlere ihtiyacimiz vardir. Bunu su sekilde blank identifier kullanarak yapabilirim
 
-/* 
+/*
 for _, element := range myArray {
     fmt.Printf("element is %s\n", string(element))
 }
@@ -2108,7 +2102,7 @@ for index, _ := range myArray {
 
 //bu ustte kullanilan bastan baslayan iteration icin gecerlidir. Eger spesifik olarak bir indexten baslayip digerinde durmak istiyorsam normal for loop kullanmam gerekir.
 
-/* 
+/*
 myArray2 := [2]int{156, 147}
 for i := 0; i < len(myArray2); i++ {
     fmt.Printf("element at index %d is %d\n", i, myArray2[i])
@@ -2120,7 +2114,7 @@ for i := 0; i < len(myArray2); i++ {
 
 //eger azalan sirada bir seyler yapmak istiyorsam bu sekilde bir kullanim yapabilirm
 
-/* 
+/*
 for i := len(a) - 1; i >= 0; i-- {
     fmt.Println(i, a[i])
 }
@@ -2139,9 +2133,9 @@ for i := len(a) - 1; i >= 0; i-- {
 
 // bu kullanim aslinda sinirli bir kullanimdir cunku hadi diyelim aradigimiz element arrayin sonunda yer aliyor hepsini tek tek gezmis olacak ayrica bu fonksiyon sadece 10 elemanlik bir arrayi parameter olarak alabiliyor bu nedenlerden dolayi bu fonksiyon yetersizdir.
 
-//arraylari karsilastirmak icin oncelikle su iki ozelligin ayni olmasi gerekmektedir. Bunlardan ilki : ayni tip olmalidirlar ikincisi ise : ayni uzunluga sahip olmalidirlar. Bu karsilastirmada kullanilabilecek operatorler sadece == ve != dur. 
+//arraylari karsilastirmak icin oncelikle su iki ozelligin ayni olmasi gerekmektedir. Bunlardan ilki : ayni tip olmalidirlar ikincisi ise : ayni uzunluga sahip olmalidirlar. Bu karsilastirmada kullanilabilecek operatorler sadece == ve != dur.
 
-/* 
+/*
 a := [2]int{1, 2}
 b := [2]int{1, 2}
 if a == b {
@@ -2153,11 +2147,10 @@ if a == b {
 // output : equal
 */
 
-
 //@ PEKI BIR ARRAYI FONKSIYONA NASIL PASS EDERIZ? ==> bu onemli bir hatadir bunun nedeni ise bir arrayi fonksiyona gonderdigimiz zaman aslinda o fonksiyonda o arrayin bir kopyasini olusturmus oluruz bu da bazi performans kayiplarina neden olur
 //! eger gercekten o arrayi degistirmek istiyor isek pointer kullanmaliyiz
 
-/* 
+/*
 
 package demo
 
@@ -2217,7 +2210,7 @@ func UpdateArray2(array *[2]string) { //@ burada nasil pointer seklinde bir arra
 
 ----------------------
 
-// array/demo/demo_test.go 
+// array/demo/demo_test.go
 package demo
 
 import (
@@ -2241,18 +2234,18 @@ ok      maximilien-andile.com/array/copy/demo   0.015s
 
 //su sekilde bir kullanim ile array copy edilebilir
 
-/* 
-    testArray := [2]string{"Value1", "Value2"}
-    newCopy := testArray
-    -----
-    testArray[1] = "updated"
-    assert.Equal(t, "updated", newCopy[1])  
-    bu alt kisim hata verir bunun nedeni sudur : testArray kopyalandiginda onun bir kopyasi olusur sonradan testArrayi degistirmek olusan kopyada herhangi bir degisiklik yasanmasina sebep olmaz
+/*
+   testArray := [2]string{"Value1", "Value2"}
+   newCopy := testArray
+   -----
+   testArray[1] = "updated"
+   assert.Equal(t, "updated", newCopy[1])
+   bu alt kisim hata verir bunun nedeni sudur : testArray kopyalandiginda onun bir kopyasi olusur sonradan testArrayi degistirmek olusan kopyada herhangi bir degisiklik yasanmasina sebep olmaz
 */
 
 //@ soyle bir kullanimda pointer seklinde array adresini alip kopyaladigimiz icin bir degisiklik yapildiginda o kisimda da yapilmis olur
 
-/* 
+/*
 func TestArrayReference(t *testing.T) {
     testArray := [2]string{"Value1", "Value2"}
     reference := &testArray
@@ -2262,8 +2255,8 @@ func TestArrayReference(t *testing.T) {
 }   burada herhangi bir hata meydana gelmeden calisir
 */
 
-//multidimensional arrays 
-/* 
+//multidimensional arrays
+/*
 [0,0
  1,3
  4,9]
@@ -2276,7 +2269,7 @@ value := a[2][1]   //9 degeridir
 
 
 /// ASAGIDAKI DOSYA ICIN INTERNAL/ARRAY KLASORUNE BAKABILIRIM
- */
+*/
 /* package main
 import (
     "newgroupproject/internal/array"
@@ -2288,11 +2281,8 @@ func main(){
     log.Println(NewArray)
 } */
 
-
-
-
 //go da multi dimentional arrayler olusturmak mumkundur
-/* 
+/*
 package main
 
 import "fmt"
@@ -2307,21 +2297,20 @@ func main() {
     threeD[0][0][1] = "element 0,1,1"
     fmt.Println(threeD)
 }
- */
+*/
 
 //! onemli : oncelikle birden cok dimension olan arraylar visualize etmesi oldukca zor olan seylerdir boyle bir durumda baska bir cozum yolu olabilir mi diye kendi kendime sormam gerekir. Bir arrayin indexindeki elemana ulasmak oldukca hizli bir islemdir ancak bir arrayin icerisindeki bir elemani bulmak oldukca zahmetli bir is olabilir cunku muhtemelen arrayin butun elemanlarini tek tek dolasmam gerekecek. Boyle bir durum varsa map kullanmak daha mantikli bir davranis olacaktir
-//arraylar cok iyidir ancak onlarim limitationlari sizelarinin fixed olmasidir. 
-/* 
+//arraylar cok iyidir ancak onlarim limitationlari sizelarinin fixed olmasidir.
+/*
 The length of an array is known at compile time.
 
 In other words, an array once created cannot grow
 
 There is no built-in function to find an element in an array.
- */
+*/
 
-
- //@======================================SLICELAR==============================================
-/* 
+//@======================================SLICELAR==============================================
+/*
 slicelar buyuyebilen arrayler gibi dusunebilirim. Yine ayni tipte olmalari gerekmekte. Buyuyebilmesinin asil nedeni derleme zamaninda fix bir boyut olmamasi ve calisma zamaninda buyutulebilmesinden kaynaklanir.
 
 kullanimi ise su sekildedir []T    T burada slice tipini belirtmek icin kullanilir
@@ -2338,12 +2327,12 @@ func main(){
     s:= make([]int,3) //bu sekilde 3 uzunlugunda bir slice olusturdum
     s[0] = 12
     s[2] = 45
-    //su sekilde de bir kullanim yapilabilir
+    //!su sekilde de bir kullanim yapilabilir
     s2 := []int{10,12}
     fmt.Println(s)
     fmt.Println(s2)
 }
- */
+*/
 //slicing islemi : go dilinde slicing islemi bir seyin bir parcasi anlami tasimaktadir. Ornek olarak bir peynir slice'i tamamen bir peynir degildir ancak yine de peynir parcasidir. bir arrayi bir arrayi isaret eden pointeri ve bir slice i slicing islemine tabi tutabiliriz elbette bunun sonucu yine bir slice olacaktir
 
 // bu islemin su sekilde bir syntaxi vardir
@@ -2351,7 +2340,7 @@ func main(){
 // s := e[low:high]
 
 //ornek olarak
-/* 
+/*
 package main
 
 import "fmt"
@@ -2362,7 +2351,7 @@ func main(){
     fmt.Println(customerSlice) //[john haack asif tunga mubarek]
     //goruldugu gibi burada 2 derken cikan sonucun uzunlugu seklinde dusunmem gerekir bunu da soyle aklimda tutabilirim high her zaman bir cikarilacak veya saymaya sifirdan degil de birden baslayacagim
 }
- */
+*/
 
 //@bir slice kopyalaniyor mu? hayir aslinda orjinal olani pointerlar ile gostermis oluyoruz
 
@@ -2385,9 +2374,37 @@ func main() {
 }
 */
 
+/*
+package main
+
+import "fmt"
+
+func main() {
+	names := [4]string{
+		"John",
+		"Paul",
+		"George",
+		"Ringo",
+	}
+	fmt.Println(names)
+
+	a := names[0:2]
+	b := names[1:3]
+	fmt.Println(a, b)
+
+	b[0] = "XXX"
+	fmt.Println(a, b)
+	fmt.Println(names)
+}
+*/
+/* output
+[John Paul George Ringo]
+[John Paul] [Paul George]
+[John XXX] [XXX George]
+[John XXX George Ringo] */
 
 //! slicing islemi stringlere de uygulanabilir bir islemdir. Ancak unutmamak gerekir bu islemden sonra ortaya cikan sey de bir stringdir.
-/* 
+/*
 package main
 
 import "fmt"
@@ -2397,10 +2414,10 @@ func main(){
     s:= otelismi[0:4]
     fmt.Println(s) //output: rama //saymaya birden baslarsam dogru sonuc alirim
 }
- */
-//go'da bulunan stringler degistirilemezlerdir yani bir kere olusturulduktan sonra orijinal olani degistirmek sonradan slicing islemini atadigimiz degiskenin degerinin degistirilmesine neden olmaz
+*/
+//go'da bulunan stringler degistirilemezlerdir yani bir kere olusturulduktan sonra orijinal olani degistirmek sonradan slicing islemini atadigimiz degiskenin degerinin degistirilmesine neden olmaz bunun nedeni stringlerin referans seklinde olmamasindan kaynaklanir
 //ornek olarak
-
+/*
 package main
 
 import "fmt"
@@ -2416,11 +2433,50 @@ func main(){
     //rama
 }
 
+*/
+
+//len hazir bir fonksiyondur ve slice icerisindeki elemanlarin uzunlugunu dondurur.
+
+/* package main
+
+import "fmt"
+
+func main(){
+    vatRates := []float32{4.65,4,14,53}
+    fmt.Println("slice uzunlugu : ",len(vatRates))  //output => slice uzunlugu :  4
+}
+*/
+/*
+slicelar icten olarak aslinda struct yapilaridir ve internally slice bir adet arraya sahiptir ve o arraye bir adet pointer barindirir. Kullanici olarak bu arraya asla erisim gerceklestiremeyiz cunku bu array internaldir.
+biz bir arraya slicing islemi uyguladigimizda go o arraya bir pointer atar
+
+bir slice'in internal represantionu su sekilde olabilir
+    pointer to array
+    length
+    capacity
 
 
 
+capacity su demektir: underlying arrayde allocated edilen element sayisini tarif eder. Bunu anlamak icin bir ornege bakalim
+*/
+
+/* package main
+
+import "fmt"
 
 
+func main(){
+    names := [4]string{"tunga","ozgul","sila","sena"}
+    mySlice := names[1:3]
+    fmt.Println(mySlice)
+    fmt.Println("length: ",len(mySlice))
+    fmt.Println("capacity: ",cap(mySlice))
+    fmt.append
+    /*
+    output
+    [ozgul sila]
+    length:  2
+    capacity:  3
+*/
 
-
-
+//length ile capacity arasinda bu sekilde bir iliski vardir
