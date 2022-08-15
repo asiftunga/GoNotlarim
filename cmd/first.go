@@ -1970,7 +1970,7 @@ coverage: 100.0% of statements
 
 */
 
-//=========================================================================================SONUNDA ARRAYLAR KONUSUNA GIRIS YAPTIM BE================
+//@========================================SONUNDA ARRAYLAR KONUSUNA GIRIS YAPTIM BE================
 
 //array ayni ture sahip elementlerin collectionlaridir
 
@@ -2476,8 +2476,5 @@ func main(){
     output
     [ozgul sila]
     length:  2
-    capacity:  3
+    capacity:  ssss3
 */
-
-//length ile capacity arasinda bu sekilde bir iliski vardir
-//son kalinan yer sliceler kismi
