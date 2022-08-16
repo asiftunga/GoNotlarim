@@ -2,7 +2,7 @@
 go dilinde variablelar nasil tanimlanir?
 degisken  isimlerine identifier denir degerlerine ise expression denir
 
-var degiskenIsmi degiskenturu = deger   seklinde degisken tanimlamasi yapilabilir
+var degiskenIsmi degiskenturu = deger(expression)   seklinde degisken tanimlamasi yapilabilir
 
 var sayi int32 = 84 seklinde bir tanimlama yapilabilir
 
@@ -55,6 +55,26 @@ bu sekilde birden fazla degiskeni tek seferde tanimlamis oldum
 While using type during declaration you are only allowed to declare multiple variables of the same type. But removing type during declarations you are allowed to declare multiple variables of different types.
 
 
+//tum degisken tanimlamalari tek bir cati altinda
+
+var degisken int32 = 23
+var degisken1,degisken2 int = 23,34
+var degisken1,degisken2 = 23 , "neden"      boyle bir tanimlamada istedigim turde degisken kullanabilirim ancak usttekinde sadece ayni turdeki degiskenleri kullanabilirdim
+var sonradandegereklenecekdegisken int
+sonradandegereklenecekdegisken = 23
+degisken1 := 23
+degisken1 := int(23)
+const degiskenismi int = 23
+const degiskenismi = "deneme"
+var(
+     geek1 = 100
+     geek2 = 200.57
+     geek3 bool
+     geek4 string = "GeeksforGeeks"
+)
+bu sekilde butun degisken tanimlamalarini tek bir cati altinda toplamis oldum
+
+
 ==============================================================================
                     if else if else ve switch case yapisi
 ==============================================================================
@@ -66,6 +86,12 @@ if kosul{
 
 }
 ! bu kullanim seklinden baska bir kullanim sekli yoktur. Kosullar parantezler icerisine alinamaz else ve else if ayri bir satirda yazilamaz
+
+	if v := math.Pow(x, n); v < lim {
+		return v
+	}
+
+    if kullaniminda short declaration denen bir sey vardir. Bununla birlikte kisa bir tanimlama if statement icerisinde kosuldan once yazilabilir
 
 ======================= switch case yapisi ===================================
 
@@ -251,7 +277,6 @@ package main
 import (
 	car1 "vehicle/car"
 	car2 "vehicle/car"
-
 	"fmt"
 )
 
@@ -340,10 +365,12 @@ bir variable initialize edilecekse ve birden cok variable varsa oncelikle bagims
 */
 
 /*
- var nameDisplayer func(name, firstname string) string bu sekilde bir kullanim mevcut bu kullanimin amaci ise sudur fonksiyonu henuz tamamlamadan tanimlama kismidir
+ var nameDisplayer func(name, firstname string) string 
+ 
+ bu sekilde bir kullanim mevcut bu kullanimin amaci ise sudur fonksiyonu henuz tamamlamadan tanimlama kismidir
 
 
-===============================================================================
+===============================STRUCT YAPILARI================================================
 
 type Country struct {
     Name        string
@@ -362,8 +389,6 @@ usa := Country{
 }
 
 bu kisimda bos biraktigimiz capitalcity kismi bos kalir. (bos kalirdan kastim initialize edilir ancak baslangic degeri atanmaz default deger atanir) String bir ifade icin bu "" seklindedir
-
-
 
 empty := Country{}
 
@@ -487,6 +512,7 @@ func main(){
 ATM otelleri
 {Turkey Antalya}
 */
+//================methodlar ve pointerlar hakkinda kisa bilgiler===========================
 
 // methodlar receiveri olan fonksiyonlara verilen isimlerdir
 
@@ -497,8 +523,8 @@ ATM otelleri
 // func main() {
 /*
    ! var DegiskenIsmi *DegiskenTuru = &AdresiGosterilecekDegisken
-   ! var po *int = &i seklinde pointer tanimlamasi yapabilecegim gibi
-   ! po := &i seklinde de pointer tanimlamasi yapabilirim
+   ! var po *int = &i   seklinde pointer tanimlamasi yapabilecegim gibi
+   ! po := &i   seklinde de pointer tanimlamasi yapabilirim
 */
 /*
 
@@ -514,38 +540,47 @@ ATM otelleri
    fmt.Println("Pointerin adresini tutan pointerin adresi: ",&po2)
    fmt.Println("Pointerin adresini tutan pointerin isaret ettigi adresteki degeri: ",*po2)
    fmt.Println("Pointerin adresini tutan pointerin isaret ettigi adresteki pointerin isaret ettigi adresteki degeri: ",**po2)
-   ========cikti============
+   ===================cikti================================
    i nin degeri:  1
    i nin adresi:  0xc00008a040
-   pointer degeri:  0xc00008a040
-   Pointerin adresi:  0xc00009e038
+   pointer degeri:  0xc00008a040    pointerin degeri kisaca i nin adresidir
+   Pointerin adresi:  0xc00009e038  pointerin kendisine has bir adresi vardir
    Pointerin isaret ettigi adresteki deger:  1
    Pointerin adresini tutan pointerin degeri:  0xc00009e038
    Pointerin adresini tutan pointerin adresi:  0xc00009e040
    Pointerin adresini tutan pointerin isaret ettigi adresteki deger:  0xc00008a040
    Pointerin adresini tutan pointerin isaret ettigi adresteki pointerin isaret ettigi adresteki deger:  1
-
 */
 
-/*     i := 1
 
-fmt.Println("initial:", i)
+/* 
+package main
 
-zeroval(i)
-fmt.Println("zeroval:", i)
+import "fmt"
 
-zeroptr(&i)
-fmt.Println("zeroptr:", i) */
+func main(){
+    i:=1
+    fmt.Println("initial:", i)
+    zeroval(i)
+    fmt.Println("zeroval:", i)
+    zeroptr(&i)
+    fmt.Println("zeroptr:", i)
+}
 
-//}
-
-/* func zeroval(ival int) {
+func zeroval(ival int) {
     ival = 0
 }
 
 func zeroptr(iptr *int) {
     *iptr = 0
 } */
+// =============output========================
+// initial: 1
+// zeroval: 1
+// zeroptr: 0
+
+//kisaca burada anlatilmak istenen eger pointer seklinde kullanmazsam fonk icinde bir kopyasi olusturulur kendi orijinal degeri degistirilmez
+// =========================================================================
 
 /* package main
 
@@ -2476,5 +2511,5 @@ func main(){
     output
     [ozgul sila]
     length:  2
-    capacity:  ssss3
+    capacity: 3
 */
