@@ -943,7 +943,7 @@ type Dog struct{
     Name string
 }
 
-func (c Cat) ReceiverAffection(from Human){
+func (c Cat) ReceiverAffection(from Human){     //! sadece Cat tipindeki structlar ile kullanilabilen (receiver olarak almis) ve Human tipindeki from degiskenini parametre olarak alan bir fonksiyon var bu kisimda
     fmt.Printf("the cat name %s receive affection from human who name is %s\n",c.Name,from.Firstname)
 }
 
@@ -966,11 +966,11 @@ type DomasticAnimal interface{
     GiveAffection(to Human)
 }
 
-func Pet(animal DomasticAnimal, human Human){
+func Pet(animal DomasticAnimal, human Human){   //! Pet fonksiyonu animal isminda DomesticAnimal(interface) tipinde bir degisken parametresi aliyor
     animal.GiveAffection(human)
     animal.ReceiverAffection(human)
 }
-
+//@ ust kisimda yaptigim kisaca ikinci bir fonksiyondan interface'e ulasip o interface icersinde tanimlanmis olan fonksiyonlara erismek.
 
 func main(){
     Pet(Dog{"MISHA"},Human{"asif","tunga",23,"turkiye"})
@@ -978,50 +978,73 @@ func main(){
     }  */
 
 // ?================================ anlamama yardimci olacak baska bir ornek olabilir ===================================================
+/* 
 
-// type Article struct {
-// 	Title string
-// 	Author string
-// }
+package main
 
-// type Book struct{
-//     Title string
-//     Author string
-//     Pages int
-// }
+import "fmt"
 
-// func (b Book) String() string{
-//     return fmt.Sprintf("The %q book was written by %s",b.Title,b.Author)
-// }
+type Article struct {
+	Title string
+	Author string
+}
 
-// func (a Article) String() string {
-// 	return fmt.Sprintf("The %q article was written by %s.", a.Title, a.Author)
-// }
+type Book struct{
+    Title string
+    Author string
+    Pages int
+}
 
-// type Stringer interface{
-//     String() string //@ burada yaptigim tek sey Stringer isminde String() isimli string geri donuslu bir metot koydum. Interface tanimlamasi bu kadar
-// }
+func (b Book) Strings() string{
+    return fmt.Sprintf("The %q book was written by %s",b.Title,b.Author)
+}
 
-// func main() {
-//     a := Article{
-//         Title: "Understanding Interfaces in Go",
-//         Author: "Sammy Shark",
-//     }
-//     b:=Article{"Umutlu Bir Bilgisayar Muhendisinin Yasami","Asif Tunga Mubarek"} // ayni zamanda bu sekilde de kullaniliyor (daha fazla bilgi icin yukaridaki struct yapisina bakabilirim)
-//     c:=Book{"Yasamim","Asif Tunga Mubarek",23}
-//     Print(a)
-//     Print(b)
-//     Print(c)
-// }
+func (a Article) Strings() string {
+	return fmt.Sprintf("The %q article was written by %s.", a.Title, a.Author)
+}
 
-// func Print(s Stringer) {
-//     fmt.Println(s.String())
-// }
+type Stringer interface{
+    Strings() string //@ burada yaptigim tek sey Stringer isminde bir interfacein icerisine String() isimli string geri donuslu bir metot koydum. Interface tanimlamasi bu kadar
+}
+
+func main() {
+    a := Article{
+        Title: "Understanding Interfaces in Go",
+        Author: "Sammy Shark",
+    }
+    b:=Article{"Umutlu Bir Bilgisayar Muhendisinin Yasami","Asif Tunga Mubarek"} // ayni zamanda bu sekilde de kullaniliyor (daha fazla bilgi icin yukaridaki struct yapisina bakabilirim)
+    c:=Book{"Yasamim","Asif Tunga Mubarek",23}
+
+    Prints(a) //bak-> dikkat ettiysem interface'i parametre olarak alan fonksiyona parametre olarak gonderdigim sey interfacein kendisi degil hatta icerisindeki fonksiyonu bile degil. O fonksiyonu (merhodu) kullanabilen, metot yaziminda tanimlanmis receiverin tipindeki structtur.
+    Prints(b)
+    Prints(c)
+}
+
+func Prints(s Stringer) {
+    fmt.Println(s.Strings())
+}
+
+//burada yaptigim sey yine farkli degil. Elimde Stringer isminde bir interface var. Bu interface icerisinde Strings() isminde bir fonksiyonum var. Bu method birden cok olabilir (hepsinde farkli receiverlari olabilir mesela). Ayrica elimde Prints(s Stringer) seklinde bir adet methodum daha var (parametre olarak interface aliyor). Bu methodu kullanirken parametre olarak interfacei yollamak yerine interface icerisindeki metodun receiverinda type olarak bulunan bir struct yollamam gerekir.
+*/
+
+
+
+/* 
+-----------------bu kod blogunun ciktisi ise su sekilde olur---------------------------------
+The "Understanding Interfaces in Go" article was written by Sammy Shark.
+The "Umutlu Bir Bilgisayar Muhendisinin Yasami" article was written by Asif Tunga Mubarek.
+The "Yasamim" book was written by Asif Tunga Mubarek
+*/
+
+//==========================================================================================================================================
 // cok onemli bir not : //! bir method fonksiyondan farkli olarak sadece tanimlandigi turun orneginden cagrilabilir
 //A method is a special function that is scoped to a specific type in Go. Unlike a function, a method can only be called from the instance of the type it was defined on.
+
 //simdi bu yapi beni kod tekrarindan kurtardi. Bunu bir ornekle gostermek istiyorum
-/*
-diyelimki elimde iki tane daha struct daha var
+/* 
+package main
+
+import "fmt"
 
 type Yazar struct{
     Name string
@@ -1034,6 +1057,25 @@ type Basimevi struct{
     Country string
 }
 
+type Article struct {
+	Title string
+	Author string
+}
+
+type Book struct{
+    Title string
+    Author string
+    Pages int
+}
+
+func (b Book) String() string{
+    return fmt.Sprintf("The %q book was written by %s",b.Title,b.Author)
+}
+
+func (a Article) String() string {
+	return fmt.Sprintf("The %q article was written by %s.", a.Title, a.Author)
+}
+
 func (y Yazar) String() string {
 	return fmt.Sprintf("The %q article was written by %s.", y.Name, y.Country)
 }
@@ -1044,88 +1086,104 @@ func (b Basimevi) String() string {
 
 //@ asagidaki print fonksiyonunu da degistirmemis oldugumu varsayalim (bundan kastim aslinda su: degistirmemisim derken interface ile kullanmamisim anlaminda soyleyebilirim)
 
-func Print(a Article){
+func (a Article)Print(){
     fmt.Println(a.String())
 }
 
-func Print(b Book){
+func (b Book)Print(){
     fmt.Println(b.String())
 }
 
-func Print(y Yazar){
-    fmt.Println(y.String())
+func (c Yazar)Print(){
+    fmt.Println(c.String())
 }
 
-func Print(b Basimevi){
-    fmt.Println(b.String())
+func (d Basimevi)Print(){
+    fmt.Println(d.String())
 }
 
-*/
-//@================================================== peki bunu interface ile yapmis olsaydim nasil mi olurdu? ========================================= neler neler
+//not farkli parametrelerle olsa dahi ayni isimle birden fazla fonksiyon yazilamaz. Ancak farkli receiverlar ile ayni isimde birden fazla method yazilabilir 
 
-// package main
+func main(){
+   a:=Article{"baslik","asif tunga mubarek"}
+   b:=Book{"kitap basligi","asif tunga mubarek",300}
+   c:=Yazar{"asif tunga mubarek",26,"antakya"}
+   d:=Basimevi{"mersin","turkey"}
+//onemli oncelikle bunun kullanim sekli Print(a) seklinde degildir. Print(a) kullanimi sadece parametreler icin gecerlidir. Receiver oldugundan alttaki sekillerde kullanilir
+    a.Print()
+    b.Print()
+    c.Print()
+    d.Print()
+}
+  */
+//*==================================== peki bunu interface ile yapmis olsaydim nasil mi olurdu? ===================
+/* 
+package main
 
-// import "fmt"
+import "fmt"
 
-// type Yazar struct{
-//     Name string
-//     Age int
-//     Country string
-// }
+type Yazar struct{
+    Name string
+    Age int
+    Country string
+}
 
-// type Basimevi struct{
-//     Locasion string
-//     Country string
-// }
+type Basimevi struct{
+    Locasion string
+    Country string
+}
 
-// type Article struct {
-// 	Title string
-// 	Author string
-// }
+type Article struct {
+	Title string
+	Author string
+}
 
-// type Book struct{
-//     Title string
-//     Author string
-//     Pages int
-// }
+type Book struct{
+    Title string
+    Author string
+    Pages int
+}
 
-// func (b Book) String() string{
-//     return fmt.Sprintf("The %q book was written by %s",b.Title,b.Author)
-// }
+func (b Book) String() string{
+    return fmt.Sprintf("The %q book was written by %s",b.Title,b.Author)
+}
 
-// func (a Article) String() string {
-// 	return fmt.Sprintf("The %q article was written by %s.", a.Title, a.Author)
-// }
+func (a Article) String() string {
+	return fmt.Sprintf("The %q article was written by %s.", a.Title, a.Author)
+}
 
-// func (y Yazar) String() string {
-// 	return fmt.Sprintf("The %q sehrinde yasayan kisi: %s.", y.Country, y.Name)
-// }
+func (y Yazar) String() string {
+	return fmt.Sprintf("The %q sehrinde yasayan kisi: %s.", y.Country, y.Name)
+}
 
-// func (b Basimevi) String() string {
-// 	return fmt.Sprintf("The %q lokasyonu su ulkede bulunur: %s.", b.Locasion, b.Country)
-// }
+func (b Basimevi) String() string {
+	return fmt.Sprintf("The %q lokasyonu su ulkede bulunur: %s.", b.Locasion, b.Country)
+}
 
-// func main(){
-//    a:=Article{"baslik","asif tunga mubarek"}
-//    b:=Book{"kitap basligi","asif tunga mubarek",300}
-//    c:=Yazar{"asif tunga mubarek",26,"antakya"}
-//    d:=Basimevi{"mersin","turkey"}
-//    Print(a)
-//    Print(b)
-//    Print(c)
-//    Print(d)
-// }
+type Stringer interface{
+    String() string
+}
 
-// type Stringer interface{
-//     String() string
-// }
+func Print(s Stringer) {
+    fmt.Println(s.String())
+}
 
-// func Print(s Stringer) {
-//     fmt.Println(s.String())
-// }
+
+func main(){
+   a:=Article{"baslik","asif tunga mubarek"}
+   b:=Book{"kitap basligi","asif tunga mubarek",300}
+   c:=Yazar{"asif tunga mubarek",26,"antakya"}
+   d:=Basimevi{"mersin","turkey"}
+   Print(a)
+   Print(b)
+   Print(c)
+   Print(d)
+}
+ */
 /*
 KONU ILE ALAKASIZ VIM NOTU : eger bir sonraki karaktere gitmek istiyor isem yapmam gereken tek sey insert moda a ile gecis yapmak. veya bunun yerine direkt olarak cumlenin sonuna gitmek istiyor isem A seklinde kullanabilirim ama bu direkt insert moda sokar haberim olsun
 $ seklinde de kullanabilirim bu insert moda sokmaz direkt cumlenin sonuna giderim bu sekilde
+0 ile de cumlenin basina giderim
 */
 
 //@ interfaceleri anlamak icin kendime alacagim not kisimlari buralar
@@ -1136,46 +1194,42 @@ $ seklinde de kullanabilirim bu insert moda sokmaz direkt cumlenin sonuna gideri
 
 import "fmt"
 
-type domatesSalçası struct {
+type domatesSalçasi struct {
     marka string
-}
-
-func (s domatesSalçası) Ye() {
-    fmt.Sprintf("Domates salçası yenildi")
 }
 
 type BiberSalcasi struct {
     marka string
 }
 
+func (s domatesSalçasi) Ye() (geridonus string){
+    fmt.Println("Domates salçasi yenildi")
+    return
+}
 func (s BiberSalcasi) Ye() (dondur string) {
-	fmt.Println("Biber salçası yenildi")
+	fmt.Println("Biber salçasi yenildi")
     return
 }
 
-
 type Salca interface{
     Ye() string    //bu kisim aslinda Ye() isimli bir fonksiyonun string bir ifade dondurdugunu anlatir
-} */
+}
 
-//* deneme amacli alan ------------------------------------------------------------------------------------
+func Besle(salcam Salca){
+    salcam.Ye()
+}
 
-// func Besle(salcam Salca){
-//     salcam.Ye()
-// }
-
-// func main(){
-//     Besle(BiberSalcasi{"tamek"}) //burada biber salcasi kismini parametre seklinde gonderdik. ASlinda ust kisimdaki besle fonksiyonunda interface i parametre olarak kullanmamiz sayesinde interface uzerinden fonksiyona erisiyorum gibi dusunebilirim
-// }
-
-//*------------------------------------------------- bu kisim ise ust kisim yerine yapilabilir--------------------------------------------------------
+func main(){
+    Besle(BiberSalcasi{"tamek"}) //burada biber salcasi struct ornegi kismini parametre seklinde gonderdik. Aslinda ust kisimdaki besle fonksiyonunda interface i parametre olarak kullanmamiz sayesinde (ancak interface gondermiyoruz parametre olarak buna dikkat etmeliyim) interface uzerinden fonksiyona erisiyorum gibi dusunebilirim
+}
+ */
+//*----------------------------------- bu kisim ise ust kisim yerine yapilabilir----------------------------------------------
 /* func main(){
-    biber := BiberSalcasi{"tamek"}
-    var salcam Salca = &biber
+    biber := BiberSalcasi{"tamek"}  //! biber salcasi tipinde bir struct olusturduk
+    var salcam Salca = &biber   //! daha sonra bu struct icin bir pointer olusturduk
     fmt.Print(salcam.Ye())
-} */
-
-//@ ustteki ile bu ayni sonucu verir. Burada yaptigim sey ise aslinda deneme amacli olarak yazdigim kisimdan cok da farkli degil. Orda bir fonksiyon olusturdum ve o fonksiyon vasitasi ile interface yapisini parametre olarak gonderip interface yapisi uzerinden kontratta yani interface uzerinde belirlenmis olan fonksiyona interface uzerinden ulasmis oldum. (struct yapimi interface uzerinden gonderdim)
+}*/
+//@ ustteki ile bu ayni sonucu verir. Burada yaptigim sey ise aslinda deneme amacli olarak yazdigim kisimdan cok da farkli degil. yesil kismin ust tarafinda bir fonksiyon olusturdum ve o fonksiyon vasitasi ile interface yapisini parametre olarak gonderip interface yapisi uzerinden kontratta yani interface uzerinde belirlenmis olan fonksiyona interface uzerinden ulasmis oldum. (struct yapimi interface uzerinden gonderdim)
 //@bu kisimda yaptigim sey ise oncelikle bir struct yapimi olustrudum ardindan interface type li bir variable a bu structimin tutuldugu adresi yolladim bir nevi interface imi pointer gibi kullanmis oldum ardindan bu interface variable im sayesinde, interface uzerinden gerekli fonksiyonuma ulasmis oldum
 
 //bak-> fonksiyonlarin struct yapilari icerisinde nasil kullanildiklarini ogrenecegim
