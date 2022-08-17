@@ -1246,7 +1246,6 @@ type Driver interface {
 interface icerisine interface implement edebilirim ancak bunu yapmanin elbette dezavantaji vardir.
 simdi bunun bir ornegini denemek istiyorum
 */
-//bak-> alt kisimda bak dedigim yer burasi
 
 // package main
 
@@ -1275,16 +1274,17 @@ simdi bunun bir ornegini denemek istiyorum
 
 // func Olustur(s Salcaer){
 //     s.Salca()
-//     s.Ye()
+//     s.Ye()   //not : altta kirmizi kisimda buradan bahsediyorum
 // }
+
+//not benim buradaki hatam aslinda tam bu kisimda. Dusunceme gore bir interface'e ulasmak diger interface icerisindeki fonksiyonu calistirir ancak bu tamamen yanlis bir dusunce. Bir interface uzerinden diger fonksiyona ulastigim dogru ancak diger fonksiyonu cagirmadan nasil calismasini bekleyebilirim ki 
+
 
 // func main(){
 //     Olustur(BiberSalcasi{"tunga salcalari"})
 // }
-// bu sekilde gerceklestiremedim diger yol ile deneyecegim su anda
-// tahmin ettigim gibi bu yol ile yapilabildi
+//========================================================================= bir diger yol ile yapimi
 
-//bak-> ustte yaptigim yol ile neden olmadigini mutlaka ogrenmeliyim
 /* package main
 
 import "fmt"
@@ -1316,6 +1316,7 @@ func main(){
     s.Salca()
     s.Ye()
 } */
+//onemli kisaca kendime interfaceler icin su notu diyebilirim. Iki farkli ulasim soz konusu aslinda. Istersem hemen ustte oldugu gibi main fonksiyonu icerisinden ulasabilirim, bir diger yontem bunun bir ustunde oldugu gibi yeni bir fonksiyon tanimlayip parametre olarak interface verip onun uzerinden ulasabilirim
 
 //STANDART LIBRARYDE BULUNAN BIRCOK INTERFACE VARDIR BUNLARDAN EN UNLULERI ISE SUNLARDIR : Error interface, Stringer interface, Interface interface bu interfaceleri daha detayli incelemek istersem ; https://www.practical-go-lessons.com/chap-16-interfaces adresinden gorebilirim
 
