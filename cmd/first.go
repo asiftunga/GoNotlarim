@@ -806,7 +806,7 @@ func main() {
 
 
 
-//simdi bir kullanim gosterecegim. adres bilgisi ile struct kullanabiliriz
+//! simdi bir kullanim gosterecegim. adres bilgisi ile struct kullanabilir ve fieldlarina ulasabiliriz
 
 /* func main(){
 
@@ -819,8 +819,8 @@ func main() {
         ID:          "115552221",
         Paid:   true,
     }
-    cartPtr := &cart
-    cartPtr.ID = "tunga"
+    cartPtr := &cart    //! bu kisimda cartPtr isimli degiskene cart structurenin adres bilgisini atadik
+    cartPtr.ID = "tunga"    //@ goruldugu gibi bu degisken uzerinden fieldlara ulasim saglayabildik
     cartPtr.Paid = false
 
     fmt.Println(cart)
@@ -843,7 +843,7 @@ func main() {
         Paid:   true,
     }
     cartPtr := &cart
-    (*cartPtr).ID = "asif tunga"
+    (*cartPtr).ID = "asif tunga"    //! onemli bir kullanim ornegi -> burda cartPtr isimli pointerimizin isaret ettigi adresteki degerlere dereference operatoru sayesinde ulasiyoruz
     (*cartPtr).Paid = false
 
     fmt.Println(cart)
@@ -851,7 +851,15 @@ func main() {
     //{asif tunga false} seklinde bir ciktisi olur
 } */
 
-/*
+
+/* 
+//* bu alttaki kodlar ustte yamis oldugum durumun bir ornegi aslinda ozellikle Rename3 ve Rename4 func lari
+
+package main
+
+import "fmt"
+
+
 type Cat struct{
     Color string
     Age int16
@@ -871,6 +879,10 @@ func Rename3(adress *Cat,newname string){
     (*adress).Name = newname
 }
 
+func Rename4(address *Cat, newname string){
+    address.Name = newname
+}
+
 func main(){
     cat := Cat{Color: "blue", Age: 8, Name: "Milow"}
     cat.Rename("Bob")
@@ -885,8 +897,12 @@ func main(){
     Rename3(adres,"hasan")
     fmt.Println(cat.Name)
     //! hasan yazdirir :)
+
+    Rename4(adres, "TOM")
+    fmt.Println(cat.Name)
+    //! TOM yazdirir
 }
-*/
+ */
 
 //@=========================ne zaman pointer receiver ne zaman value receiver kullanmam gerekli====================================================
 /*
