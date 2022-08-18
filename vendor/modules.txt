@@ -1,2 +1,8 @@
-# github.com/Rhymond/go-money v1.0.8
+# github.com/Pallinder/go-randomdata v1.2.0
+## explicit
+github.com/Pallinder/go-randomdata
+# github.com/Rhymond/go-money v1.0.9
+## explicit; go 1.13
 github.com/Rhymond/go-money
+# golang.org/x/text v0.3.7
+## explicit; go 1.17

@@ -352,7 +352,7 @@ mesela boyle bir yapida bu yapinin tamami bir moduldur ancak icerisindeki email,
    sonra paketin kendisi initialized edilir
    paket icerisindeki degiskenler initialized edilir
    son olarak paketin icersindeki init fonksiyonu calistirilir
-   onemli : init fonksiyonlari sira ile calisir yani ayni anda calismaz
+   onemli-> : init fonksiyonlari sira ile calisir yani ayni anda calismaz
 */
 
 /*
@@ -843,7 +843,7 @@ func main() {
         Paid:   true,
     }
     cartPtr := &cart
-    (*cartPtr).ID = "asif tunga"    //! onemli bir kullanim ornegi -> burda cartPtr isimli pointerimizin isaret ettigi adresteki degerlere dereference operatoru sayesinde ulasiyoruz
+    (*cartPtr).ID = "asif tunga"    // onemli-> bir kullanim ornegi => burda cartPtr isimli pointerimizin isaret ettigi adresteki degerlere dereference operatoru sayesinde ulasiyoruz
     (*cartPtr).Paid = false
 
     fmt.Println(cart)
@@ -1037,7 +1037,7 @@ The "Yasamim" book was written by Asif Tunga Mubarek
 */
 
 //==========================================================================================================================================
-// cok onemli bir not : //! bir method fonksiyondan farkli olarak sadece tanimlandigi turun orneginden cagrilabilir
+// onemli-> bir not : //! bir method fonksiyondan farkli olarak sadece tanimlandigi turun orneginden cagrilabilir
 //A method is a special function that is scoped to a specific type in Go. Unlike a function, a method can only be called from the instance of the type it was defined on.
 
 //simdi bu yapi beni kod tekrarindan kurtardi. Bunu bir ornekle gostermek istiyorum
@@ -1102,14 +1102,14 @@ func (d Basimevi)Print(){
     fmt.Println(d.String())
 }
 
-//not farkli parametrelerle olsa dahi ayni isimle birden fazla fonksiyon yazilamaz. Ancak farkli receiverlar ile ayni isimde birden fazla method yazilabilir 
+//not-> farkli parametrelerle olsa dahi ayni isimle birden fazla fonksiyon yazilamaz. Ancak farkli receiverlar ile ayni isimde birden fazla method yazilabilir 
 
 func main(){
    a:=Article{"baslik","asif tunga mubarek"}
    b:=Book{"kitap basligi","asif tunga mubarek",300}
    c:=Yazar{"asif tunga mubarek",26,"antakya"}
    d:=Basimevi{"mersin","turkey"}
-//onemli oncelikle bunun kullanim sekli Print(a) seklinde degildir. Print(a) kullanimi sadece parametreler icin gecerlidir. Receiver oldugundan alttaki sekillerde kullanilir
+//onemli-> oncelikle bunun kullanim sekli Print(a) seklinde degildir. Print(a) kullanimi sadece parametreler icin gecerlidir. Receiver oldugundan alttaki sekillerde kullanilir
     a.Print()
     b.Print()
     c.Print()
@@ -1274,10 +1274,10 @@ simdi bunun bir ornegini denemek istiyorum
 
 // func Olustur(s Salcaer){
 //     s.Salca()
-//     s.Ye()   //not : altta kirmizi kisimda buradan bahsediyorum
+//     s.Ye()   //not-> altta kirmizi kisimda buradan bahsediyorum
 // }
 
-//not benim buradaki hatam aslinda tam bu kisimda. Dusunceme gore bir interface'e ulasmak diger interface icerisindeki fonksiyonu calistirir ancak bu tamamen yanlis bir dusunce. Bir interface uzerinden diger fonksiyona ulastigim dogru ancak diger fonksiyonu cagirmadan nasil calismasini bekleyebilirim ki 
+//not-> benim buradaki hatam aslinda tam bu kisimda. Dusunceme gore bir interface'e ulasmak diger interface icerisindeki fonksiyonu calistirir ancak bu tamamen yanlis bir dusunce. Bir interface uzerinden diger fonksiyona ulastigim dogru ancak diger fonksiyonu cagirmadan nasil calismasini bekleyebilirim ki 
 
 
 // func main(){
@@ -1316,14 +1316,14 @@ func main(){
     s.Salca()
     s.Ye()
 } */
-//onemli kisaca kendime interfaceler icin su notu diyebilirim. Iki farkli ulasim soz konusu aslinda. Istersem hemen ustte oldugu gibi main fonksiyonu icerisinden ulasabilirim, bir diger yontem bunun bir ustunde oldugu gibi yeni bir fonksiyon tanimlayip parametre olarak interface verip onun uzerinden ulasabilirim
+//onemli-> kisaca kendime interfaceler icin su notu diyebilirim. Iki farkli ulasim soz konusu aslinda. Istersem hemen ustte oldugu gibi main fonksiyonu icerisinden ulasabilirim, bir diger yontem bunun bir ustunde oldugu gibi yeni bir fonksiyon tanimlayip parametre olarak interface verip onun uzerinden ulasabilirim
 
 //STANDART LIBRARYDE BULUNAN BIRCOK INTERFACE VARDIR BUNLARDAN EN UNLULERI ISE SUNLARDIR : Error interface, Stringer interface, Interface interface bu interfaceleri daha detayli incelemek istersem ; https://www.practical-go-lessons.com/chap-16-interfaces adresinden gorebilirim
 
 //Go da bir diger interface tipi ise bos interfacedir. Bu yazabilecegim en kucuk ve en kisa interfacedir. Bu su sekilde yazilir interface{}
 //peki ben bunu nerede kullanacagim? tanimlama olarak bos bir interface deger her tipte degiskeni tutabilir. Eger her tipi kabul eden bir metot yazmak istersem interface kullanabilirim
 
-// func (l *Logger) Fatal(v...interface{}) {} bu sekilde bir kullanim butun tipleri kabul eder
+// func (l *Logger) Fatal(v...interface{}) {}   bu sekilde bir kullanim butun tipleri kabul eder
 //bos bir interface' i parametre olarak alan fonksiyonlarin genel olarak aldiklari bu interface in efektif tipini bilmeleri gerekmektedir. Bunu yapmak icin ise fonksiyon type switch yapisini kullanabilir. Bu normal switchte oldugu gibi valuelari degil typelari karsilastirir
 
 /*
@@ -1455,7 +1455,8 @@ func main(){
 
 //! kendime not : interfaceler icin pointer kullanmaya gerek yoktur. Program ilk calistigi sirada zaten kendisi initialize edildigi icin tekrardan bir isaretci kullanip yeniden ram kullanmak gereksizdir.
 
-/*  //@ API nedir sorusunun cevabi niteliginde
+/*  
+//@ API nedir sorusunun cevabi niteliginde
 api lari aslinda birer contract gibi dusunebilirim. Tipki ustteki interfaceler gibi bir yapisi var. Bir api iki farkli seyin bir arada calismasina ve iletisim kurmalarina (communication) izin verir (genellikle json formatinda dosya yollayarak). API kisaca sunlardan olusur  Bir yazılım parçası ile etkileşime maruz kalan bir dizi yapıdır (sabitler, değişkenler, işlevler ...).
 
 Bu tanımla, go paketi fmt'nin go programcısına onunla etkileşim kurması için bir API sunduğunu söyleyebiliriz. API'si, örneğin Println gibi kullanabileceğiniz bir dizi işlevi temsil eder. Ayrıca paketin dışa aktarılan tanımlayıcılarını da (sabitler, değişkenler, türler) kapsar.
@@ -1502,16 +1503,16 @@ func main(){
 	fmt.Println(time.WhatTimeIsIt())
 } */
 
-//dependency graph paketlerin calismasi icin gerekli olan bagimli oldugu paketleri gosteren bir graphictir. Versiyonlar ve bagimli olduklari kisimlar nodelar seklinde yazilirlar (detayli bilgi icin https://www.practical-go-lessons.com/chap-17-go-modules)
+//dependency graph paketlerin calismasi icin gerekli olan bagimli oldugu paketleri gosteren bir graphtir. Versiyonlar ve bagimli olduklari kisimlar nodelar seklinde yazilirlar (detayli bilgi icin https://www.practical-go-lessons.com/chap-17-go-modules)
 
 //go dilini yaratan kisiler MVS seklinde bir sey gelistirdiler. Bu minimal version selection anlamina gelmektedir. Go.mod dosyasini olusturur ve projede kullanilan butun dependenciesleri gosterir.
 
-//her modul gerekli modullerin listesini vermelidir. Moduller modul path i ile tanimlanirlar. Her modulun minimum uyumlu versiyonu belirtilmelidir. Bu  dosya go.mod dosyasindadir.
+//her modul kendisinin kullandigi gerekli modullerin listesini vermelidir. Moduller modul pathi ile tanimlanirlar. Her modulun minimum uyumlu versiyonu belirtilmelidir. Bu  dosya go.mod dosyasindadir.
 //Her modul import compatibility rule kuralina uymak zorundadir. Bu kural; ayni module pathine sahip moduller geriye uyumlu olmalidir der
 // yeni bir dependency (bagimlilik) nasil eklenir? go get komutu ile dependecy eklenebilir. Bu komut gerekli modulu indirir ve go.mod dosyasina kaydeder
 //peki go hangi versiyonlari secer? => 1) en son etiketlenmis kararli surum 2) son etiketlenmis pre-release surum 3) son etiketlenmemis versiyon (son eklenmis olan commit ayrica pseudo-version) diye adlandirilir
 
-//@ Yapi listesinin olusturulmasi=> built list is the list of modules necessary to builda Go Program
+//@ Yapi listesinin olusturulmasi=> built list is Go programinin build edilmesi icin gerekli olan modullerdir
 //bu list elemanlarinin hepsi iki seyden olusurlar 1) modul path module' u tanimlar 2) revision tanimlayicisi (tag veya commit id)
 //! belirli bir modul icin build list olusturmak icin gerekli olan seyler sunlardir
 /*
@@ -1528,7 +1529,7 @@ gerekli olan her modul icin :
 //* sonrasinda kullanilan bu modulun yeni bir surumu cikti diyelim (v2.0.1)
 //* go get -u gitlab.com/loir402/bluesodium kullanarak  yeni versiyonu indiremem bunun nedeni yeni olan modulun different bir path i olmasidir
 //* bu da import compatibility kuralina gore moduller backward compatible olmalidir. Bu modul bu kurali bozmaktadir
-//@@ bir modulun son surumu son degisiklikleri getirir bu da onceki surumlerin kullanicilarini etkileyecektir
+//@ bir modulun son surumu son degisiklikleri getirir bu da onceki surumlerin kullanicilarini etkileyecektir
 //@ bundan dolayi ayri bir module pathine sahip olmalidir
 go.mod dosyasina bakarsask sununla karsilasiriz
 
@@ -1538,11 +1539,11 @@ go 1.15
 
 module path degisti artik gitlab.com/loir402/bluesodium yerine gitlab.com/loir402/bluesodium/v2 oldu
 
-bir modul v0 dan v2 ye veya v1 den v2 ye guncelleniyorsa import compatibiliry rule kuralina uymak icin pathini degistirmelidir
+onemli-> bir modul v0 dan v2 ye veya v1 den v2 ye guncelleniyorsa import compatibiliry rule kuralina uymak icin pathini degistirmelidir
 
-To specifically require the major version 2, you need to launch the command. :
+!  To specifically require the major version 2, you need to launch the command. :
 
-go get -u gitlab.com/loir402/bluesodium/v2
+!  go get -u gitlab.com/loir402/bluesodium/v2
 
 */
 /*
@@ -1647,7 +1648,7 @@ func main(){
     fmt.Println(bar.Bar())
 } */
 
-//diyelim ki bir tane fonksiyon yazdik ve onu api gibi kullandik simdi burada onemli birkac notum var
+//! diyelim ki bir tane fonksiyon yazdik ve onu api gibi kullandik simdi burada onemli birkac notum var
 //@ oncelikle kullandigimiz bu api kismini degistirip daha sonra tekrar guncellemek istersem diye asagidaki notlar cok onemli
 
 //! butun dependencyleri son surumlerine update etmek icin go get -u ./... bunu yaptigimizda go yapilan patchleri anlar ve onlari otomatik olarak indirir. go.mod dosyasina yeni bir satir eklenir
@@ -1871,6 +1872,9 @@ Proxy serverlar genel olarak su amaclar icin kullanilir :
 
 go module proxyler son zamanlarda dile eklenen bir seydir, go get komutu kullanilmadan once moduller dogrudan web sayfasi uzerinden indirilirdi
 bunun kotu yanlari modul paylasilan web sitesinden silinebilirdi veya tagler versiyon numaralari silinebilirdi. Eger bizim applicationumuz bu module bagimli ise build sirasinda hatalarla karsilasabilirdik
+
+======================================= UNIT TESTLER ========================================================================
+
 */
 
 // package main
@@ -2095,7 +2099,7 @@ $ go test -cover
 PASS
 coverage: 100.0% of statements
 
-//* sonra bu kisma tekrar geri donecegim basimi asiri derecede agirtti
+//not-> sonra bu kisma tekrar geri donecegim basimi asiri derecede agirtti
 
 
 */
@@ -2131,23 +2135,23 @@ func main(){
 }
 
 */
-//ARRAY TANIMLAMALARI
+//onemli-> ARRAY TANIMLAMALARI
 /*
- //@ long way
+ //not-> long way
 var a [2]int
 a[0] = 156
 a[1] = 147
 fmt.Println(a)
 
-//@ more concise
+//not-> more concise
 b := [2]string{"FR", "US"}
 fmt.Println(b)
 
-//@ size computed by the compiler
+//not-> size computed by the compiler
 c := [...]float64{13.2, 37.2}
 fmt.Println(c)
 
-//@ values not set (yet)
+//not-> values not set (yet)
 d := [2]int{}
 fmt.Println(d)
 */
