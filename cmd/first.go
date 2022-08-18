@@ -2147,7 +2147,7 @@ fmt.Println(a)
 b := [2]string{"FR", "US"}
 fmt.Println(b)
 
-//not-> size computed by the compiler
+//not-> size computed by the compiler (bu kullanim cok hosuma gitti)
 c := [...]float64{13.2, 37.2}
 fmt.Println(c)
 
@@ -2157,6 +2157,7 @@ fmt.Println(d)
 */
 
 //? bu sekildeki bir kullanimda bos bir array tanimladik ancak dikkat! bu tanimladigimiz array bos olmasina karsin tanimsiz anlamina gelmez cunku bilindigi uzere go dilinde tanimsiz degiskenler tanimlanamaz
+
 /* package main
 
 import "log"
@@ -2174,7 +2175,7 @@ fmt.Println(myEmptyArray2)
 // output : [] seklinde bir ciktiya sahip olunur
 */
 
-//len(v) v variablein uzunlugunu return eder.
+//onemli-> len(v) v variablein uzunlugunu return eder.
 //cap temelinde len ile ayni islevi gorur
 
 //ACCESS ELEMENT OF ARRAY
@@ -2192,7 +2193,7 @@ func main() {
 }
 */
 
-//for loop kullanarak array icinde gezmek su sekilde olmaktadir
+//not-> for loop kullanarak array icinde gezmek su sekilde olmaktadir
 
 /* package main
 
@@ -2200,14 +2201,14 @@ import "fmt"
 
 func main(){
 myArray := [13]int{156, 147, 5454, 154,21,2,45,23,154,32,654,32,454}
-for index, element := range myArray {
+for index, element := range myArray {       //! foreachin go dilindeki karsiligi seklinde dusunebilirim
     fmt.Printf("element at index %d is %d\n", index, element)
 }
 }
 
 */
 
-//! string uzerinde gezmek icin su sekilde bir yontem uygulayabiliriz
+//onemli-> string uzerinde gezmek icin su sekilde bir yontem uygulayabiliriz
 
 /* package main
 
@@ -2220,7 +2221,7 @@ for index, element := range myArray {
 }
 } */
 
-//bazi durumlarda sadece indexlere veya sadece elementlere ihtiyacimiz vardir. Bunu su sekilde blank identifier kullanarak yapabilirim
+//! bazi durumlarda sadece indexlere veya sadece elementlere ihtiyacimiz vardir. Bunu su sekilde blank identifier kullanarak yapabilirim
 
 /*
 for _, element := range myArray {
@@ -2256,7 +2257,7 @@ for i := len(a) - 1; i >= 0; i-- {
 
 //@ bir dizinin icerisindeki elementi for loop yardimi ile nasil bulabiliriz
 
-/* func getIndex(haystack [10]int, needle int) int {
+/* func getIndex(haystack [10]int, needle int) int {        //! array bu sekilde parametre olarak kullanilir
     for index, element := range haystack {
         if element == needle {
             return index
@@ -2267,7 +2268,7 @@ for i := len(a) - 1; i >= 0; i-- {
 
 // bu kullanim aslinda sinirli bir kullanimdir cunku hadi diyelim aradigimiz element arrayin sonunda yer aliyor hepsini tek tek gezmis olacak ayrica bu fonksiyon sadece 10 elemanlik bir arrayi parameter olarak alabiliyor bu nedenlerden dolayi bu fonksiyon yetersizdir.
 
-//arraylari karsilastirmak icin oncelikle su iki ozelligin ayni olmasi gerekmektedir. Bunlardan ilki : ayni tip olmalidirlar ikincisi ise : ayni uzunluga sahip olmalidirlar. Bu karsilastirmada kullanilabilecek operatorler sadece == ve != dur.
+//! arraylari karsilastirmak icin oncelikle su iki ozelligin ayni olmasi gerekmektedir. Bunlardan ilki : ayni tip olmalidirlar ikincisi ise : ayni uzunluga sahip olmalidirlar. Bu karsilastirmada kullanilabilecek operatorler sadece == ve != dur.
 
 /*
 a := [2]int{1, 2}
@@ -2337,7 +2338,7 @@ package demo
 
 const NewValue = "changedValue"
 
-func UpdateArray2(array *[2]string) { //@ burada nasil pointer seklinde bir array parametresi alindiginin kullanimi gosterilmis
+func UpdateArray2(array *[2]string) { //not-> burada nasil pointer seklinde bir array parametresi alindiginin kullanimi gosterilmis
     array[0] = NewValue
 }
 
@@ -2400,11 +2401,12 @@ func TestArrayReference(t *testing.T) {
 bu arrayde herhangi bir elemente ulasmak icin su sekilde bir kullanim yapilabilir
 
 value := a[2][1]   //9 degeridir
-
+*/
 
 /// ASAGIDAKI DOSYA ICIN INTERNAL/ARRAY KLASORUNE BAKABILIRIM
-*/
-/* package main
+//onemli-> array return gormek icin internal/array klasorune bakabilirim
+/* 
+package main
 import (
     "newgroupproject/internal/array"
     "log"
@@ -2413,7 +2415,8 @@ import (
 func main(){
     NewArray:= array.Generate()
     log.Println(NewArray)
-} */
+}
+*/
 
 //go da multi dimentional arrayler olusturmak mumkundur
 /*
