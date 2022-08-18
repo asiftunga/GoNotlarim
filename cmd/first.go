@@ -2464,7 +2464,7 @@ func main(){
     s:= make([]int,3) //bu sekilde 3 uzunlugunda bir slice olusturdum
     s[0] = 12
     s[2] = 45
-    //!su sekilde de bir kullanim yapilabilir
+    //onemli-> su sekilde de bir kullanim yapilabilir
     s2 := []int{10,12}
     fmt.Println(s)
     fmt.Println(s2)
@@ -2486,7 +2486,7 @@ func main(){
     customers := [4]string{"john haack","asif tunga mubarek","yagmur akan","mavis ve misha"}
     customerSlice:= customers[0:2]
     fmt.Println(customerSlice) //[john haack asif tunga mubarek]
-    //goruldugu gibi burada 2 derken cikan sonucun uzunlugu seklinde dusunmem gerekir bunu da soyle aklimda tutabilirim high her zaman bir cikarilacak veya saymaya sifirdan degil de birden baslayacagim
+    //goruldugu gibi burada 2 derken cikan sonucun uzunlugu seklinde dusunmem gerekir bunu da soyle aklimda tutabilirim high her zaman bir cikarilacak
 }
 */
 
