@@ -321,10 +321,10 @@ vehicle>go run main.go bu komutu calistirdigimiz zaman ise su output karsimiza c
 
 //* https://www.practical-go-lessons.com/chap-11-packages-and-imports#answers bu adreste key takeaways kisminda paketlerin genel bir ozeti bulunmakta
 
-//@ paket ayni directories icerisinde bulunan bir veya birden cok source files'a verilen isimdir. Source files : su anda icinde yazdigim first.go file'i source filedir. Source file icerisinde package blabla ardindan import edilen seyler ardindan degisken tanimlamalari ardindan ise fonksiyon tanimlamalarinin oldugu bir yerdir
-//@ bir isim bir paketi tanimlar.
-//@ buyuk harf ile baslayan bir isimlendirme exported diye isimlendirilir ve public anlami tasir
-//! bir modul kokunde (root kisminda) bir go.mod file dosyasi bulunan dosya agacinda depolanan bir go paketleri toplulugudur
+// @ paket ayni directories icerisinde bulunan bir veya birden cok source files'a verilen isimdir. Source files : su anda icinde yazdigim first.go file'i source filedir. Source file icerisinde package blabla ardindan import edilen seyler ardindan degisken tanimlamalari ardindan ise fonksiyon tanimlamalarinin oldugu bir yerdir
+// @ bir isim bir paketi tanimlar.
+// @ buyuk harf ile baslayan bir isimlendirme exported diye isimlendirilir ve public anlami tasir
+// ! bir modul kokunde (root kisminda) bir go.mod file dosyasi bulunan dosya agacinda depolanan bir go paketleri toplulugudur
 /*
 .
 ├── cmd
@@ -365,8 +365,8 @@ bir variable initialize edilecekse ve birden cok variable varsa oncelikle bagims
 */
 
 /*
- var nameDisplayer func(name, firstname string) string 
- 
+ var nameDisplayer func(name, firstname string) string
+
  bu sekilde bir kullanim mevcut bu kullanimin amaci ise sudur fonksiyonu henuz tamamlamadan tanimlama kismidir
 
 
@@ -552,8 +552,7 @@ ATM otelleri
    Pointerin adresini tutan pointerin isaret ettigi adresteki pointerin isaret ettigi adresteki deger:  1
 */
 
-
-/* 
+/*
 package main
 
 import "fmt"
@@ -650,11 +649,11 @@ import (
 ) */
 
 //alttaki koddaki receiver ismi yukarida import ettigim newgroupproject/internal/receiver isminden geliyor. (10 saat bunu dusundum amk)
-/* 
+/*
 func main(){
     //bunu pointer seklinde kullanmadigimda da oluyor peki pointerin buradaki amaci nedir amk
     //? burdaki b yi su sekilde kullandigimda neden bir fark olusmuyor bunu sonradan tekrar incelemem gerekli cok ONEMLI (b := receiver.Fatura)
-    var b *receiver.Fatura = &receiver.Fatura{ 
+    var b *receiver.Fatura = &receiver.Fatura{
         Isim: "Market Faturasi",
         Bahsis: 40.00,
         Items: map[string]float32{"patates": 5.00, "elma":4.00, "biber":10.00, "salatalik":12.00},
@@ -666,7 +665,7 @@ func main(){
     b.Update("lahana",17.00)
     fmt.Println(b.Hesap())
 }
- */
+*/
 
 //?===========================================================================================================
 //leetcode sorusu : roman to int
@@ -777,7 +776,6 @@ bu kopya hala temel olan slice i referans ediyor ancak soyle bir durum var //! s
 
 // import "fmt"
 
-
 // func main() {
 //     EUcountries := []string{"Austria", "Belgium", "Bulgaria"}
 //     addCountries2(&EUcountries) //slice adresini yolladik
@@ -802,9 +800,6 @@ func main() {
 //     *countriesPointer = append(*countriesPointer, []string{"Croatia", "Republic of Cyprus", "Czech Republic", "Denmark", "Estonia", "Finland", "France", "Germany", "Greece", "Hungary", "Ireland", "Italy", "Latvia", "Lithuania", "Luxembourg", "Malta", "Netherlands", "Poland", "Portugal", "Romania", "Slovakia", "Slovenia", "Spain", "Sweden"}...)
 // }
 //? ===============================================================================================================================================
-
-
-
 
 //! simdi bir kullanim gosterecegim. adres bilgisi ile struct kullanabilir ve fieldlarina ulasabiliriz
 
@@ -851,8 +846,7 @@ func main() {
     //{asif tunga false} seklinde bir ciktisi olur
 } */
 
-
-/* 
+/*
 //* bu alttaki kodlar ustte yamis oldugum durumun bir ornegi aslinda ozellikle Rename3 ve Rename4 func lari
 
 package main
@@ -902,7 +896,7 @@ func main(){
     fmt.Println(cat.Name)
     //! TOM yazdirir
 }
- */
+*/
 
 //@=========================ne zaman pointer receiver ne zaman value receiver kullanmam gerekli====================================================
 /*
@@ -978,7 +972,7 @@ func main(){
     }  */
 
 // ?================================ anlamama yardimci olacak baska bir ornek olabilir ===================================================
-/* 
+/*
 
 package main
 
@@ -1027,9 +1021,7 @@ func Prints(s Stringer) {
 //burada yaptigim sey yine farkli degil. Elimde Stringer isminde bir interface var. Bu interface icerisinde Strings() isminde bir fonksiyonum var. Bu method birden cok olabilir (hepsinde farkli receiverlari olabilir mesela). Ayrica elimde Prints(s Stringer) seklinde bir adet methodum daha var (parametre olarak interface aliyor). Bu methodu kullanirken parametre olarak interfacei yollamak yerine interface icerisindeki metodun receiverinda type olarak bulunan bir struct yollamam gerekir.
 */
 
-
-
-/* 
+/*
 -----------------bu kod blogunun ciktisi ise su sekilde olur---------------------------------
 The "Understanding Interfaces in Go" article was written by Sammy Shark.
 The "Umutlu Bir Bilgisayar Muhendisinin Yasami" article was written by Asif Tunga Mubarek.
@@ -1041,7 +1033,7 @@ The "Yasamim" book was written by Asif Tunga Mubarek
 //A method is a special function that is scoped to a specific type in Go. Unlike a function, a method can only be called from the instance of the type it was defined on.
 
 //simdi bu yapi beni kod tekrarindan kurtardi. Bunu bir ornekle gostermek istiyorum
-/* 
+/*
 package main
 
 import "fmt"
@@ -1102,7 +1094,7 @@ func (d Basimevi)Print(){
     fmt.Println(d.String())
 }
 
-//not-> farkli parametrelerle olsa dahi ayni isimle birden fazla fonksiyon yazilamaz. Ancak farkli receiverlar ile ayni isimde birden fazla method yazilabilir 
+//not-> farkli parametrelerle olsa dahi ayni isimle birden fazla fonksiyon yazilamaz. Ancak farkli receiverlar ile ayni isimde birden fazla method yazilabilir
 
 func main(){
    a:=Article{"baslik","asif tunga mubarek"}
@@ -1115,9 +1107,9 @@ func main(){
     c.Print()
     d.Print()
 }
-  */
+*/
 //*==================================== peki bunu interface ile yapmis olsaydim nasil mi olurdu? ===================
-/* 
+/*
 package main
 
 import "fmt"
@@ -1179,7 +1171,7 @@ func main(){
    Print(c)
    Print(d)
 }
- */
+*/
 /*
 KONU ILE ALAKASIZ VIM NOTU : eger bir sonraki karaktere gitmek istiyor isem yapmam gereken tek sey insert moda a ile gecis yapmak. veya bunun yerine direkt olarak cumlenin sonuna gitmek istiyor isem A seklinde kullanabilirim ama bu direkt insert moda sokar haberim olsun
 $ seklinde de kullanabilirim bu insert moda sokmaz direkt cumlenin sonuna giderim bu sekilde
@@ -1222,7 +1214,7 @@ func Besle(salcam Salca){
 func main(){
     Besle(BiberSalcasi{"tamek"}) //burada biber salcasi struct ornegi kismini parametre seklinde gonderdik. Aslinda ust kisimdaki besle fonksiyonunda interface i parametre olarak kullanmamiz sayesinde (ancak interface gondermiyoruz parametre olarak buna dikkat etmeliyim) interface uzerinden fonksiyona erisiyorum gibi dusunebilirim
 }
- */
+*/
 //*----------------------------------- bu kisim ise ust kisim yerine yapilabilir----------------------------------------------
 /* func main(){
     biber := BiberSalcasi{"tamek"}  //! biber salcasi tipinde bir struct olusturduk
@@ -1277,8 +1269,7 @@ simdi bunun bir ornegini denemek istiyorum
 //     s.Ye()   //not-> altta kirmizi kisimda buradan bahsediyorum
 // }
 
-//not-> benim buradaki hatam aslinda tam bu kisimda. Dusunceme gore bir interface'e ulasmak diger interface icerisindeki fonksiyonu calistirir ancak bu tamamen yanlis bir dusunce. Bir interface uzerinden diger fonksiyona ulastigim dogru ancak diger fonksiyonu cagirmadan nasil calismasini bekleyebilirim ki 
-
+//not-> benim buradaki hatam aslinda tam bu kisimda. Dusunceme gore bir interface'e ulasmak diger interface icerisindeki fonksiyonu calistirir ancak bu tamamen yanlis bir dusunce. Bir interface uzerinden diger fonksiyona ulastigim dogru ancak diger fonksiyonu cagirmadan nasil calismasini bekleyebilirim ki
 
 // func main(){
 //     Olustur(BiberSalcasi{"tunga salcalari"})
@@ -1455,7 +1446,7 @@ func main(){
 
 //! kendime not : interfaceler icin pointer kullanmaya gerek yoktur. Program ilk calistigi sirada zaten kendisi initialize edildigi icin tekrardan bir isaretci kullanip yeniden ram kullanmak gereksizdir.
 
-/*  
+/*
 //@ API nedir sorusunun cevabi niteliginde
 api lari aslinda birer contract gibi dusunebilirim. Tipki ustteki interfaceler gibi bir yapisi var. Bir api iki farkli seyin bir arada calismasina ve iletisim kurmalarina (communication) izin verir (genellikle json formatinda dosya yollayarak). API kisaca sunlardan olusur  Bir yazılım parçası ile etkileşime maruz kalan bir dizi yapıdır (sabitler, değişkenler, işlevler ...).
 
@@ -2405,7 +2396,7 @@ value := a[2][1]   //9 degeridir
 
 /// ASAGIDAKI DOSYA ICIN INTERNAL/ARRAY KLASORUNE BAKABILIRIM
 //onemli-> array return gormek icin internal/array klasorune bakabilirim
-/* 
+/*
 package main
 import (
     "newgroupproject/internal/array"
@@ -2490,29 +2481,28 @@ func main(){
 }
 */
 
-//@bir slice kopyalaniyor mu? hayir aslinda orjinal olani pointerlar ile gostermis oluyoruz
+//@bir slice kopyalaniyor mu? hayir aslinda orjinal olani (slice veya arrayi) pointerlar ile gostermis oluyoruz
 
 /* package main
 
 import "fmt"
 
 func main() {
-    customers := [4]string{"John Doe", "Helmuth Verein", "Dany Beril", "Oliver Lump"}
+    customers := [4]string{"John Doe", "Helmuth Verein", "Dany Beril", "Oliver Lump"} //bir adet array olusturduk
     customersSlice := customers[0:1]
     fmt.Println(customersSlice)
     // modify original array
     customers[0] = "John Doe degistirildi"
     fmt.Println("orijinal arrayin degistirilmesinden sonra bu sekilde gozukur")
-    fmt.Println(customersSlice)
-    =======
+    fmt.Println(customersSlice) =======
     john doe
-    orijinal arrayin degistirilmesinden sonra bu sekilde gozukur
+    ==============orijinal arrayin degistirilmesinden sonra bu sekilde gozukur
     john doe degistirildi
 }
 */
 
-/*
-package main
+//! buradaki ornekte de goruldugu gibi slice islemi aslinda slicing yapilan degiskendeki degerlere birer pointer seklinde calisir. Bu da burda olan seyi aciklar. Slicing isleminden sonra arrayde degisiklik yaptigimizda slicelar da degisti
+/* package main
 
 import "fmt"
 
@@ -2524,23 +2514,26 @@ func main() {
 		"Ringo",
 	}
 	fmt.Println(names)
-
 	a := names[0:2]
 	b := names[1:3]
-	fmt.Println(a, b)
-
+	fmt.Println(a)
+    fmt.Println(b)
 	b[0] = "XXX"
-	fmt.Println(a, b)
+	fmt.Println(a)
+    fmt.Println(b)
 	fmt.Println(names)
-}
-*/
-/* output
+} */
+/*
 [John Paul George Ringo]
-[John Paul] [Paul George]
-[John XXX] [XXX George]
-[John XXX George Ringo] */
+[John Paul]
+[Paul George]
+[John XXX]
+[XXX George]
+[John XXX George Ringo]
+*/
 
 //! slicing islemi stringlere de uygulanabilir bir islemdir. Ancak unutmamak gerekir bu islemden sonra ortaya cikan sey de bir stringdir.
+//not-> String slicing sonucu ortaya string cikar (slice degil). ONEMLI
 /*
 package main
 
@@ -2553,9 +2546,10 @@ func main(){
 }
 */
 //go'da bulunan stringler degistirilemezlerdir yani bir kere olusturulduktan sonra orijinal olani degistirmek sonradan slicing islemini atadigimiz degiskenin degerinin degistirilmesine neden olmaz bunun nedeni stringlerin referans seklinde olmamasindan kaynaklanir
+
 //ornek olarak
-/*
-package main
+
+/* package main
 
 import "fmt"
 
@@ -2568,18 +2562,17 @@ func main(){
     //--------output
     //rama
     //rama
-}
+} */
+//not-> goruldugu gibi stringi sonradan degistirmek slicing isleminde olusturulan slice da herhangi bir degisiklik yaratmadi
 
-*/
-
-//len hazir bir fonksiyondur ve slice icerisindeki elemanlarin uzunlugunu dondurur.
+//! len hazir bir fonksiyondur ve slice icerisindeki elemanlarin uzunlugunu dondurur.
 
 /* package main
 
 import "fmt"
 
 func main(){
-    vatRates := []float32{4.65,4,14,53}
+    vatRates := []float32{4.65, 4, 14, 53}
     fmt.Println("slice uzunlugu : ",len(vatRates))  //output => slice uzunlugu :  4
 }
 */
@@ -2615,3 +2608,89 @@ func main(){
     length:  2
     capacity: 3
 */
+
+/* package main
+
+import "fmt"
+
+func main(){
+    //m:=make(map[string]int) //bos bir map olusturmak
+    //a := map[int]string{} //bos map diger yol
+    onemlitarihler := map[int]string{
+        1923: "TR",
+        1996: "Dogum",
+        2024: "plan1",
+        2026: "plan2"}
+    fmt.Println(onemlitarihler) //map[1923:TR 1996:Dogum 2024:plan1 2026:plan2]
+    fmt.Println(onemlitarihler[1996]) //Dogum
+    fmt.Println(len(onemlitarihler)) //4
+    delete(onemlitarihler, 1996)
+    fmt.Println(len(onemlitarihler)) //3
+    //v, ok := myMap[k] //boyle bir kullanimda ok key-value ciftinin olup olmadigini tutan bir bool degerdir
+    //map[int]map[string]string //iki boyutlu bir array ornegi
+    //for _,k := range onemlitarihler{} //seklinde map uzerinde loop islemi yapabiliriz
+} */
+
+//===============================anonymous func and closures===========================
+/* package main
+
+import "log"
+
+func main(){
+    type yenitip func(string)
+    var f yenitip
+    f = func(s string){
+    // my function defined
+    log.Printf("yenitip %s",s) //2022/08/08 09:21:56 yenitip fonksiyon atanan degisken
+    }
+    f("fonksiyon atanan degisken")
+} */
+
+/* package main
+
+import "fmt"
+
+func closure() func() int { //burasi su anlama gelir; bu fonksiyonun kendisi bir fonksiyon return edecek ve return ettigi bu fonksiyon da bir int deger return edecek
+    i := 0
+    return func() int {
+        i++
+        return i
+    }
+}
+func main() {
+    eklenen := closure()
+    fmt.Println(eklenen())
+    fmt.Println(eklenen())
+    soneklenen := closure()
+    fmt.Println(soneklenen())
+    fmt.Println(eklenen())
+
+} */
+
+package main
+
+import (
+	"encoding/json"
+	"fmt"
+)
+
+type Product struct {
+ID    uint64
+Name  string
+SKU   string
+Cat   Category
+}
+type Category struct {
+ID   uint64
+Name string
+}
+
+func main(){
+    p := Product{ID: 42, Name: "Tea Pot", SKU: "TP12", Cat: Category{ID: 2, Name: "Tea"}}
+    bI, err := json.MarshalIndent(p,"","    ")
+if err != nil {
+    panic(err)
+}
+fmt.Println(string(bI))
+
+}
