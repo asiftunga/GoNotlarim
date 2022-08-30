@@ -2644,9 +2644,9 @@ func main(){
     log.Printf("yenitip %s",s) //2022/08/08 09:21:56 yenitip fonksiyon atanan degisken
     }
     f("fonksiyon atanan degisken")
-} */
+}
 
-/* package main
+package main
 
 import "fmt"
 
@@ -2667,30 +2667,125 @@ func main() {
 
 } */
 
-package main
+/* package main
 
 import (
 	"encoding/json"
 	"fmt"
 )
 
-type Product struct {
-ID    uint64
-Name  string
-SKU   string
-Cat   Category
+type Urun struct{
+    Id int32
+    Marka string
+    SonKullanim int
+    Kategori Kategori
 }
-type Category struct {
-ID   uint64
-Name string
+type Kategori struct{
+    Id int32
+    Isim string
 }
-
 func main(){
-    p := Product{ID: 42, Name: "Tea Pot", SKU: "TP12", Cat: Category{ID: 2, Name: "Tea"}}
-    bI, err := json.MarshalIndent(p,"","    ")
+    t := Urun{Id: 23, Marka: "sutas", SonKullanim: 1104, Kategori: Kategori{Id: 32, Isim: "sut urunleri"}}
+    bI, err := json.MarshalIndent(t,"","    ")
 if err != nil {
     panic(err)
 }
-fmt.Println(string(bI))
+fmt.Println(string(bI))}
 
+/* ciktisi su sekilde olur
+{
+    "Id": 23,
+    "Marka": "sutas",
+    "SonKullanim": 1104,
+    "Kategori": {
+        "Id": 32,
+        "Isim": "sut urunleri"
+    }
+} */ 
+
+/* package main
+
+import (
+	"encoding/json"
+	"fmt"
+)
+
+type Urun struct{
+    Id int32 `json: "id"`
+    Marka string `json: "marka"`
+    SonKullanim int `json: "sonKullanim"`
+    Kategori Kategori `json: "kategori"`
+}
+type Kategori struct{
+    Id int32 `json: "id"`
+    Isim string `json: "isim"`
+}
+
+
+func main() {
+    myJson := []byte(`{"id": 23,"marka": "sutas","sonKullanim": 1104,"kategori": {"id": 32,"isim": "sut urunleri"}}`)
+    c := Urun{}
+    err := json.Unmarshal(myJson, &c)
+    if err != nil {
+        panic(err)
+    }
+    fmt.Println(c.Kategori.Id) //32
+    fmt.Println(c.Kategori.Isim) //sut urunleri
+} */
+
+
+/* package main
+import (
+    "time"
+    "net/http"
+    "log")
+type myHandler struct {}
+func main() {
+    // serveri olustur
+    ilkserverim := &http.Server{}
+    ilkserverim.Addr = "127.0.0.1:2323"
+    ilkserverim.ReadTimeout = 10 * time.Second
+    ilkserverim.WriteTimeout = 10 * time.Second
+    ilkserverim.Handler = &myHandler{}
+    //serveri baslat
+    log.Fatal(ilkserverim.ListenAndServe())
+}
+
+
+func (h *myHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+    toSend := []byte("<html lang='en'><head> <meta charset='utf-8'> <title>Sample Page</title></head><body> <div class='courses-container'><div class='course' style='background-color: #fff;border-radius: 10px;box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);display: flex;max-width: 100%;margin: 20px;overflow: hidden;width: 700px;'><div class='course-preview' style='background-color: #2A265F;color: #fff;padding: 30px;max-width: 250px;'><h6>Course</h6><h2>Go Temelleri</h2><a href='#'>Hepsini gor <i class='fas fa-chevron-right'></i></a></div><div class='course-info' style='padding: 30px;position: relative;width: 100%;' ><div class='progress-container' style='position: absolute;top: 30px;right: 30px;text-align: right;width: 150px;'><div class='progress' style='background-color: #ddd;border-radius: 3px;height: 5px;width: 100%;'></div><span class='progress-text' style='font-size: 10px;opacity: 0.6;letter-spacing: 1px;'>6/9 Challenges</span></div><h6>Bolum 4</h6><h2>HTTP Server</h2><button class='btn' style='background-color: #2A265F;border: 0;border-radius: 50px;box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);color: #fff;font-size: 16px;padding: 12px 25px;position: absolute;bottom: 30px;right: 30px;letter-spacing: 1px;'>Devam</button></div></div></div></body></html>")
+    _, err := w.Write(toSend)
+    if err != nil {
+        log.Printf("bodyi yazarken hata ile karsilasildi %s", err)
+    }
+} */
+
+
+package main
+
+import "fmt"
+
+type HTTPMethod int
+
+const (
+    GET     HTTPMethod = 0
+    POST    HTTPMethod = 1
+    PUT     HTTPMethod = 2
+    DELETE  HTTPMethod = 3
+    PATCH   HTTPMethod = 4
+    HEAD    HTTPMethod = 5
+    OPTIONS HTTPMethod = 6
+    TRACE   HTTPMethod = 7
+    CONNECT HTTPMethod = 8
+)
+
+type HTTPRequest struct {
+    method  HTTPMethod
+    headers map[string]string
+    uri     string
+}
+func main() {
+    r := HTTPRequest{method: GET, headers: map[string]string{"Accept": "application/json"}, uri: "/prices"}
+    fmt.Println(r)
+    //ust kisimdaki method sanki int varmis gibi calisir. Biz bunu marshaling islemine tabi tutarsak int deger ile karsilasiriz
 }
